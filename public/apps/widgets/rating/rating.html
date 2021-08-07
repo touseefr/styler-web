@@ -1,0 +1,96 @@
+<div class="modal fade bs-example-modal-review" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ng-bind-html="self.businesstitle"></h4>
+            </div>
+            <form class="form-horizontal" role="form" name="ratingform" id="ratingformpopup">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="address">
+                            <span>Rating :</span>
+                        </label>
+                        <div class="col-sm-9 text-left margin-top-7 font-increase">
+                            <uib-rating ng-model="self.rate" max="self.max" readonly="self.isReadonly" on-hover="self.hoveringOver(value)" on-leave="self.overStar = null" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="address">
+                            <span>Approximate price :</span>
+                        </label>
+
+                        <div class="col-sm-9 text-left margin-top-7">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input  type="number" class="form-control"  style="width: 30%;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="review"> 
+                            <span>Your Review :</span>
+                        </label>
+                        <div class="col-sm-9 margin-top-7">
+                            <textarea onkeyup="char_length_home_pg()" minlength="30" class="form-control" id="review" placeholder="Your Review" ng-model="self.review" required=""></textarea>
+                            <text class="red text-right note " style="color: #333;">Characters (30 minimum): <text class="remaining_char">30</text></text>
+                            <div class="div_show_char_bar">
+                                <div class="div_char_bar" ></div>                                            
+                            </div>                             
+                        </div>
+                    </div>
+
+
+                    <div class="review-user-info review-profile-login" ng-hide="self.authstatus == 1">
+                        <div align="left" class="your_info_title">Your information</div>
+                        <div id="fb_portion">                            
+                            <a href="#" id="loginBtn" title="login with facebook" class="btn-link facebook-login">
+                                <img src="images/log in with facebook button.png"  class="fb-login-btn-review">
+                            </a>
+                            <div >
+                                ------------------------- OR -------------------------
+                            </div>
+                        </div>
+
+                        <div style="padding-bottom: 20px;" >
+                            <input type="text" placeholder="First Name" ng-model="self.first_name" value="self.first_name" ng-init="self.first_name" name="first_name" id="rating_first_name" style="width: 210px;" class="input_lineheight">
+                            <input type="text" placeholder="Last Name"  ng-model="self.last_name" value="self.last_name" ng-init="self.last_name" name="last_name" id="rating_last_name" style="width: 210px;" class="input_lineheight">
+                        </div>
+                        <div>
+                            <input type="text" style="width: 420px;" placeholder="Your email" id="rating_email" ng-model="self.email" class="input_lineheight">
+                        </div>
+                        <br>
+
+                        <div>
+                            <p>
+                                Your Last name and email address will never be published.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="review">
+                                <span>Publishing as</span>
+                            </label>
+                            <div class="col-sm-8" style="text-align: LEFT;padding-top: 5px;">
+                                <select ng-model="self.anonymously" name="anonymously">
+                                    <option value="0" ng-selected="true">You</option>
+                                    <option value="1">Anonymously</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>                                       
+                </div> 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="self.saveReview();" ng-disabled="ratingform.$invalid" data-dismiss="modal" >Submit Review</button>
+                </div>
+                <br>
+                <div>
+                    make sure you read the <a href="/review_guide" class="review-guide-link" target="_blank">Review Guidelines</a> before posting.
+                </div>
+                <div>
+                    By clicking publish, I accept policy
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

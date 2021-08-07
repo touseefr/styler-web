@@ -1,0 +1,106 @@
+<footer>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12 f-col-1">
+                <a href="">
+                    <img src="/images/logo_footer.png" alt="Beauty" />
+                </a>
+                <div class="beaty_about">
+                    <h6>About</h6>
+                    <p>Lorem ipsum ex vix illud nonummy, novum tation et his. At vix scriptaset patrioque scribentur, at pro fugit erts verterem molestiae, sed et vivendo ali Lorem ipsum ex vix illud nonummy, novum tation et his. At vix scripta patrioque scribentur...</p>
+                </div>
+            </div>
+            <!--f-col-1-->
+            <div class="foot_top">
+                <div class="faq-one">
+                    <h6>FAQ</h6>
+                    <p>Lorem ipsum ex vix illud nonummy, novum tation et his. At vix scriptaset patrioque scribentur, at pro fugit erts verterem molestiae, sed et vivendo ali </p>
+                </div>
+                <div class="faq-one">
+                    <h6>Contact Us</h6>
+                    <p>113 Contact information DR
+                        <br/> South Louisiana 4064
+                        <br/> phone: 135 555 866
+                        <br/> email:
+                        <a href="mailto:">info@beautycollective.com</a>
+                    </p>
+                </div>
+            </div>
+            <div class="foot_col_rht">
+                <div class="social_feedback">
+                    <div class="twitter_feed s-feed">
+                        <h4>Twitter</h4>
+                        <p>
+                            <a href="#">@crucio</a> Random things being explained and talked about. Random things being explained and talked about. Random things being explained and talked about. Random things being explained and talked about.
+                            <!-- <label class="post_time"> 25 minutes ago</label> -->
+                        </p>
+                    </div>
+                    <div class="s-feed fb_tweet">
+                        <h4>Facebook</h4>
+                        <div class="twet_half">
+                            <p>
+                                <a href="#">@crucio</a> Random things being explained and talked about. Random things being explained and talked about. Random things being explained and talked about. Random things being explained and talked about.
+                                <!-- <label class="post_time"> 25 minutes ago</label> -->
+                            </p>
+                        </div>
+                        <div class="twet_half">
+                            <p>
+                                <a href="#">@crucio</a> I What an awesome theme! We love it, tons of options and great design, thank you! :) </p>
+                            <p>you’ve got to check this one out, very cool looking!
+                                <label class="post_time"> 25 minutes ago</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--social_feedback-->
+            </div>
+            <!--f-rht-->
+        </div>
+        <div class="foot_btm">
+            <ul class="our_support">
+                <li>
+                    <a href="../aboutus">About Us</a>
+                </li>
+                <li>
+                    <a href="../termsandconditions">Terms & Conditions</a>
+                </li>
+                <li>
+                    <a href="../legal">Legal</a>
+                </li>
+                <li>
+                    <a href="../support">Support</a>
+                </li>
+            </ul>
+            <!--our_support-->
+            <ul class="social_links">
+                <li>
+                    <a href="#">
+                        <img src="/images/fb_ico.png" alt="facebook" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/twiter_ico.png" alt="facebook" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/in_ico.png" alt="facebook" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/rss_ico.png" alt="facebook" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/web_ico.png" alt="facebook" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--foot_btm-->
+    </section>
+    <!--wrapper-->
+</footer>

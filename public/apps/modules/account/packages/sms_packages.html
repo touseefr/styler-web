@@ -1,0 +1,80 @@
+<div id="SMS_Packages" class="tab-pane ng-scope">
+    <div class="row">
+        <h4 class="font-bold col-sm-8 col-xs-12">SMS Packages</h4>
+        <div class="col-sm-4 col-xs-12 mb-10 mt-10 text-right">
+            <b>Remaining : </b> <% _self.businessInfo.sms_count %>           
+        </div>
+    </div>
+    <hr />    
+    <div class="mt-20 row" ng-show="_self.SMS_Packages.length > 0">
+        <div
+            class="mb-20 col-md-4 col-sm-6 col-xs-12"
+            ng-repeat="sms in _self.SMS_Packages track by $index"
+        >
+            <div class="list-card-box">
+                <div class="left-line"></div>
+                <div class="center-portion">
+                    <div class="Package-title">
+                        <% sms.name %>
+                    </div>
+                    <div class="Package-description">
+                            <% sms.description | limitTo :70 %>
+                            <a ng-click="_self.showCardDetails(sms)" style="cursor: pointer;">View Details</a>
+                    </div>
+                    
+                </div>
+                <div class="right-portion">
+                    <div class="Package-Price">
+                        $<% sms.price %>
+                    </div>
+                    <button ng-click="_self.CardModel('sms',sms.id)" type="button" class="Buy-Now">                        
+                        <span ng-if="sms.last_selected==0">Buy Now</span>
+                        <span ng-if="sms.last_selected==1">Re Buy</span>
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-panel-box" ng-show="_self.SMS_Packages.length == 0">
+        SMS Packages Not Available
+    </div>
+    <div class="row">
+        <h4 class="font-bold col-sm-8 col-xs-12">Listing Packages</h4>
+        <div class="col-sm-4 col-xs-12 mb-10 mt-10 text-right">
+                <b>Remaining : </b> <% _self.businessInfo.listing_count %>
+        </div>
+    </div>
+    <hr />
+    <div class="mt-20 row" ng-show="_self.Listing_Packages.length > 0">
+        <div
+            class="mb-20 col-md-4 col-sm-6 col-xs-12"
+            ng-repeat="listing in _self.Listing_Packages track by $index"
+        >
+            <div class="list-card-box">
+                <div class="left-line"></div>
+                <div class="center-portion">
+                    <div class="Package-title">
+                        <% listing.name %>
+                    </div>
+                    <div class="Package-description">
+                        <% listing.description | limitTo :70 %>
+                        <a ng-click="_self.showCardDetails(listing)" style="cursor: pointer;">View Details</a>
+                    </div>
+                </div>
+                <div class="right-portion">
+                    <div class="Package-Price">
+                        $<% listing.price %>
+                    </div>
+                    <button ng-click="_self.CardModel('listing',listing.id)" type="button" class="Buy-Now">
+                      <span ng-if="listing.last_selected==0">Buy Now</span>
+                        <span ng-if="listing.last_selected==1">Re Buy</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-panel-box" ng-show="_self.Listing_Packages.length == 0">
+        Listing Packages Not Available
+    </div>
+</div>

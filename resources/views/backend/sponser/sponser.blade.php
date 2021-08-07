@@ -1,0 +1,60 @@
+@extends ('backend.layouts.master') @section ('title', 'Video Management') @section('page-header')
+<h1>Video Management</h1>
+@stop @section('content')
+
+@if(Session::has('message'))
+	<div class="alert alert-{{Session::get('type')}}" style="text-align: center;">{{Session::get('message')}}</div>
+@endif
+
+@section ('breadcrumbs')
+    <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
+    <li class="active">Video Management</li>
+@stop
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box box-default">
+			
+			<div class="box-body">
+
+				<form name="sponser" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="_token" value="{{csrf_token()}}"/>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2">sponser Image</label>
+						<div class="col-sm-5">
+							 <input type="file" class="form-control" name="sponser_image" />
+						</div>
+						<div class="col-sm-5"><button type="submit" class="btn btn-info pull-right">Save</button></div>
+					</div>	
+				</form>
+
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Reviewer</th>
+							<th>Reviewee</th>
+							<th>Rating</th>
+							<th>Comment</th>
+							<th>Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>	
+					</tbody>
+				</table>				
+			</div>	
+		
+		</div>
+		
+	</div>
+</div>
+<div class="clearfix"></div>
+
+<?php 
+						//if(Settings::get('video')){
+							//echo '<iframe width="420" height="315" src="'.Settings::get('video').'"></iframe>';
+						//}
+				?>
+
+@stop

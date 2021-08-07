@@ -1,0 +1,188 @@
+<div class="row">
+    <div class="col-md-2 col-xs-12">
+        <div class="vertical_tabs pl-15f pt-5f">
+            <div class="text-center p-15 mt-10 mr-15 mb-15 borderAll">
+                <a ui-sref="listing.jobs" ng-class="{'active_text' : $state.includes('listing.jobs')}" class="text-teal">
+                    <h3 class="m-0">
+                        <% listingCtrl.left_menu_info.total_jobs %>
+                    </h3>
+                    <p class="mt-10 mb-0">Total Jobs</p>
+                </a>
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a ui-sref="listing.jobs.applications.appliedsall" ng-class="{'active_text' : $state.includes('listing.jobs.applications.appliedsall')}"
+                   class="text-teal">
+                    <h3 class="m-0">
+                        <% listingCtrl.left_menu_info.total_applications %>
+                    </h3>
+                    <p class="mt-10 mb-0">Total Applications</p>
+                </a>
+
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a ui-sref="listing.jobs.applications.shortlistedall" ng-class="{'active_text' : $state.includes('listing.jobs.applications.shortlistedall')}"
+                   class="text-orange">
+                    <h3 class="m-0">
+                        <% listingCtrl.left_menu_info.total_shortlisted %>
+                    </h3>
+                    <p class="mt-10 mb-0">Total Shortlisted</p>
+                </a>
+            </div>
+            <!-- <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <button ng-disabled="listingCtrl.activeFindStaff==0" ng-click="listingCtrl.openNewPage('/search?q=&label=job&searchFor=job&location_address=')"
+                    class="text-teal" style="background-color: transparent;">
+                    <h4 class="m-0">
+                        Find Staff
+                    </h4>
+
+                </button>
+            </div> -->
+        </div>
+    </div>
+    <div class="col-md-10 col-xs-12 pt-25" ui-view="create_listing_view">
+        <div class="pg_account_listing tab-pane">
+
+            <div class="clearfix">
+                <h4 class="mt-0 mb-15 pull-left">Manage Jobs</h4>                
+                <div class="new_add pull-right"><a ng-class="{'active' : $state.includes('listing.jobs.create', {listing_type: 'job'}) }"
+                                                   ng-href="#" title="Create a classified" ui-sref="listing.jobs.create({listing_type:'job'})"
+                                                   class="checklist_button"><span class="h3 vertical-sub">&#43;</span> New Job</a></div>
+                <div style="float:right;margin-top: 3px;margin-right: 10px;">
+                    <button ng-disabled="listingCtrl.activeFindStaff == 0" ng-click="listingCtrl.openNewPage('/search?q=&label=job&searchFor=job&location_address=')"
+                            class="btn-yellow-2 mb-sm-10" style="padding: 2px 11px 2px 11px;font-size: 12px;border-radius: 0px;">                       
+                        Find Staff                       
+                    </button>
+
+                </div>
+            </div>
+            <table ng-if="listingCtrl.listing.data" class="table table-bordered table-vertically-center table-responsive bordered table-striped table-condensed datatable"
+                   ui-jq="dataTable" ui-options="dataTableOptJobManagement" style="border:none;">
+                <thead>
+                    <tr style="display:none;">
+                        <th>id</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: transparent;" ng-repeat="list in listingCtrl.listing.data">
+                        <td style="display: none;">
+                            <% list.id %>
+                        </td>
+                        <td style="border:none;padding: 0 0 10px;">
+                            <table class="table table-bordered m-0 bg-white">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4">
+                                            <h4 class="mt-0"><a href="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>"
+                                                                class="text-teal">
+                                                    <% list.title %>
+                                                    <span ng-bind-html="listingCtrl.showtitle(list.post_title)"></span>
+                                                    <!--(list.post_title)?'-'+Json.parse(list.post_title[0]).name:'';-->
+                                                    <% (list.state)?'-'+list.state:''; %>
+                                                </a>
+                                                <span class="btn-switch ml-20" ng-if="list.expiry < listingCtrl.todayDat" style="color: red;font-size: 12px;padding-top: 0px;">
+                                                    Expired
+                                                </span>
+                                                <span class="btn-switch ml-20" ng-if="list.expiry > listingCtrl.todayDat">
+                                                    <input type="radio" id="yes_<%list.id%>" name="switch_<%list.id%>"
+                                                           ng-checked="list.status == 1" ng-click="listingCtrl.changeJobStatus(list.id, 1)"
+                                                           class="btn-switch__radio btn-switch__radio_yes" />
+                                                    <input type="radio" id="no_<%list.id%>" name="switch_<%list.id%>"
+                                                           ng-checked="list.status == 2" ng-click="listingCtrl.changeJobStatus(list.id, 2)"
+                                                           class="btn-switch__radio btn-switch__radio_no" />
+                                                    <label for="yes_<%list.id%>" class="btn-switch__label btn-switch__label_yes"></label>
+                                                    <label for="no_<%list.id%>" class="btn-switch__label btn-switch__label_no"></label>
+                                                    <span class="btn-switch__txt">Activated</span>
+                                                    </<span>
+
+
+
+                                                        </h4>
+                                                        <p><i class="fa fa-map-marker"></i>
+                                                            <% (list.suburb)?list.suburb:''; %>
+                                                            <% (list.state)?'-'+list.state:''; %>
+                                                            <% (list.postcode)?'-'+list.postcode:''; %>
+                                                        </p>
+                                                        </td>
+                                                        <td colspan="2" class="col-md-3">
+                                                            <div class="clearfix">
+                                                                <h4 ng-if="list.expected_salary.length > 0" class="text-teal mt-0 pull-left">AUD
+                                                                    $<% list.expected_salary %>
+                                                                </h4>
+                                                                <h4 ng-if="(!list.expected_salary)" class="text-teal mt-0 pull-left">AUD
+                                                                    Negotiable
+                                                                </h4>
+                                                                <p class="pull-right"><strong>Total Views:</strong>
+                                                                    <% list.listing_views.length %>
+                                                                </p>
+                                                            </div>
+                                                            <p class="mb-0"><strong>Expiry Date:</strong> <span ng-bind="listingCtrl.formatDate(list.expiry ) |  date:'dd MMM yyyy'"></span></p>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">
+                                                                <div class="jobAid">
+                                                                    <div class="applied">
+                                                                        <span class="number"><a ui-sref="listing.jobs.applications.applieds({list_id:<%list.id%>})">
+                                                                                <% list.jobs_application.length %></a></span>
+                                                                        <a ui-sref="listing.jobs.applications.applieds({list_id:<%list.id%>})"
+                                                                           style="color:#000;">View Applicants</a>
+                                                                    </div>
+                                                                    <div class="reviewed">
+                                                                        <span class="number"><a ui-sref="listing.jobs.applications.applieds({list_id:<%list.id%>})">
+                                                                                <% list.job_views.length %></a></span>
+                                                                        <a ui-sref="listing.jobs.applications.applieds({list_id:<%list.id%>})"
+                                                                           style="color:#000;"> View Reviewed</a>
+                                                                    </div>
+                                                                    <div class="shortlisted">
+                                                                        <span class="number"><a ui-sref="listing.jobs.applications.shortlisted({list_id:<%list.id%>})">
+                                                                                <% list.short_listed.length %></a></span>
+                                                                        <a ui-sref="listing.jobs.applications.shortlisted({list_id:<%list.id%>})"
+                                                                           style="color:#000;"> View Shortlisted</a>
+                                                                    </div>
+                                                                    <div class="interviews">
+                                                                        <span class="number"><a ui-sref="listing.jobs.applications.interview({list_id:<%list.id%>})">
+                                                                                <% list.job_interview.length %></a></span>
+                                                                        <a ui-sref="listing.jobs.applications.interview({list_id:<%list.id%>})"
+                                                                           style="color:#000;"> View Interview </a>
+                                                                    </div>
+                                                                    <div class="completed">
+                                                                        <span class="number"><a ui-sref="listing.jobs.applications.completed({list_id:<%list.id%>})">
+                                                                                <% list.job_completed.length %></a></span>
+                                                                        <a ui-sref="listing.jobs.applications.completed({list_id:<%list.id%>})"
+                                                                           style="color:#000;">View Completed</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="6" class="bg-gray text-right tbl-job-manage">
+                                                                    <a href="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>" class="text-muted"
+                                                                       ui-sref="listing.jobs.update({listing_type:list.type,list_id:base64_encode(list.id)})"><span><i
+                                                                                class="fa fa-eye"></i> View</span></a>
+                                                                    <span class="ml-15 mr-15">&verbar;</span>
+                                                                    <a href="javascript:;" class="text-muted" ui-sref="listing.jobs.update({listing_type:list.type,list_id:base64_encode(list.id)})"><span><i
+                                                                                class="fa fa-pencil"></i> Edit</span></a>
+                                                                    <span class="ml-15 mr-15">&verbar;</span>
+                                                                    <a href="javascript:;" class="text-muted" prevent-default ng-click="listingCtrl.delete_options($event, list.id)"><span><i
+                                                                                class="fa fa-trash"></i> Delete</span></a>
+                                                                    <div class="delte_selection" id="delete_options_<%list.id%>">
+                                                                        <p>Sure to Delete!<p>
+                                                                            <button class="ok btn btn-xs btn-default" ng-href="#"
+                                                                                    prevent-default ng-click="listingCtrl.delete($event, list.id)">Yes</button>
+                                                                            <button class="cancel  btn btn-xs btn-default" ng-href="#"
+                                                                                    prevent-default ng-click="listingCtrl.delete_options_cancel($event, list.id)">No</button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                        </table>
+                                                        </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        </table>
+                                                        </div>
+                                                        </div>
+                                                        </div>

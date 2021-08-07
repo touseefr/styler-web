@@ -1,0 +1,99 @@
+<div class="col-md-12 col-xs-12 px-0 pt-0" ui-view="create_listing_view">
+    <div class="sub-horizontal-nav">
+        <ul ng-if="applicationingCtrl.show_applicationall_menu == 0" class="horizontal-inner-tabs mt-0 mb-15">
+            <li><a ui-sref="listing.jobs.applications.applieds({list_id: applicationingCtrl.listing_type})" ng-class="{'active_text' : $state.includes('listing.jobs.applications.applieds')}">&verbar;
+                    Applied</a></li>
+            <li><a ui-sref="listing.jobs.applications.shortlisted({list_id:applicationingCtrl.listing_type})" ng-class="{'active_text' : $state.includes('listing.jobs.applications.shortlisted')}">&verbar;
+                    ShortListed</a></li>
+            <li><a ui-sref="listing.jobs.applications.interview({list_id:applicationingCtrl.listing_type})" ng-class="{'active_text' : $state.includes('listing.jobs.applications.interview')}">&verbar;
+                    Interview</a></li>
+            <li><a ui-sref="listing.jobs.applications.completed({list_id:applicationingCtrl.listing_type})" ng-class="{'active_text' : $state.includes('listing.jobs.applications.completed')}">&verbar;
+                    Completed</a></li>
+        </ul>
+        <ul ng-if="applicationingCtrl.show_applicationall_menu == 1" class="horizontal-inner-tabs mt-0 mb-15">
+            <li><a ui-sref="listing.jobs.applications.appliedsall" ng-class="{'active_text' : $state.includes('listing.jobs.applications.appliedsall')}">&verbar;
+                    All Applied</a></li>
+            <li><a ui-sref="listing.jobs.applications.shortlistedall" ng-class="{'active_text' : $state.includes('listing.jobs.applications.shortlistedall')}">&verbar;
+                    All ShortListed</a></li>
+        </ul>
+    </div>
+    <div class="pg_account_listing tab-pane">
+        <table ng-if="applicationingCtrl.job_applications.data" class="table borderAll table-vertically-center table-responsive bordered table-striped datatable"
+               ui-jq="dataTable" ui-options="dataTableOpt">
+            <thead>
+                <tr style="display:none;">
+                    <th>Type</th>
+                    <th>Gallery</th>
+                    <th>Gallery</th>
+                    <th>Salary</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fadeInUp animated" ng-repeat="application in applicationingCtrl.job_applications.data">
+                    <td>
+                        <div class="pull-left mr-10">
+                            <img ng-src="<%application.applicant_info.profilepic.path+application.applicant_info.profilepic.name || 'images/no-image.png'%>"
+                                 fallback-src="images/no-image.png" class="img-responsive square60 img-circle border center-block"
+                                 title="<%application.applicant_info.name%>" />
+                        </div>
+                        <div class="pull-left">
+                            <div class="clearfix">
+                                <h5 class="mt-0 mb-0 pull-left">
+                                    <a style="cursor: pointer;" class="applicationing-title1 text-capitalize text-teal d-inlineB"
+                                       ng-click="applicationingCtrl.openurl('/profile?id=' + base64_encode(application.user_id) + '&app_id=' + application.id, application.id, application.applic_status)">
+                                        <%application.applicant_info.name%>
+                                    </a>
+                                </h5>
+                                <div ng-if="application.applic_status == 0" class="badge pull-left ml-10" style="background:red">New</div>
+                                <div ng-if="application.applic_status == 1" class="badge pull-left ml-10" style="background:#ffcb0d">Viewed</div>
+                                <div ng-if="application.applic_status == 2" class="badge pull-left ml-10" style="background:#fd9427">ShortListed</div>
+                                <div ng-if="application.applic_status == 3" class="badge pull-left ml-10" style="background:blueviolet">Interview</div>
+                                <div ng-if="application.applic_status == 5" class="badge pull-left ml-10" style="background:#4abdac">Completed</div>
+                                <div ng-if="application.applic_status == 4" class="badge pull-left ml-10" style="background: indianred">Rejected</div>
+                            </div>
+                            <span class="d-inlineB small mb-5" style="text-transform: capitalize;">
+                                <% application.applicant_info.user_info.jobtitle%></span>-
+<!--                            <span class="d-inlineB small mb-5" style="text-transform: capitalize;" ng-if="application.applicant_info.user_info.jobtype">
+                                <% application.applicant_info.user_info.jobtype%></span>--->
+                            <span class="d-inlineB small mb-5" style="text-transform: capitalize;">
+                                <% application.applicant_info.user_info.suburb%></span>
+                            <br>
+                            <span class="d-inlineB small mb-5" style="text-transform: capitalize;">
+                                <% application.applicant_info.user_info.suburb%></span>-
+                            <span class="d-inlineB small mb-5" style="text-transform: capitalize;">
+                                <% application.applicant_info.user_info.state%></span>
+                        </div>
+                    </td>
+                    <td class="middle-align">
+                        <h5><strong>Exp Salary:</strong> <i class="fa fa-dollar"></i>
+                            <% application.applicant_info.user_info.exp_salary %>
+                        </h5>
+                        <p><strong>Applied At:</strong> <span ng-bind="applicationingCtrl.formatDate(application.created_at ) |  date:'dd MMM yyyy'"></span></p>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="text-right w100 middle-align">
+                        <button class="btn btn-primary btn-sm" type="button" ng-click="applicationingCtrl.previewDoc(application.cv_info.file_path + application.cv_info.file_name, application.id, application.applic_status)">Download CV</button>
+                    </td>
+                    <td class="text-center w70 middle-align">
+                        <div class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-primary btn-sm">More<b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="applicationingCtrl.shortListCandidate(application.id, '2')">ShortList</a></li>
+                                <li><a href="#" ng-click="applicationingCtrl.shortListCandidate(application.id, '3')">Call
+                                        For Interview</a></li>
+                                <li><a href="#" ng-click="applicationingCtrl.shortListCandidate(application.id, '5')">Completed</a></li>
+                                <li><a href="#" ng-click="applicationingCtrl.shortListCandidate(application.id, '4')">Rejected</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" ng-click="">Go to Profile</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

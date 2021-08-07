@@ -1,0 +1,67 @@
+<a href="#" data-toggle="modal" data-target=".bs-example-modal-booking" class="padd_top_btm service"><i class="fa fa-book fa-4x" aria-hidden="true"></i></a>
+<div class="modal fade bs-example-modal-booking" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Book Appointment</h4>
+      </div>
+      <div class="modal-body">
+		<form>
+          <div class="form-group">
+            <label for="booking-date" class="control-label">Date:</label>
+             <p class="input-group">
+				 <input type="text" class="form-control" uib-datepicker-popup="<%self.format%>" ng-model="self.appointmentdate" is-open="self.popup1.opened" min-date="self.minDate" max-date="self.maxDate" datepicker-options="self.dateOptions"  ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+				  <span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="self.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+				  </span>
+			  </p>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Time:</label>
+           <uib-timepicker ng-model="self.appointmenttime" ng-change="self.changed()" hour-step="self.hstep" minute-step="self.mstep" show-meridian="self.ismeridian"></uib-timepicker>
+          </div>
+		<div class="row">
+		<div class="col-xs-5"><label for="booking-date" class="control-label">Categories:</label></div>
+		<div class="col-xs-6"><label for="booking-date" class="control-label">Services:</label></div>
+		<div class="col-xs-1">&nbsp;</div>
+		</div>		
+		  <div class="row" ng-repeat="service in self.appointmentservices"> 
+			<div class="col-xs-5">
+			   <div class="form-group">
+					<ui-select on-select="self.selectCategory($item, $index)" ng-model="self.appointmentservices[$index].category" theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+						<ui-select-match placeholder="Select a category">
+							<% $select.selected.name %>
+						</ui-select-match>
+						<ui-select-choices repeat="category in self.serviceprovidercategories">
+							<div ng-bind-html="category.name | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>	
+			</div>
+			<div class="col-xs-6">
+			    <div class="form-group">
+					<ui-select ng-model="self.appointmentservices[$index].service" theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+						<ui-select-match placeholder="Select a Service">
+							<% $select.selected.name %>
+						</ui-select-match>
+						<ui-select-choices repeat="subcategory in self.services[$index].serviceproviderServices">
+							<div ng-bind-html="subcategory.name | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>				
+			</div>
+			<div class="col-xs-1">
+				<a href="#" ng-show="$last" ng-click="self.addService(service.index)" style="font-size:18px;"><i class="fa fa-plus-circle"></i></a>
+				<a href="#" ng-show="!$last" ng-click="self.removeService(service.index)" style="font-size:18px;"><i class="fa fa-minus-circle"></i></a>
+			</div>
+		  </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="self.bookAppointment(service.index)">Book Appointment</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

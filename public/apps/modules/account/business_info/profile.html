@@ -1,0 +1,228 @@
+<div id="profile" class="">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="font-bold">Basic Info</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            <a href="/profile?id=<%base64_encode(_self.userBusinessModel.id)%>" class="btn btn-primary"
+                style="margin-right: 15px;">View Profile</a>
+            <a ui-sref="business_info.basic_info" class="btn btn-primary" ui-sref-opts="{reload:true}">Edit Profile</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <div class="round text-center">
+                <img ng-show="_self.userBusinessModel.logo" src="<% _self.userBusinessModel.logo %>" alt="Not Found"
+                    class="round mt-15" width="200" style="height: 194px;" />
+                <img ng-show="!_self.userBusinessModel.logo" src="../images/user_pic.jpg" alt="Not Found"
+                    class="round mt-15" width="200" />
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-9">
+            <div class="row mt-20 mb-20">
+                <div class="col-xs-12 col-md-6">
+                    <div class="row">
+                        <div class="col-xs-2 mb-10">
+                            <i class="fas fa-map-marker-alt text-teal mt-5"></i>
+                        </div>
+                        <div class="col-xs-10 mb-10">
+                            <% _self.userBusinessModel.address %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-2 mb-10">
+                            <i class="fas fa-phone text-teal mt-5"></i>
+                        </div>
+                        <div class="col-xs-10 mb-10">
+                            <% _self.userBusinessModel.contactnumber %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-2 mb-10">
+                            <i class="fas fa-at text-teal mt-5"></i>
+                        </div>
+                        <div class="col-xs-10 mb-10">
+                            <% _self.userBusinessModel.email %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-2 mb-10">
+                            <i class="fas fa-globe text-teal mt-5"></i>
+                        </div>
+                        <div class="col-xs-10 mb-10">
+                            <% _self.userBusinessModel.website %>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="row">
+                        <div class="col-xs-4 mb-10 text-right">
+                            Suburb:
+                        </div>
+                        <div class="col-xs-8 mb-10">
+                            <% _self.userBusinessModel.locations.location +' - '+  _self.userBusinessModel.locations.state +' - '+ _self.userBusinessModel.locations.postcode %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-4 mb-10 text-right">
+                            ABN:
+                        </div>
+                        <div class="col-xs-8 mb-10">
+                            <% _self.userBusinessModel.abn %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-4 mb-10 text-right">
+                            Business Code:
+                        </div>
+                        <div ng-if="_self.userBusinessModel.businessCode" class="col-xs-8 mb-10">
+                            <% _self.userBusinessModel.businessCode %>
+                        </div>
+                        <div ng-if="!_self.userBusinessModel.businessCode" class="col-xs-8 mb-10">
+                            Not Available
+                        </div>
+                        <div class="clearfix"></div>
+                        <div ng-if="_self.promo_code.length > 0" class="col-xs-4 mb-10 text-right">
+                            Coupons:
+                        </div>
+                        <div ng-if="_self.promo_code.length > 0" class="col-xs-8 mb-10">
+                            <% _self.promo_code %>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <strong>Business Info</strong>
+            <div class="trix-content" ng-bind-html="_self.userBusinessModel.about"></div>
+        </div>
+    </div>
+</div>
+<div class="row mt-20 > 0">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Services</h4>
+        <hr>
+    </div>
+</div>
+
+<div class="row" ng-if="_self.userBusinessModel.categories.length > 0">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10">
+        <ul>
+            <li class="bg-teal courseName py-5 px-10 text-white"
+                ng-repeat="category in _self.userBusinessModel.categories"><% category.name %></li>
+        </ul>
+    </div>
+</div>
+<div class="row mt-20" ng-if="_acountCtrl.userRole != 'SchoolCollege' && _self.BussBrand.data.length > 0">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Brands</h4>
+        <hr>
+    </div>
+</div>
+<div class="row" ng-if="_acountCtrl.userRole != 'SchoolCollege' && _self.BussBrand.data.length > 0">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10">
+        <ul>
+            <li class="bg-teal courseName py-5 px-10 text-white" ng-repeat="brand in _self.BussBrand.data">
+                <%brand.title%></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row mt-20" ng-if="_acountCtrl.userRole == 'SchoolCollege' && _self.BussCourses.length > 0">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Courses</h4>
+        <hr>
+    </div>
+</div>
+<div class="row" ng-if="_acountCtrl.userRole == 'SchoolCollege' && _self.BussCourses.length > 0">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10">
+        <ul>
+            <li class="bg-teal courseName py-5 px-10 text-white" ng-repeat="course in _self.BussCourses">
+                <%course.course_title%></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row mt-20">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Business Hours</h4>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10">
+        <div class="opening-hours-time text-capitalize">
+            <div class="mt-15 px-10" ng-repeat="bussinessDay in _self.bussinessDays">
+                <h4><% bussinessDay.day %></h4>
+                <div class="mt-5" ng-if="_self.bussinessHours[bussinessDay.day]['holiday']">
+                    <%_self.businesshoursdata[bussinessDay.day]['open']['hours']=(_self.bussinessHours[bussinessDay.day].open | date: 'hh')%>:<%_self.businesshoursdata[bussinessDay.day]['open']['minutes']=_self.setMinuteOnLoad((_self.bussinessHours[bussinessDay.day].open | date: 'mm'))%>
+                    <%_self.businesshoursdata[bussinessDay.day]['open']['time']=(_self.bussinessHours[bussinessDay.day].open | date: 'a')%>
+                </div>
+                <div class="mt-5" ng-if="_self.bussinessHours[bussinessDay.day]['holiday']">
+                    <%_self.businesshoursdata[bussinessDay.day]['close']['hours']=(_self.bussinessHours[bussinessDay.day].close | date: 'hh')%>:<%_self.businesshoursdata[bussinessDay.day]['close']['minutes']=_self.setMinuteOnLoad((_self.bussinessHours[bussinessDay.day].close | date: 'mm'))%>
+                    <%_self.businesshoursdata[bussinessDay.day]['close']['time']=(_self.bussinessHours[bussinessDay.day].close | date: 'a')%>
+                </div>
+                <div class="mt-5" ng-if="!_self.bussinessHours[bussinessDay.day]['holiday']">Closed</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-20" ng-if='_self.TeamInfo.data.length > 0'>
+    <div class="col-xs-12">
+        <h4 class="font-bold">Business Team</h4>
+        <hr>
+    </div>
+</div>
+<div class="row" ng-if='_self.TeamInfo.data.length > 0'>
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10 bTeamMembers">
+        <div class="bTeamMember" ng-repeat="team in _self.TeamInfo.data" style="margin-right:15px;">
+            <img ng-show="team.image_url" ng-src="<%team.image_url%>" alt="Not Found" class="round" />
+            <div class="memberName">
+                <h5> <%team.member_name%></h5>
+                <p> <%team.designation%></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-20">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Social Media</h4>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-20 socialMedia" style="display:flex">
+        <div class=" mb-10" ng-repeat="social_media in _self.userBusinessModel.social_media_list track by $index"
+            ng-show="_self.userBusinessModel.userSocialMediaAccounts[social_media.media_key]">
+            <a ng-href="<%_self.validUrl(_self.userBusinessModel.userSocialMediaAccounts[social_media.media_key])%>"
+                class="mr-15 text-darkGray hlink">
+                <img ng-src="<%social_media.media_logo%>" class="socialMediaiconsize">
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h4 class="font-bold">Profile QR Code</h4>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-9 col-xs-offset-0 col-md-offset-3 mt-10 Qrcode">
+        <div class="">
+            <img src="<% _self.profile_url%>" />
+            <div class="QrcodeCopy">
+                <div id='profileurl' style="display:none">/profile?id=<%base64_encode(_self.userBusinessModel.id)%>
+                </div>
+                <button ng-click="_self.copyInputMessage()" id="getcopytext" value="click to copy" class="copybutton"><i
+                        class="fas fa-clipboard"></i></button>
+
+                <div class="copiedtext">Copied!</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!--<button ng-click="_self.showSpinner()">Click Me</button>
+<button ng-click="_self.stopSpinner()">Stop Me</button>-->

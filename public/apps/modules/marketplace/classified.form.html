@@ -1,0 +1,209 @@
+<form name="listingForm" class="form-beautyCollective tab-pane" role="form" novalidate>
+  <h4 class="mb-15 mt-0"><% (createListCtrl.listing.id ? 'Update' : 'Create') %> a Marketplace</h4>
+  <div class="row panel-beautyCollective">
+    <div class="col-md-6">
+      <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine }">
+        <label for="inputEmail3" class="control-label text-right col-sm-4 pt-5">Title of Listing <span class="text-red">*</span></label>
+        <div class="col-sm-8">
+            <input type="text" autocomplete="off" class="form-control" data-ng-model="createListCtrl.listing.title" placeholder="Title of Listing *" Name="listingtitle" required />
+          <p ng-show="listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine" class="help-block">Title is required.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Contact Number</label>
+        <div class="col-sm-8">
+            <input type="text" autocomplete="off" class="form-control" data-ng-model="createListCtrl.listing.contact" placeholder="Contact Number" Name="Contact number" maxlength="15" />
+        </div>
+      </div>
+      <div class="form-group row" ng-class="{ 'has-error' : listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine }">
+        <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Contact Email <span class="text-red">*</span></label>
+        <div class="col-sm-8">
+          <input type="email" autocomplete="off" class="form-control" data-ng-model="createListCtrl.listing.email" placeholder="Contact Email *" name="contactemail" required />
+          <p ng-show="listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine" class="help-block">Enter valid email.</p>
+        </div>
+      </div>
+      <input type="hidden" id="latitude-n1" class="form-control" data-ng-model="createListCtrl.listing.latitude"
+        placeholder="latitude" name="listinglatitude" />
+      <input type="hidden" id="longitude-n1" data-ng-model="createListCtrl.listing.longitude" value="">
+      <input type="hidden" id="suburb-n1" ng-model="createListCtrl.listing.suburb" value="">
+      <input type="hidden" id="state-n1" ng-model="createListCtrl.listing.state" value="">
+      <input type="hidden" id="postcode-n1" ng-model="createListCtrl.listing.postcode" value="">
+      <div class="form-group row">
+        <label for="inputPassword3" class="control-label text-right col-sm-4">Addess (suburb, postcode, or city)  <span class="text-red">*</span></label>
+        <div class="col-sm-8 select-postcode">
+          <ui-select on-select="createListCtrl.selectLocation($item, $model)" ng-model="createListCtrl.listing.locations"
+            ng-disabled="disabled" reset-search-input="true" title="Addess? (suburb, postcode, or city) *"
+            append-to-body="true" style="width:100%">
+
+            <ui-select-match placeholder="suburb, postcode *">
+              <%$select.selected.location%> -
+              <%$select.selected.state%>,
+              <%$select.selected.postcode%>
+            </ui-select-match>
+            <ui-select-choices ui-disable-choice="locclass.no_found"  repeat="locclass in createListCtrl.suburbList track by $index" refresh="createListCtrl.getLocation($select.search)"
+              refresh-delay="0">
+                           <span ng-if="!locclass.no_found" ng-bind-html="locclass.location | highlight: $select.search"></span> <span ng-if="!locclass.no_found">-</span> <span ng-if="!locclass.no_found" ng-bind-html="locclass.state | highlight: $select.search"></span><span ng-if="!locclass.no_found">,</span> <span ng-if="!locclass.no_found" ng-bind-html="locclass.postcode | highlight: $select.search"></span>
+                                <span ng-if="locclass.no_found">Records not found.</span>                               
+            </ui-select-choices>
+          </ui-select>
+            <div ng-show="createListCtrl.showspinner ==1" class="inner-pg-serach-loader"><i class="fas fa-spinner fa-spin"></i></div>    
+        </div>
+      </div>
+      <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine }">
+        <label for="inputPassword3" class="col-sm-12 mt-10">Write a Description  <span class="text-red">*</span></label>
+        <div class="col-sm-12">
+             <trix-editor angular-trix ng-model='createListCtrl.listing.description'  class="trix-content"></trix-editor>
+          
+          <p ng-show="listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine" class="help-block">Enter
+            listing description.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">          
+        <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Category  <span class="text-red">*</span></label>
+        <div class="col-sm-8">            
+                    <ui-select multiple ng-model="createListCtrl.listing.parentCategory" theme="bootstrap"  close-on-select="true" title="Categories" style="width:100%" ng-required="true">
+                        <ui-select-match placeholder="Categories"><% $item.name %></ui-select-match>
+                        <ui-select-choices repeat="service in createListCtrl.categories track by $index">
+                            <span ng-bind-html="service.name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Price</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+            <input type="number" class="form-control width200" data-ng-model="createListCtrl.listing.price"
+              placeholder="Price" Name="Price" maxlength="11" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="expiry" class="control-label text-right col-sm-4 pt-5">Expiry</label>
+        <div class="col-sm-8">
+          <input type="text" autocomplete="off" class="form-control" uib-datepicker-popup="<%self.format%>" ng-model="createListCtrl.listing.expire"
+            is-open="createListCtrl.popup1.opened" min-date="createListCtrl.minDate" max-date="createListCtrl.maxDate"
+            datepicker-options="createListCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" disabled="disabled" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="activeBox" class="control-label text-right col-sm-4 pt-5">Active</label>
+        <div class="col-sm-8">
+          <input type="checkbox" class="mt-10f" id="activeBox" data-ng-model="createListCtrl.listing.classifiedActive" ng-click="createListCtrl.toggleactive()"
+            name="activeBox" placeholder="Embed youtube video url" ng-true-value="1" ng-false-value="0" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="soldBox" class="control-label text-right col-sm-4 pt-5">Sold</label>
+        <div class="col-sm-8">
+          <input type="checkbox" class="mt-10f" data-ng-model="createListCtrl.listing.isSold" ng-click="createListCtrl.togglesold()"
+            name="soldBox" id="soldBox" ng-true-value="1" ng-false-value="0" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="soldBox" class="control-label text-right col-sm-4 pt-5">Features</label>
+        <div class="col-sm-8 businessFeature">
+          <div class="input-group mb-10 w100p" ng-repeat="column in createListCtrl.business_feature">
+            <input type="text" autocomplete="off" name="columnName" ng-model="column.name"  placeholder="Feature" class="form-control">
+            <span class="input-group-addon" ng-if="createListCtrl.business_feature.length>1">
+              <a class="text-danger active disabled_button" ng-click="createListCtrl.removeColumn($index,0)"><i class="fas fa-trash"></i></a>
+            </span>
+            <span class="input-group-addon" ng-if="createListCtrl.business_feature.length==($index+1)">
+              <a class="text-teal active disabled_button" ng-click="createListCtrl.addNewColumn(0)"><i class="fa fa-plus"></i></a>
+            </span>                
+            <p ng-show="listingForm.area.$invalid && !listingForm.area.$pristine" class="help-block">Enter listing area.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+                <div class="col-sm-12">
+      <div class="form-group row">
+        <div class="col-sm-12 overflowH">
+          <div class="upload_pics">
+            <div flow-init="createListCtrl.flowConfig()" flow-files-submitted="createListCtrl.uploadfiles($flow)"
+              flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="createListCtrl.fileUploadSuccess($file,$message,$flow)"
+              flow-file-error="createListCtrl.UserGalleryfileUploadError($file,$message)">
+                <h4>Gallery</h4>
+<!--              <div class="drop pull-right" flow-drop ng-class="dropClass"><span class="btn btn-default" flow-btn flow-attrs="{accept:'image/*'}">Upload Image</span><small>Upload upto 6 images</small></div>
+              <div class="upload-heading mb-10">Upload upto 10 images <span class="req-msg-listing">(Atleast one image required.)</span></div>-->
+              <div class="row after_upload">
+                <div class="uploadImageSize col-md-12" ng-if="createListCtrl.listing.assets && createListCtrl.showgallery==1">
+                  <div ng-if="$flow.files.length==0" ng-repeat="image in  createListCtrl.listing.assets">
+                    <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+<!--                      <span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                      <img ng-src="<%image.path%><%image.name%>" src="" class="img-responsive img-rounded">
+                    </div>
+                  </div>
+                  <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+                    <div ng-if="$flow.files.length>0" class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}" >
+<!--                      <span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                      <img flow-img="file" class="img-responsive img-rounded" />
+                    </div>
+                    <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                        aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                        <span class="sr-only"><%file.progress()%>% Complete</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-ng-repeat=" j in [1]">
+                    <div class="uploadImageSize" ng-if="j > createListCtrl.listing.assets.length + $flow.files.length">
+                      <div class="ng-scope" flow-btn flow-attrs="{accept:'image/*'}">
+                        <div class="fileupload upldbrd">
+                          <div class="upload-image">upload</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>                 
+                <div class="col-md-12" ng-if="createListCtrl.showgallery==0" >
+                  <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+                    <div class="fileupload upldbrd" ng-show="$flow.files.length" flow-btn="" flow-attrs="{accept:'image/*'}"> 
+                      <!--<span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                      <img flow-img="file" class="img-responsive img-rounded" />
+                    </div>
+
+                    <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                    <div ng-if="file.isUploading()" ng-show="createListCtrl.showprogressbar == 1" class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                        aria-valuemin="0" aria-valuemax="100" ng-style="{width: my = (file.progress() * 100) + '%'}">
+                        <span class="sr-only">
+                          <%file.progress()%>% Complete</span>
+                      </div>
+                    </div>
+
+                  </div>
+                      </div> 
+                  <div class="uploadImageSize" data-ng-repeat="i in [1]" >
+                    <div ng-if="i > $flow.files.length">
+                      <div class="ng-scope">
+                        <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                          <div class="upload-image">upload</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                              
+
+              </div>
+              <input type="hidden" data-ng-model="createListCtrl.listing.flowFiles"/>
+
+    
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12" style="padding-left:0;">        
+      <button class="btn btn-primary" type="button" data-ng-click="createListCtrl.savelisting();" ng-disabled="createListCtrl.listingValidateForm(1,listingForm.$invalid)" >Save</button>
+      <div style="float: left;margin-right: 15px;" ng-if="createListCtrl.showgallery==1 && createListCtrl.checkExpiry(createListCtrl.listing.expire) ">                           
+        <button class="btn btn-primary" type="button" data-ng-click="createListCtrl.makeSold(createListCtrl.listing.id);" >Repost </button>                    
+      </div>
+      
+      
+      
+    </div>
+  </div>
+</form>

@@ -1,0 +1,14 @@
+PK	SupplierID	Name	FirstName	LastName	Address	Address2	City	State	ZIP	Phone	E-mail	URL	Account	Products	Comment	VendorHistory	Total	Cell	Fax	TollFree	Check	QuickBooksExport
+1	100	ABC Supplies	Jason	Troon	00 East Maple	Apt #174	San Marcos	CA	90270	(808) 555-9589	jason.troon@email.com	www.ABCSupplies.Sample.com	11-002-9001		Sample vendor			(808) 555-9393	(808) 555-9832	(808) 555-5257		
+2	102	CMJ Designs, Inc.	Sales	Manager	7566 Isle Way	Apt #221	Pebble Beach	CA	90214	(808) 555-6370	Support@CMJDesigns.com	www.CMJDesigns.com	12-SAMPLE-34		Sample vendor			(808) 555-7049	(808) 555-0544	(808) 555-0082		
+3	103	Global Systems	Kathy	Alberts	87314 Carson View		Pacific Grove	CA	90298	(808) 555-6650	kathy.alberts@email.com	www.GlobalSystems.Sample.com	492847653		Sample vendor			(808) 555-1340	(808) 555-7775	(808) 555-5029		
+4	104	wella colours	Sacha	Dempsey	Level 2catobery Rd		Melborne	Vic		1300885002			2002201338			5/01/2011:   12/11x3 10/16x3  7/0x6  77/0x6  66/0x5  22/0x3  88/0x6  6/1x3  2/8x4  5/7x5 (koleston perfect)                      6/77x5  8/7x2	0.0000	0405628665	1300885003			
+5	105	label.m	Kristina	Marino	255c Oxford street, Paddington		Paddington	Nsw	2021	+61 2 9380 2059	kristina@labelm.com.au	www.labelm.com.au					0.0000	0488 321 059	+61 2 8354 1762			
+6	106	Xtense	Fathia /  Pervin							1300983673	pervin@xtense.com.au	www.xtense.com.au					0.0000	0404 96 26 44				
+7	108	DATELINE	Michelle		8/1801 Botany Rd, Banksmeadow			Nsw	2019	02 9666 3611		www.datelinecity.com	80884				0.0000		02 9666 6690			
+8	109	Haircare Australia	Sam	Interligi	Corner of Manton +Adam St Hindmarsh South Australia				5007	08 8403 8201	sami@haircareaust.com	www.haircareaust.com					0.0000	0407 504 594	08 8403 8201	1800 882 174		
+9	110	RUSK					Sydney	Nsw		02-99862211							0.0000					
+10	113	GK HAIR 	Helen	Charalambosh	Po Box 230		Sydney	Nsw	2059			WWW.VTBAEUTY.COM					0.0000	043-088-3322		180-045-4247		
+11	114	ALFAPARF															0.0000					
+12	118	SARYNA 															0.0000					
+13	120	ref															0.0000					

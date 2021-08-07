@@ -1,0 +1,7 @@
+<div class="sub-horizontal-nav">
+	<ul class="horizontal-inner-tabs">
+			<li><a ng-href="#" ui-sref="reviews.received-reviews" ng-class="{'active_text' : $state.includes('reviews.received-reviews')}">&verbar; Incoming Reviews</a></li>
+		<li><a ng-href="#" ui-sref="reviews.dashbaord" ng-class="{'active_text' : $state.includes('reviews.dashbaord')}">&verbar; Submitted Reviews</a></li>
+		<li ng-if=" _acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='Distributor'"><a ng-href="#" ui-sref="reviews.request" ng-class="{'active_text' : $state.includes('reviews.request')}">&verbar; Request Reviews</a></li>
+	</ul>
+</div>

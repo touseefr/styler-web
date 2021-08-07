@@ -1,0 +1,19 @@
+
+<div id="listing" class="tab-pane pt-15 mb-20 account_list faq_list ng-scope">	
+<div class="table-responsive"> 
+<div class="faq_form">
+	<div class="panel-heading" style = "padding-left:0px;">
+            <h3>Update Business Brand Information</h3>
+        </div>
+	<form  method ="post" class="form-horizontal form-beautyCollective col-md-12" name="servicesform" ng-repeat=" service  in _self.BussBrandSetVal.data">	
+			<div class="form-group" ng-class="{ 'has-error' : servicesform.title.$invalid && !servicesform.title.$pristine }">
+				<input ng-model="service.title" name = "title" id = "title" value="" type = "text" placeholder = "Enter the title" class="form-control" required>
+				 <p ng-show="servicesform.title.$invalid && !servicesform.title.$pristine" class="help-block">Title is required.</p>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" type="button" ng-click="_self.UpdateBusinesBrand()" ng-disabled="servicesform.$invalid">Update</button>
+			</div>					
+	</form>
+</div>
+</div>
+</div>

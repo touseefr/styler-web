@@ -1,0 +1,15 @@
+<div class="modal-content">
+  <div class="modal-header" ng-if="header">
+    <button type="button" class="close" ng-click="no()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title" ng-bind-html="header"></h4>
+  </div>
+  <div class="modal-body">
+    <p ng-bind-html="msg"></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default  btn-sm pull-left" ng-click="no()">No</button>
+    <button type="button" class="btn btn-success btn-sm"  ng-click="yes()">Yes</button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="clear"></div>
+<div class="tableOverflow row">
+  <div class="col-xs-12">
+  <table  ng-if="bookingCtrl.bookings.data" class="table table-bordered bordered table-vertically-center table-striped table-condensed datatable" ui-jq="dataTable" >
+    <thead>
+      <tr>
+        <th class="w60">Ticket#</th>
+        <th>Date Scheduled</th>
+        <th>Customer</th>
+        <th>Description</th>
+        <th>Total</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="(key, value) in bookingCtrl.bookings.data.bookingData[0]">
+        <td class="w60 text-center"><% value.booking.id %></td>
+        <td><% value.booking.date %></td>
+        <td><% value.customer.email %></td>
+        <td><% value.booking_services %></td>
+        <td class="text-right">$<%  value.booking.totalprice %></td>
+        <td class="text-center">
+          <span ng-class="bookingCtrl.getStatusClass(value.booking.status)"><% value.booking.status %></span>
+        </td>
+        <td class="text-center">
+          <a ng-class="bookingCtrl.disableCancel(value.booking.status)" ng-click="bookingCtrl.cancelBooking(value.booking.id,value.booking.status)" style="cursor: pointer;"><i class="fa fa-trash">&nbsp;</i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<!--<div class="reviews_pagination ng-binding ng-scope" style="text-align:right;">
+  <button ng-disabled="bookingCtrl.current_page==0" ng-click="bookingCtrl.previousPage()" class="btn bg-teal text-white no-radius">Previous</button>
+  <%bookingCtrl.current_page+1%>/
+  <%bookingCtrl.total_pages%>
+  <button ng-disabled="(bookingCtrl.current_page+1)==bookingCtrl.total_pages || bookingCtrl.total_pages===0 " ng-click="bookingCtrl.nextPage()" class="btn bg-teal text-white no-radius">Next</button>
+</div>-->

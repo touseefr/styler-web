@@ -1,0 +1,42 @@
+<!-- modules/main/sidebar/main-sidebar.html -->
+<section class="sidebar">
+  <!-- Sidebar user panel -->
+  <div class="user-panel">
+    <div class="pull-left image">
+     <user-image data-userid="currentUser.id" data-imageclass="img-circle"></user-image>
+    </div>
+    <div class="pull-left info">
+      <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+    </div>
+  </div>
+  <!-- search form -->
+  <form action="#" method="get" class="sidebar-form">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Search..." />
+      <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+    </div>
+  </form>
+  <!-- /.search form -->
+  <!-- sidebar menu: : style can be found in sidebar.less -->
+  <ul class="sidebar-menu">
+    <li class="header">MAIN NAVIGATION</li>
+    <li ng-class="{'active':$state.includes('users.list') }" ng-if="can('USER','UPDATE')">
+      <a href="#" ui-sref="users.list" title="Users">
+        <i class="fa fa-users"></i><span>Manage Users</span>
+      </a>
+    </li>
+   <li ng-if="can('PROJECT','UPDATE')">
+      <a href="#" ui-sref="projects.list" title="Users">
+        <i class="fa fa-th-large"></i><span>Manage Projects</span>
+      </a>
+    </li>
+    <li class="header">Support</li>
+    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>FAQ</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Tickets</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Live Chat</span></a></li>
+  </ul>
+</section>
+<!-- /modules/main/sidebar/main-sidebar.html -->

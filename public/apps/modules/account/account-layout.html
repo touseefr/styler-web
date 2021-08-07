@@ -1,0 +1,70 @@
+<div class="tab_review">
+    <div class="row">
+        <div class="col-md-2 border_right content_right bg-f5">
+            <div class="vertical_tabs">
+                <ul class="nav nav-tabs toggle_tab">        
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'Distributor'">
+                        <a ng-href="#" ui-sref="business_info.profile" ng-class="{'active_text' : $state.includes('business_info')}" ui-sref-opts="{reload:true}" >Profile</a>
+                    </li>
+<!--                    <li ng-show="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid, 3)">
+                        <a ng-href="#" ui-sref="settings.details" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.details')}" >Account Settings</a>
+                    </li>-->
+                    <li ng-if="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid) || _acountCtrl.userRole == 'SchoolCollege'">
+                        <a ng-href="#" ui-sref="settings.teams" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.teams')}" >Meet The Team</a>
+                    </li>
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'Distributor'"><a ng-href="#" ui-sref="settings.mygallery" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.mygallery')}">Gallery</a></li>
+                    <li ng-if="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid, 3) || acountCtrl.userRole == 'Individual' || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'JobSeeker'"><a ng-href="#" ui-sref="reviews.received-reviews" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('reviews')}">My Reviews</a></li>
+                    <li ng-if="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid, 3) || _acountCtrl.userRole == 'Individual' || _acountCtrl.userRole == 'JobSeeker'  || _acountCtrl.userRole == 'SchoolCollege'">
+                        <a id="watchlist_nav_link" ng-href="#" ui-sref="watchlist.listing" ng-class="{'active_text' : $state.includes('watchlist.listing')}" ui-sref-opts="{reload:true}" >Watchlist (<% _acountCtrl.getWatchListlisting.data.length %>)</a>
+                    </li>
+                    <li ng-if="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid, 3) || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'SchoolCollege'">
+                        <a ng-href="#" ui-sref="settings.invoice" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.invoice')}" >Invoices</a>
+                    </li>
+                    <!-- <li ng-if="_acountCtrl.checkstatus(_acountCtrl.userRole, _acountCtrl.planid) || _acountCtrl.userRole == 'SchoolCollege'">
+                        <a ng-href="#" ui-sref="settings.notifications" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.notifications')}" >Notifications (0)</a>
+                    </li> -->
+                    <li ng-if="_acountCtrl.userRole == 'Individual' || _acountCtrl.userRole == 'JobSeeker'">
+                        <a ng-href="#" ui-sref="user.detail" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('user.detail')}">Account Details</a>
+                    </li>
+                    <li ng-hide="true"><a ng-href="#" ui-sref="user.reviews" ng-class="{'active_text' : $state.includes('user.reviews')}" ui-sref-opts="{reload:true}">User reviews</a></li>
+                    <li ng-if=" _acountCtrl.userRole == 'JobSeeker'">
+                        <a ng-href="#" ui-sref="user.job_preferences.shortlisted" ng-class="{'active_text' : $state.includes('user.job_preferences.shortlisted') || $state.includes('user.job_preferences.preferences')}" ui-sref-opts="{reload:true}">Job Preferences</a>
+                    </li>
+                    <li ng-if="_acountCtrl.userRole == 'JobSeeker'">
+                        <a ng-href="#" ui-sref="settings.resumeupload" ng-class="{'active_text' : $state.includes('settings.resumeupload')}" ui-sref-opts="{reload:true}">Resume Upload</a>
+                    </li>                
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' || _acountCtrl.userRole == 'Distributor' || _acountCtrl.userRole == 'SchoolCollege'" >
+                        <a ng-href="#" ui-sref="settings.subscription" ng-class="{'active_text' : $state.includes('settings.subscription')}" ui-sref-opts="{reload:true}">Manage Subscription</a>
+                    </li>            
+<!--                    <li ng-if="_acountCtrl.userRole != 'ServiceProvider'" >
+                        <a ng-href="#" ui-sref="settings.booking" ng-class="{'active_text' : $state.includes('settings.booking')}" ui-sref-opts="{reload:true}">Bookings</a>
+                    </li>                -->
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' && (_acountCtrl.showBooking(_acountCtrl.userRole, _acountCtrl.planid))"> 
+                        <a href="<%_acountCtrl.bookingUrl()%>"    ui-sref-opts="{reload:true}" target="_blank" style="background-color: transparent;">Manage Bookings System</a>
+
+                    </li>                
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' && (_acountCtrl.showBooking(_acountCtrl.userRole, _acountCtrl.planid))"> 
+                        <a ng-href="#" ui-sref="settings.sms_packages" ng-class="{'active_text' : $state.includes('settings.sms_packages')}" ui-sref-opts="{reload:true}">Packages</a>
+                    </li>                
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider'"> 
+                        <a ng-href="#" ui-sref="settings.facebook_chat" ng-class="{'active_text' : $state.includes('settings.facebook_chat')}" ui-sref-opts="{reload:true}">Fb Chat Messenger Setting</a>
+                    </li>     
+                    
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'Distributor'">
+                        <a ng-href="#" ui-sref="settings.bookings" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.bookings')}" >User Bookings</a>
+                    </li>
+                    <li ng-if="_acountCtrl.userRole == 'ServiceProvider' || _acountCtrl.userRole == 'SchoolCollege' || _acountCtrl.userRole == 'Distributor'">
+                        <a ng-href="#" ui-sref="settings.blogs" ui-sref-opts="{reload:true}" ng-class="{'active_text' : $state.includes('settings.blogs')}" >User Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 fadeIn animated">
+            <div class="row">
+                <div class="col-md-12" ng-class="{'hide_business_menu' : $state.includes('business_info.profile')}" ui-view="account_top_nav_view"></div>
+                <div class="col-md-12" ui-view="account_content_view"></div>
+            </div>
+        </div>
+    </div>
+</div>

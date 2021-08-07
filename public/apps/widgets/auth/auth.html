@@ -1,0 +1,264 @@
+<div class="row">
+    <!-- login section -->
+    <div class="detail_form login" uib-dropdown is-open="authCtrl.dropdown.login.isopen" auto-close="outsideClick" on-toggle="authCtrl.dropdown.login.toggle(open)">
+        <button id="single-button" type="button" class="btn btn-primary hide" uib-dropdown-toggle ng-disabled="disabled">
+            Button dropdown
+            <span class="caret"></span>
+        </button>
+        <div class="login_main popup uib-dropdown-menu no-background no-shadow no-border animated fadeIn">
+            <form role="form" name="authCtrl.userLogin" class="form-horizontal" autocomplete="off" novalidate="" ng-submit="authCtrl.authentication()">
+                <div class="fb_login_main">
+                    <h6 class="fb_title">
+                        Login Via
+                        <span>
+                            <a href="/auth/login/facebook">Facebook</a>
+                        </span>
+                    </h6>
+                    <uib-alert type="danger" ng-if="authCtrl.errors.length">
+                        <ul>
+                            <li ng-repeat="(key, error) in authCtrl.errors" ng-bind-html="error"></li>
+                        </ul>
+                    </uib-alert>
+                    <ul class="enter_detail">
+                        <li ng-class="{ 'has-error' : authCtrl.userLogin.email.$invalid && !authCtrl.userLogin.email.$pristine }">
+                            <input type="text" placeholder="Email" ng-model="authCtrl.login.email" name="email" required ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" class="form-control" autocomplete="off" />
+                            <div ng-show="authCtrl.userLogin.email.$invalid && !authCtrl.userLogin.email.$pristine">
+                                <p ng-show="authCtrl.userLogin.email.$error.required" class="help-block">Please enter email</p>
+                                <p ng-show="authCtrl.userLogin.email.$error.pattern" class="help-block">Please enter valid email</p>
+                            </div>
+                        </li>
+                        <li ng-class="{ 'has-error' : authCtrl.userLogin.password.$invalid && !authCtrl.userLogin.password.$pristine }">
+                            <input type="password" ng-model="authCtrl.login.password" placeholder="Password" name="password" required autocomplete="off" />
+                            <div ng-show="authCtrl.userLogin.password.$invalid && !authCtrl.userLogin.password.$pristine">
+                                <p ng-show="authCtrl.userLogin.password.$error.required" class="help-block">Please enter password</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" rel="forget_pwd" class="forgotpassword">Forgotten Password?</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--fb_login-->
+                <button class="submit_btn" type="submit" data-ng-disabled="authCtrl.userLogin.$invalid || loadingSpinner">
+                    <i class="fa fa-circle-o-notch fa-spin" ng-show="loadingSpinner"></i>Login</button>
+            </form>
+        </div>
+    </div>
+    <!-- /login section -->
+    <!-- registeration section -->
+    <div class="detail_form register" uib-dropdown is-open="authCtrl.dropdown.register.isopen" auto-close="disabled" on-toggle="authCtrl.dropdown.register.toggle(open)">
+        <button id="single-button" type="button" class="btn btn-primary hide" uib-dropdown-toggle ng-disabled="disabled">
+            Button dropdown
+            <span class="caret"></span>
+        </button>
+        <div class="register_div popup uib-dropdown-menu no-radius no-shadow no-border animated fadeIn">
+            <form role="form" data-toggle="validator">
+                <button class="close btn btn-default" ng-click="authCtrl.dropdown.register.toggleDropdown($event)">x</button>
+                <h6>Registration</h6>
+                <label>Please choose an account type:</label>
+                <div class="account_type">
+                    <a ng-href="#" prevent-default ng-click="authCtrl.setUserType('individual')" class="ac_type">Individual</a>
+                    <a ng-href="#" prevent-default ng-click="authCtrl.setUserType('service_provider')" class="ac_type">Business</a>
+                    <a ng-href="#" prevent-default ng-click="authCtrl.setUserType('distributor')" class="ac_type">Distributor</a>
+                    <a ng-href="#" prevent-default ng-click="authCtrl.setUserType('school_college')" class="ac_type">School / College</a>
+                </div>
+            </form>
+        </div>
+        <!--register_div-->
+        <!--login_main-->
+        <div class="register_detail change_pwd popup animated fadeIn" ng-if="false">
+            <form role="form" data-toggle="validator">
+                <span class="close">x</span>
+                <div class="change_detail">
+                    <h6 class="title_form">Change Password</h6>
+                    <ul class="enter_detail">
+                        <li>
+                            <input type="email" placeholder="Email Address" required/>
+                        </li>
+                        <li>
+                            <input type="password" placeholder="New Password" required/>
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Confirm new Password" required/>
+                        </li>
+                    </ul>
+                </div>
+                <button class="submit_btn">Submit</button>
+            </form>
+        </div>
+        <!--change_detail-->
+        <div class="register_detail forget_pwd popup animated fadeIn" ng-if="false">
+            <form role="form" data-toggle="validator">
+                <span class="close">x</span>
+                <div class="change_detail">
+                    <h6 class="title_form">Forgotten Password?</h6>
+                    <p>Please enter your email address. You will then reciece an email with a link, via which you can choose a new password.</p>
+                    <input type="email" placeholder="Email Address" required/>
+                </div>
+                <!--change_detail-->
+                <button class="submit_btn">Submit</button>
+            </form>
+        </div>
+        <!--forget_pwd-->
+        <div class="login_ind popup animated fadeIn" ng-if="authCtrl.dropdown.register.isopen && (authCtrl.user_type === 'individual')">
+            <form role="form" name="authCtrl.userRegister" class="form-horizontal" autocomplete="off" novalidate="" ng-submit="authCtrl.registerAccount()">
+                <button class="close btn btn-default" ng-click="authCtrl.setUserType('')">x</button>
+                <div class="individual_login">
+                    <div class="alert alert-danger" ng-if="authCtrl.errors.length" style="maring-top:15px;">
+                        <ul>
+                            <li ng-repeat="(key, error) in authCtrl.errors"><%error%></li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-success" ng-if="authCtrl.successMsg" style="maring-top:15px;">
+                        <p><%authCtrl.successMsg%></p>
+                    </div>
+                    <div class="ind_acunt">
+                        <h6 class="title_white">Individual Account</h6>
+                        <ul class="enter_detail">
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.name.$invalid && !authCtrl.userRegister.name.$pristine }">
+                                <input type="text" placeholder="name" ng-model="authCtrl.user.name" name="name" required class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.name.$invalid && !authCtrl.userRegister.name.$pristine">
+                                    <p ng-show="authCtrl.userRegister.name.$error.required" class="help-block">Please enter name</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.email.$invalid && !authCtrl.userRegister.email.$pristine }">
+                                <input type="text" placeholder="Email" ng-model="authCtrl.user.email" name="email" required ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.email.$invalid && !authCtrl.userRegister.email.$pristine">
+                                    <p ng-show="authCtrl.userRegister.email.$error.required" class="help-block">Please enter email</p>
+                                    <p ng-show="authCtrl.userRegister.email.$error.pattern" class="help-block">Please enter valid email</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.suburb.$invalid && !authCtrl.userRegister.suburb.$pristine }">
+                                <input type="text" placeholder="Suburb" ng-model="authCtrl.user.suburb" name="suburb" required class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.suburb.$invalid && !authCtrl.userRegister.suburb.$pristine">
+                                    <p ng-show="authCtrl.userRegister.suburb.$error.required" class="help-block">Please enter suburb</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="fb_login">
+                        <h6 class="fb_title">Login Via
+                            <span>Facebook</span>
+                        </h6>
+                        <ul class="enter_detail">
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.password.$invalid && !authCtrl.userRegister.password.$pristine }">
+                                <input type="password" id="password" ng-model="authCtrl.user.password" placeholder="Password" name="password" required autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.password.$invalid && !authCtrl.userRegister.password.$pristine">
+                                    <p ng-show="authCtrl.userRegister.password.$error.required" class="help-block">Please enter password</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.password_confirmation.$invalid && !authCtrl.userRegister.password_confirmation.$pristine }">
+                                <input type="password_confirmation" ng-model="authCtrl.user.password_confirmation" placeholder="Confirm password" name="password_confirmation" required autocomplete="off" match="authCtrl.user.password" />
+                                <div ng-show="authCtrl.userRegister.password_confirmation.$invalid && !authCtrl.userRegister.password_confirmation.$pristine">
+                                    <p ng-show="authCtrl.userRegister.password_confirmation.$error.required" class="help-block">Please enter confirm password</p>
+                                    <p ng-show="authCtrl.userRegister.password_confirmation.$error.match" class="help-block">Passwords do not match</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="terms" ng-class="{ 'has-error' : authCtrl.userRegister.terms_condition.$invalid && !authCtrl.userRegister.terms_condition.$pristine }">Acknowledge terms and conditions
+                                    <span class="chkbox">
+                                        <input type="checkbox" required name="terms_condition" ng-model="authCtrl.user.terms_condition" />
+                                    </span>
+                                    <div ng-show="authCtrl.userRegister.terms_condition.$invalid && !authCtrl.userRegister.terms_condition.$pristine">
+                                        <p ng-show="authCtrl.userRegister.terms_condition.$error.required" class="help-block">Please select terms</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--fb_login-->
+                </div>
+                <!--individual_login-->
+                <button class="submit_btn" type="submit" data-ng-disabled="authCtrl.userRegister.$invalid || loadingSpinner">
+                    <i class="fa fa-circle-o-notch fa-spin" ng-show="loadingSpinner"></i>Register account</button>
+            </form>
+        </div>
+        <!-- service provider/distributer -->
+        <div class="distributor popup animated fadeIn" ng-if="authCtrl.dropdown.register.isopen && ( (authCtrl.user_type === 'distributor')  || (authCtrl.user_type ==='service_provider')  || (authCtrl.user_type ==='school_college'))">
+            <form role="form" name="authCtrl.userRegister" class="form-horizontal" autocomplete="off" novalidate="" ng-submit="authCtrl.registerAccount()">
+                <button class="close btn btn-default" ng-click="authCtrl.setUserType('')">x</button>
+                <div class="dist_wrap">
+                    <div class="alert alert-danger" ng-if="authCtrl.errors.length" style="maring-top:15px;">
+                        <ul>
+                            <li ng-repeat="(key, error) in authCtrl.errors"><%error%></li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-success" ng-if="authCtrl.successMsg" style="maring-top:15px;">
+                        <p><%authCtrl.successMsg%></p>
+                    </div>
+                    <h6 class="title_white"><% (authCtrl.user_type === 'distributor') ? 'Distributor': '' %> <% (authCtrl.user_type === 'service_provider') ? 'Service Provider': '' %> Account</h6>
+                    <div class="dis_lft">
+                        <ul class="enter_detail">
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.business_name.$invalid && !authCtrl.userRegister.business_name.$pristine }">
+                                <input type="text" placeholder="Business Name" ng-model="authCtrl.user.business_name" name="business_name" required class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.business_name.$invalid && !authCtrl.userRegister.business_name.$pristine">
+                                    <p ng-show="authCtrl.userRegister.business_name.$error.required" class="help-block">Please enter business name</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.firstName.$invalid && !authCtrl.userRegister.firstName.$pristine }">
+                                <input type="text" placeholder="First name" ng-model="authCtrl.user.firstName" name="firstName" required class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.firstName.$invalid && !authCtrl.userRegister.firstName.$pristine">
+                                    <p ng-show="authCtrl.userRegister.firstName.$error.required" class="help-block">Please enter first name</p>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="Last name" ng-model="authCtrl.user.lastName" name="lastName" class="form-control" autocomplete="off" />
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.contact_number.$invalid && !authCtrl.userRegister.contact_number.$pristine }">
+                                <input type="text" placeholder="Contact number" ng-model="authCtrl.user.contact_number" name="contact_number" class="form-control" autocomplete="off" required />
+                                <div ng-show="authCtrl.userRegister.contact_number.$invalid && !authCtrl.userRegister.contact_number.$pristine">
+                                    <p ng-show="authCtrl.userRegister.contact_number.$error.required" class="help-block">Please enter contact number</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dis_rht">
+                        <ul class="enter_detail">
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.email.$invalid && !authCtrl.userRegister.email.$pristine }">
+                                <input type="text" placeholder="Email" ng-model="authCtrl.user.email" name="email" required ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.email.$invalid && !authCtrl.userRegister.email.$pristine">
+                                    <p ng-show="authCtrl.userRegister.email.$error.required" class="help-block">Please enter email</p>
+                                    <p ng-show="authCtrl.userRegister.email.$error.pattern" class="help-block">Please enter valid email</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.suburb.$invalid && !authCtrl.userRegister.suburb.$pristine }">
+                                <input type="text" placeholder="Suburb" ng-model="authCtrl.user.suburb" name="suburb" required class="form-control" autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.suburb.$invalid && !authCtrl.userRegister.suburb.$pristine">
+                                    <p ng-show="authCtrl.userRegister.suburb.$error.required" class="help-block">Please enter suburb</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.password.$invalid && !authCtrl.userRegister.password.$pristine }">
+                                <input type="password" id="password" ng-model="authCtrl.user.password" placeholder="Password" name="password" required autocomplete="off" />
+                                <div ng-show="authCtrl.userRegister.password.$invalid && !authCtrl.userRegister.password.$pristine">
+                                    <p ng-show="authCtrl.userRegister.password.$error.required" class="help-block">Please enter password</p>
+                                </div>
+                            </li>
+                            <li ng-class="{ 'has-error' : authCtrl.userRegister.password_confirmation.$invalid && !authCtrl.userRegister.password_confirmation.$pristine }">
+                                <input type="password_confirmation" ng-model="authCtrl.user.password_confirmation" placeholder="Confirm password" name="password_confirmation" required autocomplete="off" match="authCtrl.user.password" />
+                                <div ng-show="authCtrl.userRegister.password_confirmation.$invalid && !authCtrl.userRegister.password_confirmation.$pristine">
+                                    <p ng-show="authCtrl.userRegister.password_confirmation.$error.required" class="help-block">Please enter confirm password</p>
+                                    <p ng-show="authCtrl.userRegister.password_confirmation.$error.match" class="help-block">Passwords do not match</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="terms" ng-class="{ 'has-error' : authCtrl.userRegister.terms_condition.$invalid && !authCtrl.userRegister.terms_condition.$pristine }">Acknowledge terms and conditions
+                                    <span class="chkbox">
+                                        <input type="checkbox" required name="terms_condition" ng-model="authCtrl.user.terms_condition" />
+                                    </span>
+                                    <div ng-show="authCtrl.userRegister.terms_condition.$invalid && !authCtrl.userRegister.terms_condition.$pristine">
+                                        <p ng-show="authCtrl.userRegister.terms_condition.$error.required" class="help-block">Please select terms</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--dist_wrap-->
+                <button class="submit_btn" type="submit" data-ng-disabled="authCtrl.userRegister.$invalid || loadingSpinner">
+                    <i class="fa fa-circle-o-notch fa-spin" ng-show="loadingSpinner"></i>Register account</button>
+            </form>
+        </div>
+        <!-- /service provider/distributer -->
+    </div>
+    <!-- /registeration section -->
+</div>

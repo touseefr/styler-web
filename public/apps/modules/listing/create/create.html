@@ -1,0 +1,68 @@
+<div class="row">
+    <!-- left navigation -->
+    <div class="col-md-5 col-xs-12">
+    <div class="row">
+     <div class="col-md-4">
+        <ul class="nav nav-tabs toggle_tab">
+            <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'classified'}) || ($state.params.listing_type === 'classified') }" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                <a ng-href="#" ui-sref="listing.create.list({listing_type:'classified'})" class="news_icon" title="Create a classified"></a>
+            </li>
+            <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'deal'}) || ($state.params.listing_type === 'deal') }" ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                <a ng-href="#" ui-sref="listing.create.list({listing_type:'deal'})" class="delear_icon" title="Create a deal"></a>
+            </li>
+            <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'job'}) || ($state.params.listing_type === 'job') }" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                <a ng-href="#" ui-sref="listing.create.list({listing_type:'job'})" class="group_icon" title="Create a job"></a>
+            </li>
+            <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'businessforsale'}) || ($state.params.listing_type === 'businessforsale') }" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                <a ng-href="#" ui-sref="listing.create.list({listing_type:'businessforsale'})" class="idea_icon" title="Create a business for sale"></a>
+            </li>
+
+            <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'gallery'}) || ($state.params.listing_type === 'gallery') }" ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                <a ng-href="#" ui-sref="listing.create.list({listing_type:'gallery'})" class="gallery_icon" title="Create a new gallery"></a>
+            </li>
+        </ul>
+        </div>
+  <div class="col-md-6">
+                <ul class="number_list">
+                    <li ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                        <p>you currently have (<% listingCtrl.listing.data[0].classifiedsCount %>) Classified Authored</p>
+                    </li>
+                    <li ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                        <p>you currently have (<% listingCtrl.listing.data[0].dealsCount %>) Deals of Offer</p>
+                    </li>
+                    <li ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                        <p>you currently have (<% listingCtrl.listing.data[0].jobCount %>) Jobs</p>
+                    </li>
+                    <li ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                        <p>you currently have (<% listingCtrl.listing.data[0].businessCount %>) Bussiness for sale</p>
+                    </li>
+                    <li ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                        <p>you currently have (<% listingCtrl.listing.data[0].galleryCount %>) Galleries</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-2">
+                <div class="pannel_plus" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                    <a ng-href="#" ui-sref="listing.create.list({listing_type:'classified'})" class="news_icon" title="Create a classified">+</a>
+                </div>
+                <div class="pannel_plus" ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                    <a ng-href="#" ui-sref="listing.create.list({listing_type:'deal'})" class="delear_icon" title="Create a deal">+</a>
+                </div>
+                <div class="pannel_plus" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                    <a ng-href="#" ui-sref="listing.create.list({listing_type:'job'})" class="group_icon" title="Create a job">+</a>
+                </div>
+                <div class="pannel_plus" ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+                    <a ng-href="#" ui-sref="listing.create.list({listing_type:'businessforsale'})" class="idea_icon" title="Create a business for sale">+</a>
+                </div>
+                <div class="pannel_plus" ng-if="dashboardCtrl.hasRole('serviceprovider')">
+                    <a ng-href="#" ui-sref="listing.create.list({listing_type:'gallery'})" class="gallery_icon" title="Create a gallery">+</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-7 fadeIn animated" ui-view="create_listing_view">
+    </div>
+</div>

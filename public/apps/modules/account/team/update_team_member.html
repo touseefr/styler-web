@@ -1,0 +1,92 @@
+<div  class="tab-pane ng-scope">
+  <!-- <div class="table-responsive"> -->
+    
+  <div class="">
+    <div class="faq_form">
+      <div class="panel-heading" style="padding-left:0px;">
+        <h3>Edit a team member</h3>
+      </div>
+      <div class="panel-body">
+          <form method="post" class="form-horizontal1 form-beautyCollective" ng-repeat="ff in _self.updatetm.data" name="update_tem_member">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : ff.member_name.$invalid && !ff.member_name.$pristine }">
+                    <input id="name" ng-model="ff.member_name" value="" type="text" placeholder="Enter member name *" class="form-control" required>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : ff.about.$invalid && !ff.about.$pristine }">
+                  <textarea id="about" name="about" rows="5" ng-model="ff.about" class="form-control" placeholder="Enter About here *" required></textarea>
+                  <p ng-show="ff.about.$invalid && !ff.about.$pristine" class="help-block">About is required.</p>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : ff.designation.$invalid && !ff.designation.$pristine }">
+                    <input id="designation" ng-model="ff.designation" value="" type="text" placeholder="Enter member designation *" class="form-control" required>
+                </div>
+                <div class="form-group upload_pics" style="padding-top:20px">
+                    <div flow-init="_self.teamflowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                    flow-file-success="_self.teamfileUploadSuccess($file,$message)" flow-file-error="_self.UserGalleryfileUploadError($file,$message,$flow)" flow-complete="_self.hideProgressbar()" >
+<!--       
+                    <div class="upload-heading">Upload Image</div> -->
+                    <div class="after_upload">
+                      <div class="row">
+                        <div class=" col-md-3" ng-repeat="file in $flow.files">
+                          <div class="btn-group btn-cross">
+                            <a class="upldbrdDelete" style="top:-45px;left:75px;cursor: pointer;" prevent-default ng-click="_self.DeleteUploadTMpic($event,_self.teams.imgid)">
+                                &times;
+                            </a>
+                          </div>
+                          <div class="thumbnail upldbrd" ng-show="$flow.files.length" >
+                            <img flow-img="file" class="img-responsive img-rounded" />
+                          </div>
+                          <div ng-if="file.isUploading()" class="progress progress-striped progressOverlay" ng-class="{active: file.isUploading()}" style="width: 85px;">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                                  aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                  <span class="sr-only"><%file.progress()%>% Complete</span>
+                                </div>
+                          </div>      
+                        </div>
+          
+                          <!------------- for add new listing case --------------->
+                          <div ng-if="ff.image_id!==''" class="col-md-3  ng-scope">
+                            <div class="btn-group btn-cross">
+                              <a class="upldbrdDelete" style="top:-45px;left:75px;cursor: pointer;" prevent-default ng-click="_self.DeleteExistingTMProfilePic($event,ff.image_id,ff.member_id)">
+                                &times;
+                              </a>
+                            </div>
+                            <div class="thumbnail upldbrd" >
+                              <img src="<%ff.image_path%><%ff.image_name%>" class="img-responsive img-rounded" style="height:72px;" />
+                            </div>
+          
+                          </div>
+                          <div ng-if="$flow.files.length==0">
+                            <div ng-if="ff.image_id==''">
+                              <div class="col-md-3 ng-scope">
+                                <div class="thumbnail upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                  <div class="upload-image">Upload</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          
+                          <input type="hidden" ng-model="_self.teams.imgid" ng-if="ff.image_id !==''" value="<%_self.teams.imgid%>">
+                          <input type="hidden" ng-model="_self.teams.imgid" ng-if="ff.image_id==''"  value="<%_self.teams.imgid%>">
+                          <!-------------------- END ---------------------->
+                          <div class="col-md-4">
+                            <button class="btn btn-primary" type="button" ng-disabled="update_tem_member.$invalid" ng-click="_self.updateTMember()" style="margin-top: 20px;">Update</button>
+                          </div>
+                        </div>                    
+                      </div>                
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-sm-12">
+    
+              </div>
+            </div>
+          </form>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

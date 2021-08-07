@@ -1,0 +1,20 @@
+<div class="col-md-12">
+  <div class="create_list_outer">
+    <ul class="nav nav-tabs account_tab" ng-class="{noborder:dashboardCtrl.userplanid==1||dashboardCtrl.userplanid==0}" >
+      <li ng-class="{'active' : $state.includes('account'),'':dashboardCtrl.userRole=='JobSeeker'}" ng-hide="dashboardCtrl.userRole=='JobSeeker' || dashboardCtrl.userRole=='Individual'" >
+        <a ng-class="{'roundForce':dashboardCtrl.userRole=='JobSeeker'}" ng-href="#" ui-sref="business_info.basic_info">Account</a>
+      </li>
+      <li ng-class="{'active' : $state.includes('listing')}" ng-if="dashboardCtrl.checkstatus(dashboardCtrl.userRole, dashboardCtrl.planid)">
+        <a ng-href="#" ui-sref="listing.list">Listings</a>
+      </li>
+      <li ng-class="{'active' : $state.includes('marketplace')}" ng-if="dashboardCtrl.checkstatus(dashboardCtrl.userRole, dashboardCtrl.planid)">
+        <a ng-href="#" ui-sref="marketplace">Marketplace</a>
+      </li>
+      <li ng-class="{'active' : $state.includes('listing.jobs')}" ng-if="dashboardCtrl.checkstatus(dashboardCtrl.userRole, dashboardCtrl.planid)">
+        <a style="cursor: pointer;" ng-href="#" ui-sref="listing.jobs" ui-sref-opts="{reload: true}">Jobs</a>
+      </li>
+    </ul>
+    <div class="fadeIn animated" ui-view="dashboard_view"></div>
+  </div>
+  <!--create_list-->
+</div>

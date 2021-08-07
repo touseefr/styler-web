@@ -1,0 +1,432 @@
+<div ng-if="$stripe.show_register_form == 0">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Subscription for <%$stripe.packages[$stripe.plan_selected].title%></h3>
+    </div>
+    <form name="myForm" class="validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+        id="payment-form">
+        <div class="modal-body p30" style="padding-bottom: 0;" id="modal-body">
+            <div class="row form-group">
+                <label for="" class="col-sm-4 sub_bc_label">Billing Cycle</label>
+                <div class="col-sm-8">
+                    <select name="billing_cycle" class="form-control" ng-model="$stripe.plan_selected"
+                        style="text-transform: capitalize;">
+                        <option ng-repeat="(index,package) in $stripe.packages" value="<% index %>"><% index %></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group" ng-if="$stripe.show_cb == 10">
+                <label for="" class="col-sm-4 sub_bc_label"></label>
+                <label for="booking_system" class="col-sm-8">Booking System <span><input type="checkbox"
+                            name="booking_system" id="booking_system" ng-click="$stripe.selectBooking()"
+                            ng-model="$stripe.cb_select_booking" /></span></label>
+            </div>
+            <div class="row form-group">
+                <label for="" class="col-sm-4 sub_bc_label"></label>
+                <div class="col-sm-8" style="font-size:12px;text-align: center;">
+                    <strong>Get 30% off at annual Subscription</strong>
+                </div>
+            </div>
+            <!-- <div class="split_line"></div> -->
+            <div class="row form-group" style="padding-right:4px;">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-12">
+                    <div class=" d-flex justify-content-between "
+                        style="margin-bottom:0px;margin-left: 7px; background-color:transparent">
+                        <div>
+                            <span style="font-weight: bold;font-size: medium;">
+                                Price
+                            </span>
+                        </div>
+                        <div>
+                            <span style="font-weight: bolder; font-size: x-large;"><strong>
+                                    $<%$stripe.packages[$stripe.plan_selected].originalprice%>
+                                </strong></span>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-between "
+                        style="margin-bottom:0px;margin-left: 7px; background-color:transparent">
+                        <div>
+                            <span style="font-weight: bold;font-size: medium;">
+                                Discount%
+                            </span>
+                        </div>
+                        <div>
+                            <span style="font-weight: bolder; font-size: x-large;"><strong>
+                                    <%$stripe.packages[$stripe.plan_selected].discount%>
+                                </strong></span>
+                        </div>
+                    </div>
+                    <div ng-if="$stripe.show_coupon_discount==1" class="row" style="margin-top:26px;">
+                        <div class="col-sm-6 right-align"><span>Coupon Discount:</span></div>
+                        <div class="col-sm-6 center-align"><span><strong>$<%$stripe.coupon_discount%></strong></span>
+                        </div>
+                    </div>
+                    <!-- <div class="split_line"></div>
+                          <div class="row">
+                              <div class="col-sm-6 right-align"><span>Total:</span></div>
+                              <div class="col-sm-6 center-align"><span><strong>$
+                                          <%$stripe.packages[$stripe.plan_selected].price.toFixed(2)%>
+                                      </strong></span></div>
+                          </div> -->
+
+                </div>
+            </div>
+            <style type="text/css">
+                .error {
+                    border: 1px solid red;
+                }
+
+            </style>
+            <div ng-show="$stripe.plan_selected != 'free' && $stripe.ToggleCards==0">
+                <div class="split_line"></div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div ng-show="$stripe.ToggleCards == 0">
+                            <strong style="font-size: 12px;"> NAME ON CARD </strong>
+                            <div class="row">
+                                <div class="form-group col-lg-12 " style="margin: 0;">
+                                    <input type="text" class="form-control" placeholder="" />
+                                </div>
+                            </div><br>
+
+                            <strong style="font-size: 12px;">CARD NUMBER</strong>
+
+                            <div class="cardNumberInput " style="position: relative; padding: 0; border: 0px;">
+                                <!-- <div class="cardinput " >
+                                <i class="fa fa-credit-card"></i>
+                              </div> -->
+                                <div class="cardinput form-group" style="width: 100%;">
+                                    <div class="cardNumberInput"
+                                        ng-class="{error:$stripe.stripe_error.code == 'incorrect_number'}"
+                                        style="padding: 0;">
+                                        <input type="text" required class="form-control card-num"
+                                            placeholder="0000 0000 0000 0000" ng-model="number" payments-validate="card"
+                                            payments-format="card" payments-type-model="type">
+                                    </div>
+                                    <div class="cardinput"
+                                        style="font-size: 24px; position: absolute ; top: 1px; right: -45px;">
+
+                                        <!-- <img src="{{ asset('mastercard.png') }}" /> -->
+                                        <image img src="vs.png" style="height: 33px; width: 40px; margin-bottom: 6px;"
+                                            alt="Logo"></image <i class="fa fa-cc-visa"
+                                            style="color:rgba(207, 207, 207, 0.952);"></i>
+                                        <image img src="mastercard.png"
+                                            style="height: 33px; width: 40px; margin-bottom: 6px;" alt="Logo">
+                                        </image <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="cardNumberInput" style="border: none;padding: 1px;margin-top: -20px;"
+                            ng-class="{error:$stripe.stripe_error}">
+                            <div class="form-group row" style="    margin-top: 15px;"
+                                ng-show="$stripe.ToggleCards == 0">
+                                <label style="padding-left: 18px;" for="">EXPIRY DATE (MM YYYY)</label>
+                                <label style="padding-left: 187px;" for="">CSV / CVV</label>
+                                <div class="col-sm-12">
+                                    <div class="cardNumberInput" style="border: none; padding: 0;">
+                                        <!-- <div class="cardinput">
+                                              <i class="fa fa-credit-card"></i>
+                                          </div>
+                                          <div class="cardinput">
+                                              <input
+                                                  type="text"
+                                                  class="form-control"
+                                                  placeholder="Card Number"
+                                                  ng-model="number"
+                                                  payments-validate="card"
+                                                  payments-format="card"
+                                                  payments-type-model="type"
+                                              />
+                                          </div> -->
+                                        <div class="col-sm-6" style="padding-right: 16px; margin-left: -13px;">
+                                            <div class="cardinput expiration  mr-2" style="border: 0px solid gray;">
+                                                <div class="cardNumberInput"
+                                                    ng-class="{error:$stripe.stripe_error.code == 'invalid_expiry_month'}"
+                                                    style="padding: 0;">
+                                                    <input type="number" class="form-control card-expiry-month"
+                                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                        placeholder="MM" size='2' maxlength="2" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding-right: 43px;">
+                                            <div class="cardinput expiration required" style="border: 0px solid gray">
+                                                <div class="cardNumberInput"
+                                                    ng-class="{error:$stripe.stripe_error.code == 'invalid_expiry_year'}"
+                                                    style="padding: 0;">
+                                                    <input type="text" class="form-control card-expiry-year"
+                                                        placeholder="YYYY"
+                                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                        maxlength="4" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cardinput  cvc required" style="border: 0px solid gray">
+                                            <div class="cardNumberInput"
+                                                ng-class="{error:$stripe.stripe_error.code == 'invalid_cvc'}"
+                                                style="padding: 0;">
+                                                <input type="text" class="form-control card-cvc"
+                                                    placeholder="3 or 4 digit number" ng-model="cvc"
+                                                    payments-validate="cvc" payments-format="cvc"
+                                                    payments-type-model="type" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            ng-if="$stripe.auth_check == 1 && $stripe.promo_status==0 &&  $stripe.plan_selected=='monthly' && $stripe.promo_code">
+                            You have Promo code do you want to use it for discount
+                            <span class="chkbox">
+                                <input type="checkbox" name="havepromo" ng-model="$stripe.havepromo" value="1"
+                                    ng-true-value="1" ng-false-value="0" ng-change="$stripe.getBookingDetails()" />
+                            </span>
+                            <p ng-if="" class="text-color-red"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="$stripe.stripe_error  && $stripe.ToggleCards == 0" class="text-color-red">
+                <%$stripe.stripe_error.message%>
+            </div>
+            <div class="" ng-if="$stripe.userSubscription && $stripe.plan_selected != 'free' "></div>
+            <div ng-if="$stripe.userSubscription && $stripe.plan_selected != 'free' ">
+                <input type="checkbox" name="ToggleCards" ng-model="$stripe.ToggleCards" value="0" ng-true-value="1"
+                    ng-false-value="0" />
+                Use Existing Card
+            </div>
+            <div>
+                <input type="checkbox" checked ng-model="checked" name="ToggleCards" ng-init="checked=true" /> <label>
+                    <a style="color: black;font-size: small;" href="/termsandconditions" target="_blank">Accept Terms &
+                        Condition</a></label>
+            </div>
+        </div>
+        <div class="modal-footer" style="border: none;">
+            <div class="span4">
+                <button type="submit" ng-model="button" ng-disabled="!checked"
+                    style="width: 92%;margin-right: 26px; font-weight: 50px;" class="btn btn-primary btn-large"
+                    ng-click="$stripe.BuySubmit3()" id="stripeBuybutton" ng-if="$stripe.ToggleCards==0"> Confirm Payment
+                    <span style="padding-left: 11px;"> $
+                        <%$stripe.packages[$stripe.plan_selected].price.toFixed(2)%>
+                    </span></button>
+                <button type="button" ng-model="button" ng-disabled="!checked"
+                    style="width: 92%;margin-right: 26px; font-weight: 50px;" class="btn btn-primary btn-large"
+                    ng-click="$stripe.BuySubmit2()" id="stripeBuybutton" ng-if="$stripe.ToggleCards==1">
+                    Confirm Payment
+                    <span style="padding-left: 11px;"> $
+                        <%$stripe.packages[$stripe.plan_selected].price.toFixed(2)%>
+                    </span>
+                </button>
+                <!-- <button class="cancel btn btn-defaul" type="button" ng-click="$stripe.cancel()">Cancel</button> -->
+            </div>
+            <div class="d-flex justify-content-between" style="margin-bottom: -12px; background-color:transparent;">
+                <div ng-if="$stripe.userSubscription && $stripe.ToggleCards == 0" style="font-size: 9px;"
+                    class="text-darkGray text-info-message">
+                    Note: Once you enter the new details, existing information will
+                    be updated.
+                </div>
+                <div class="text-darkGray text-info-message" style="font-size: 9px;margin-left: auto;">
+                    <i class="fab fa-stripe-s" style="color: rgb(112, 112, 206);"></i> Powered by Stripe
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div ng-if="$stripe.show_register_form == 1">
+
+    <form name="$stripe.userRegister" ng-submit="$stripe.registerAccount()" method="get">
+        <div class="modal-header clearfix">
+            <h4 class="modal-title pull-left"><%$stripe.packages[$stripe.plan_selected].title%></h4>
+            <!--        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>-->
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.business_name.$invalid && !$stripe.userRegister.business_name.$pristine }">
+                        <input type="text" placeholder="Business Name" ng-model="$stripe.user.business_name"
+                            name="business_name" required class="form-control" />
+                        <div
+                            ng-show="$stripe.userRegister.business_name.$invalid && !$stripe.userRegister.business_name.$pristine">
+                            <p ng-show="$stripe.userRegister.business_name.$error.required" class="help-block">Please
+                                enter business name</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.firstName.$invalid && !$stripe.userRegister.firstName.$pristine }">
+                        <input type="text" placeholder="First name" ng-model="$stripe.user.firstName" name="firstName"
+                            required class="form-control" />
+                        <div
+                            ng-show="$stripe.userRegister.firstName.$invalid && !$stripe.userRegister.firstName.$pristine">
+                            <p ng-show="$stripe.userRegister.firstName.$error.required" class="help-block">Please enter
+                                first name</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Last name" ng-model="$stripe.user.lastName" name="lastName"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.contact_number.$invalid && !$stripe.userRegister.contact_number.$pristine }">
+                        <input type="number" placeholder="Contact number" ng-model="$stripe.user.contact_number"
+                            name="contact_number" class="form-control" required />
+                        <div
+                            ng-show="$stripe.userRegister.contact_number.$invalid && !$stripe.userRegister.contact_number.$pristine">
+                            <p ng-show="$stripe.userRegister.contact_number.$error.required" class="help-block">Please
+                                enter contact number</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.email.$invalid && !$stripe.userRegister.email.$pristine }">
+                        <input type="text" placeholder="Email" ng-model="$stripe.user.email" name="email" required
+                            ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                            class="form-control" />
+                        <div ng-show="$stripe.userRegister.email.$invalid && !$stripe.userRegister.email.$pristine">
+                            <p ng-show="$stripe.userRegister.email.$error.required" class="help-block">Please enter
+                                email</p>
+                            <p ng-show="$stripe.userRegister.email.$error.pattern" class="help-block">Please enter valid
+                                email</p>
+                        </div>
+                    </div>
+                    <div class="terms form-group theme-color" style="text-align: right;margin-bottom: 10px;">
+                        Have Promo
+                        <span class="chkbox">
+                            <input type="checkbox" name="sub_newletter" ng-model="$stripe.havepromo2" value="1"
+                                ng-true-value="1" ng-false-value="0" />
+                        </span>
+
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.suburb.$invalid && !$stripe.userRegister.suburb.$pristine }">
+                        <ui-select ng-model="$stripe.user.locations" theme="bootstrap" required
+                            ng-model-options="$stripe.modelOptions" ng-disabled="disabled" reset-search-input="true"
+                            title="Addess? (suburb, postcode, or city)" append-to-body="false" style="width:100%">
+                            <ui-select-match placeholder="Suburb or Postcode">
+                                <!--<%$select.selected.location%> - <%$select.selected.state%>, <%$select.selected.postcode%>-->
+                                <%$select.selected.location%> <%$select.selected.state%> <%$select.selected.postcode%>
+                            </ui-select-match>
+                            <ui-select-choices ui-disable-choice="address.no_found"
+                                repeat="address in $stripe.suburbList track by $index"
+                                refresh="$stripe .getLocation($select.search)" refresh-delay="0">
+                                <span ng-if="!address.no_found"
+                                    ng-bind-html="address.location | highlight: $select.search"></span> <span
+                                    ng-if="!address.no_found">-</span> <span ng-if="!address.no_found"
+                                    ng-bind-html="address.state | highlight: $select.search"></span><span
+                                    ng-if="!address.no_found">,</span> <span ng-if="!address.no_found"
+                                    ng-bind-html="address.postcode | highlight: $select.search"></span>
+                                <span ng-if="address.no_found">Records not found.</span>
+                            </ui-select-choices>
+                            <!--                            <ui-select-choices repeat="address in $stripe.suburbList track by $index" refresh="$stripe.getLocation($select.search)" refresh-delay="0">
+                                                                                            
+                                                            <span ng-bind-html="address.location | highlight: $select.search"></span>
+                                                            - <span ng-bind-html="address.state | highlight: $select.search"></span>,
+                                                            <span ng-bind-html="address.postcode | highlight: $select.search"></span>
+                                                        </ui-select-choices>-->
+                        </ui-select>
+
+                        <div ng-show="$stripe.showspinner == 1" class="signup-price-serach-loader"><i
+                                class="fas fa-spinner fa-spin"></i></div>
+                        <div ng-show="$stripe.userRegister.suburb.$invalid && !$stripe.userRegister.suburb.$pristine">
+                            <p ng-show="$stripe.userRegister.suburb.$error.required" class="help-block">Please enter
+                                suburb</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.password.$invalid && !$stripe.userRegister.password.$pristine }">
+                        <div class="error-msg"
+                            ng-show="$stripe.userRegister.password.$invalid && !$stripe.userRegister.password.$pristine">
+                            Password should be at least 8 characters long and should contain 1 capital letter, 1 special
+                            character and at least 1 digit.
+                        </div>
+                        <input type="password"
+                            ng-pattern="/^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,50}$/"
+                            class="form-control" ng-model="$stripe.user.password" placeholder="Password" name="password"
+                            required />
+                        <div
+                            ng-show="$stripe.userRegister.password.$invalid && !$stripe.userRegister.password.$pristine">
+                            <p ng-show="$stripe.userRegister.password.$error.required" class="help-block">Please enter
+                                password</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                        ng-class="{ 'has-error' : $stripe.userRegister.password_confirmation.$invalid && !$stripe.userRegister.password_confirmation.$pristine }">
+                        <input type="password" class="form-control" ng-model="$stripe.user.password_confirmation"
+                            placeholder="Confirm password" name="password_confirmation" required
+                            match="$stripe.user.password" />
+                        <div
+                            ng-show="$stripe.userRegister.password_confirmation.$invalid && !$stripe.userRegister.password_confirmation.$pristine">
+                            <p ng-show="$stripe.userRegister.password_confirmation.$error.required" class="help-block">
+                                Please enter confirm password</p>
+                            <p ng-show="$stripe.userRegister.password_confirmation.$error.match" class="help-block">
+                                Passwords do not match</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 select-postcode" style="width: 100%;padding: 0;margin-bottom: 15px;">
+                            <select class="businessType-select" ng-model="$stripe.user.hear_us">
+                                <option value="" disabled selected><span style="color:#ccc">How did you hear about
+                                        us?</span></option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Magazine">Magazine</option>
+                                <option value="Search Engine">Search Engine</option>
+                                <option value="Email">Email</option>
+                                <option value="Referral">Referral</option>
+                                <option value="Youtube">Youtube</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$stripe.user.hear_us == 'Others'">
+                        <input class="form-control" ng-if="$stripe.user.hear_us == 'Others'" type="text" name="txtplan"
+                            ng-model="$stripe.user.other_option" placeholder="Other Option" />
+                    </div>
+                    <div class="terms form-group theme-color"
+                        ng-class="{ 'has-error' : $stripe.userRegister.terms_condition.$invalid && !$stripe.userRegister.terms_condition.$pristine }"
+                        style="margin-bottom: 3px;">
+                        <a href="../termsandconditions" class="terms theme-color">Terms and conditions</a>
+                        <span class="chkbox">
+                            <input type="checkbox" name="terms_condition" ng-model="$stripe.user.terms_condition" />
+                        </span>
+
+                        &nbsp;&nbsp;&nbsp; &nbsp;<br />
+                        Subscribe for News Letter
+                        <span class="chkbox">
+                            <input type="checkbox" name="sub_newletter" ng-model="$stripe.user.sub_newletter"
+                                value="1" />
+                        </span>
+                        <div
+                            ng-show="$stripe.userRegister.terms_condition.$invalid && !$stripe.userRegister.terms_condition.$pristine">
+                            <p class="help-block">Please select terms</p>
+                        </div>
+                    </div>
+                    <div class="terms form-group theme-color" style="margin-bottom: 0;"
+                        ng-class="{ 'has-error' : $stripe.couponerror==1}">
+                        <span ng-if="$stripe.havepromo2">
+                            <input type="text" class="form-control" ng-model="$stripe.user.promo_code"
+                                placeholder="Promo Code" name="promo_code" ng-keyup="$stripe.couponerror=0" />
+                        </span>
+                        <p ng-if="$stripe.couponerror==1" class="help-block">Invalid Coupon.</p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-large" type="submit"
+                data-ng-disabled="$stripe.userRegister.$invalid || loadingSpinner">
+                <i class="fa fa-circle-o-notch fa-spin" ng-show="loadingSpinner"></i>Register account
+            </button>
+            <button type="button" class="cancel btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+    </form>
+
+</div>

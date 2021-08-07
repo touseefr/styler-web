@@ -1,0 +1,116 @@
+<!-- /app/modules/users/create/create.html -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">{{($state.params.user_id) ? 'Update user' : 'Create user'}}</h3>
+      </div>
+      <!-- /.box-header -->
+      <form role="form" name="userForm" class="form-horizontal" novalidate="" ng-submit="_self.saveUser()">
+        <div class="box-body">
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+              <label for="username" class="col-md-4 control-label" translate="createuser.form.fields.username.label"></label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" name="username" id="username" placeholder="{{'createuser.form.fields.username.placeholder' | translate }}" data-ng-model="_self.user.username" required="" ng-pattern="/[a-zA-Z0-9]$/" ng-maxlength="100" ng-readonly="true" >
+                <div ng-show="userForm.username.$invalid && !userForm.username.$pristine">
+                  <p ng-show="userForm.username.$error.required" class="help-block" translate="createuser.form.fields.username.error.required"></p>
+                  <p ng-show="userForm.username.$error.pattern" class="help-block" translate="createuser.form.fields.username.error.pattern"></p>
+                  <p ng-show="userForm.username.$error.maxlength" class="help-block" translate="createuser.form.fields.username.error.maxlength"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.firstName.$invalid && !userForm.firstName.$pristine }">
+              <label for="name" class="col-md-4 control-label" translate="createuser.form.fields.firstName.label"></label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" name="firstName" id="name" placeholder="{{'createuser.form.fields.firstName.placeholder' | translate }}" ng-model="_self.user.firstName" required="" ng-maxlength="50">
+                <div ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine">
+                  <p ng-show="userForm.firstName.$error.required" class="help-block" translate="createuser.form.fields.firstName.error.required"></p>
+                  <p ng-show="userForm.firstName.$error.maxlength" class="help-block" translate="createuser.form.fields.firstName.error.maxlength"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.lastName.$invalid && !userForm.lastName.$pristine }">
+              <label for="name" class="col-md-4 control-label" translate="createuser.form.fields.lastName.label"></label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" name="lastName" id="name" placeholder="{{'createuser.form.fields.lastName.placeholder' | translate }}" ng-model="_self.user.lastName" required="" ng-maxlength="50">
+                <div ng-show="userForm.lastName.$invalid && !userForm.lastName.$pristine">
+                  <p ng-show="userForm.lastName.$error.required" class="help-block" translate="createuser.form.fields.lastName.error.required"></p>
+                  <p ng-show="userForm.lastName.$error.maxlength" class="help-block" translate="createuser.form.fields.lastName.error.maxlength"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.phoneNumber.$invalid && !userForm.phoneNumber.$pristine }">
+              <label for="phoneNumber" class="col-md-4 control-label" translate="createuser.form.fields.phoneNumber.label"></label>
+              <div class="col-md-7">
+                <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="{{'createuser.form.fields.phoneNumber.placeholder' | translate }}" ng-model="_self.user.phoneNumber" ui-mask="(999) 999-9999" ng-maxlength="15" ui-mask-placeholder>
+                <div ng-show="userForm.phoneNumber.$invalid && !userForm.phoneNumber.$pristine">
+                  <p ng-show="userForm.phoneNumber.$error.required" class="help-block" translate="createuser.form.fields.phoneNumber.error.required"></p>
+                  <p ng-show="userForm.phoneNumber.$error.maxlength" class="help-block" translate="createuser.form.fields.phoneNumber.error.maxlength"></p>
+                  <p ng-show="userForm.phoneNumber.$error.mask" class="help-block" translate="createuser.form.fields.phoneNumber.error.phone"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+              <label for="email" class="col-md-4 control-label" translate="createuser.form.fields.email.label"></label>
+              <div class="col-md-7">
+                <input type="email" class="form-control" name="email" id="email" placeholder="{{'createuser.form.fields.email.placeholder' | translate }}" data-ng-model="_self.user.email" required="" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" ng-maxlength="100">
+                <div ng-show="userForm.email.$invalid && !userForm.email.$pristine">
+                  <p ng-show="userForm.email.$error.required" class="help-block" translate="createuser.form.fields.email.error.required"></p>
+                  <p ng-show="userForm.email.$error.pattern" class="help-block" translate="createuser.form.fields.email.error.pattern"></p>
+                  <p ng-show="userForm.email.$error.maxlength" class="help-block" translate="createuser.form.fields.email.error.maxlength"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" ng-class="{ 'has-error' : userForm.roles.$invalid && !userForm.roles.$pristine }">
+              <label for="roles" class="col-md-4 control-label" translate="createuser.form.fields.roles.label"></label>
+              <div class="col-md-7">
+                <ui-select multiple ng-model="_self.user.roles" ui-select-required name="roles">
+                  <ui-select-match placeholder="{{'createuser.form.fields.roles.placeholder' | translate}}">{{$item.type}}</ui-select-match>
+                  <ui-select-choices repeat="role in _self.roles | propsFilter: {description: $select.search}">
+                    <span ng-bind-html="role.type | highlight: $select.search"></span> (
+                    <span style="font-weight:bold;" ng-bind-html="role.description | highlight: $select.search"></span>)
+                  </ui-select-choices>
+                </ui-select>
+                <div ng-show="userForm.roles.$invalid && !userForm.roles.$pristine">
+                  <p ng-show="userForm.roles.$invalid" class="help-block" translate="createuser.form.fields.roles.error.required"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-sm-12 col-lg-12">
+            <div class="form-group">
+            <div class="col-md-7 col-md-offset-4">
+                <user-image data-userid="_self.user.id" data-imageclass="img-circle"></user-image>
+                 <h6 class="widget-user-update-photo"> <a ng-href="#" ng-click= "_self.openPhotoModal()" prevent-default> <i class="fa fa-camera fa-fw"></i> Update photo</a> </h6>
+                </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <a href="#" ui-sref="users.list" class="btn btn-warning pull-left btn-flat">
+            <i class="fa fa-times fa-fw"></i>Cancel</a>
+          <button type="submit" class="btn btn-success pull-right btn-flat" data-ng-disabled="userForm.$invalid || loadingSpinner" ng-class="{'disabled' : (userForm.$invalid || loadingSpinner) }">
+            <i class="fa {{ loadingSpinner ? 'fa-spinner fa-spin' : 'fa-plus' }} fa-fw"></i>Update</button>
+        </div>
+      </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /app/modules/users/create/create.html -->

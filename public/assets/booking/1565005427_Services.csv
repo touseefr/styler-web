@@ -1,0 +1,50 @@
+PK,AllDay,PreExpires,PreInstructions,PreLot,PreManufacturer,PreQuantity,PreRefills,Prescription,RequiresProcess,ResourceID,ResourceLinkType,Tax1,Tax2,Tax3,Favorite,ID,IDNumeric,Name,BackBar,Setup,Process,Finish,Category,Price,Vendor,CommissionBonus,ComType,Link1,Link2,Link3,Balance,QntPur,QntUsed,BackBar1,Inactive,QuickBooksExport,CustomField1,CustomField2,CustomField3,Alias1,Alias2,Alias3,ComPurType,ComPurValue,ComUsedType,ComUsedValue,LoyaltyPoints
+2,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,EEE,0,hair extension SHIFT UP,0,90,0,0,,180,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+3,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFA,0,clear semi color,0,30,30,30,,35,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+4,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFB,0,cut/ tint for men,0,45,30,45,,65,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+5,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFD,0,tint full head,0,30,60,30,,100,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+7,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,MS,0,Consultation ,0,20,0,0,,0,,0,0,,,,0,1,1,FALSE,FALSE,,,,,,,,0,0,0,0,0
+8,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAA,0,boys cut under 15,0,30,0,0,,30,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+9,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAB,0, girls under 15 cut no b/w,0,30,0,0,,55,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+10,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAC,0,Womens cut only,0,45,0,0,,70,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+11,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAD,0,Womens cut&bw,0,60,0,0,,95,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+12,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAE,0,Mens cut,0,30,0,0,,45,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+13,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAF,0,BW short,0,30,0,0,,30,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+14,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,AAG,0,BW Med,0,45,0,0,,40,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+15,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBA,0,BW Long,0,60,0,0,,50,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+16,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBB,0,curls styling,0,30,0,0,,65,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+17,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBC,0,GHD smoothing,0,15,0,0,,15,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+18,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBD,0,Tint roots only,0,30,60,30,,70,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+20,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBF,0,Foils Tsection,0,45,60,30,,135,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+21,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCA,0,Foils top only,0,30,60,30,,85,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+22,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCB,0,1/2 HEAD FOILS SHORT,0,40,60,30,,125,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+23,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCC,0,Full head foil short,0,60,60,30,,155,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+24,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCD,0,Full head foil medium,0,60,60,30,,185,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+25,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCE,0,Full head foil long hair,0,60,60,30,,275,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+26,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCF,0,Semi colour,0,30,25,30,,75,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+27,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,CCG,0,Hair up trial,0,60,0,0,,65,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+28,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,DDA,0,Hair up ,0,60,0,0,,110,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+29,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,DDB,0,keratin straightening Thermal ionic sh,0,30,150,60,,300,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+30,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,DDC,0,keratin straightning Thermal ionic Med,0,30,150,60,,400,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+31,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,DDD,0,keratin straightning Thermal ionic Long,0,30,150,60,,500,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+32,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,DDE,0,Style set,0,30,30,30,,70,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+35,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,EEA,0,Colour correction 1 aapliction,0,30,30,0,,110,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+36,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,GGB,0,Unticurl rusk 1.2.3,0,90,0,0,,0,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+37,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,MA,0,scrunch ,0,30,0,0,,35,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+119,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFF,0,tint 1/2 head,0,20,45,30,,45,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+142,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,EEG,0,roots bleach loreal,0,30,60,30,,120,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+143,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,EEH,0,buzz cut,0,30,0,0,,25,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+162,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFG,0,1/2 HEAD FOILS MID,0,60,60,30,,145,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+163,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFH,0,1/2 HEAD FOILS LONG ,0,60,60,30,,195,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+209,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,FFI,0,Ladies Trim,0,30,0,0,,55,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+237,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,HHH,0,Hair Treatment,0,30,0,0,Miscellaneous,35,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+260,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,GGH,0,OLAPLEX HAIR PERTECTOR SERVICE,0,30,0,0,Miscellaneous,85,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+310,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,GGG,0,Balayage,0,90,60,30,Miscellaneous,295,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+405,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBBP,0,Bond Builder Per Service 7ml,0,0,0,0,Miscellaneous,45,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+411,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,TTT,0,Toner,0,30,0,0,Miscellaneous,45,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+412,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,EE2,2,Hair extension take out,0,45,0,0,,0,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+418,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,jjj,0,no yellow-no orange,0,10,0,0,Miscellaneous,15,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+432,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,zzz,0,bw +curls,0,60,0,0,Miscellaneous,60,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+433,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,zab,0,bw + straightening ,0,60,0,0,Miscellaneous,55,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+434,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,HAH,0,mans cut+beard ,0,45,0,0,Miscellaneous,60,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0
+437,0,,,,,,,,,,0,FALSE,FALSE,FALSE,,BBP,0,braids ,0,20,0,0,Miscellaneous,30,,0,,,,,0,1,1,,FALSE,,,,,,,,0,,0,,0

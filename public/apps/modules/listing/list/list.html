@@ -1,0 +1,135 @@
+<style>
+   .bg-warning{background-color: #f0ad4e}
+</style>
+<div class="col-md-2 col-xs-12">
+  <div class="vertical_tabs_list pl-15f">
+    <div class="list_txt mb-20">
+      <h4 class="pt-15">Create a Listing</h4>
+    </div>
+    <div class="left_listing clearfix">
+      <ul class="user_txt checklisting">
+<!--        <li ng-class="{'active' :listingvalues,'active' : $state.includes('listing.create.list', {listing_type: 'classified'}) }"
+          ng-if="dashboardCtrl.hasRole('serviceprovider') || dashboardCtrl.hasRole('distributor')">
+          <div class="new_icon"><a ng-href="#" ui-sref="listing.create.list({listing_type:'classified'})" title="Create a classified"></a></div>
+          <div class="clearfix">
+            <div class="cListinItem">
+              <a ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'classified'}) }" ng-href="#" title="Create a classified" ui-sref="listing.create.list({listing_type:'classified'})" class="checklist_button1 cListinItemInner">Classified (<% (listingCtrl.listing.data[0].classifiedsCount)?listingCtrl.listing.data[0].classifiedsCount:0; %>) <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+        </li> li end here -->
+
+        <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'deal'}) }" ng-if="dashboardCtrl.hasRole('serviceprovider')||dashboardCtrl.hasRole('distributor')||dashboardCtrl.hasRole('schoolcollege')">
+          <div class="new_icon1"><a ng-href="#" ui-sref="listing.create.list({listing_type:'deal'})" title="Create a deal"></a></div>
+          <div class="clearfix">
+            <div class="cListinItem">
+              <a ng-if="dashboardCtrl.hasRole('schoolcollege')" ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'deal'}) }" ng-href="#" ui-sref="listing.create.list({listing_type:'deal'})"  title="Create a deal" class="cListinItemInner">
+              <span>Course Deals</span>
+              <i class="fa fa-plus"></i>
+              </a>              
+              <a ng-if="!dashboardCtrl.hasRole('schoolcollege')" ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'deal'}) }" ng-href="#" ui-sref="listing.create.list({listing_type:'deal'})"  title="Create a deal" class="cListinItemInner">
+              <span >Deals (<% (listingCtrl.listing.data[0].dealsCount)?listingCtrl.listing.data[0].dealsCount:0; %>) </span> <i class="fa fa-plus"></i></a>
+            </div>
+              <div class="pull-left"> </div>
+            <div class="new_add pull-right mr-15"></div>
+          </div>
+        </li><!-- li end here -->
+
+        <li ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'businessforsale'}) }" ng-if="dashboardCtrl.hasRole('serviceprovider')">
+          <div class="new_icon3"><a ng-href="#" ui-sref="listing.create.list({listing_type:'businessforsale'})" title="Create a business for sale"></a></div>
+          <div class="clearfix">
+            <div class="cListinItem">
+              <a ng-class="{'active' : $state.includes('listing.create.list', {listing_type: 'businessforsale'}) }" ng-href="#" ui-sref="listing.create.list({listing_type:'businessforsale'})" title="Create a business for sale" class="cListinItemInner">Business For Sale (<% (listingCtrl.listing.data[0].businessCount)?listingCtrl.listing.data[0].businessCount:0; %>) <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+        </li><!-- li end here -->
+
+      </ul><!-- ul end here -->
+    </div>
+  </div>
+</div>
+<div class="col-md-10 col-xs-12 pt-25" ui-view="create_listing_view">
+  <div class="pg_account_listing tab-pane">
+    <h4 class="mt-0 mb-15">Manage Listing</h4>
+    <table ng-if="listingCtrl.listing.data" class="table table-bordered table-vertically-center table-responsive bordered table-striped table-condensed datatable"
+      ui-jq="dataTable" ui-options="dataTableOpt">
+       <thead>
+        <tr style="display:none;">
+          <th>id</th>
+          <th>Type</th>
+          <th>Type</th>
+          <th>Gallery</th>
+          <th>Price</th>
+          <th>Title</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <tr class="fadeInUp animated" ng-repeat="list in listingCtrl.listing.data">
+          <td style="display:none;"><%list.id%></td>
+          <td class="tb_border-right">
+            <div class="flex flexRow flexNoWrap">
+              <div class="mr-5">
+                <div ng-if='list.type=="classified"' class="classifiedCircle">C</div>
+                <div ng-if='list.type=="businessforsale"' class="businessCircle">B</div>
+                <div ng-if='list.type=="deal" && !dashboardCtrl.hasRole("schoolcollege")' class="dealsCircle">D</div>
+                <div ng-if="list.type=='deal' && dashboardCtrl.hasRole('schoolcollege')" class="grayCircle textUpper"><%list.title  | limitTo : 2 %></div>              
+              </div>
+              <div class="">
+                <h5 class="mt-0 mb-0">
+                  <a ng-if="listingCtrl.today<=list.expiry" class="listing-title1 text-capitalize text-teal d-inlineB" href="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>"><%list.title%></a>
+                  <a ng-if="listingCtrl.today>list.expiry" class="listing-title1 text-capitalize text-teal d-inlineB" ><%list.title%></a>
+                </h5>
+                <small ng-if="list.type=='businessforsale' && listingCtrl.today<=list.expiry && list.status!=1" class="bg-teal d-inlineB text-white mt-5 ng-scope btn-xs">Sold</small>
+                <small ng-if="listingCtrl.today<=list.expiry && list.status==1" class="bg-teal d-inlineB text-white mt-5 ng-scope btn-xs">Active</small>
+                
+                <small ng-if="listingCtrl.today>list.expiry" class="bg-warning d-inlineB text-white mt-5 ng-scope btn-xs">Expired</small>
+              </div>
+            </div>
+          </td>
+          <td class="text-center middle-align tb_border-right tb_border-left">
+              <div ng-if="list.type=='businessforsale'">
+                <span><label>Turn Over: </label> <% list.turnover %></span><br />
+                <span><label>Rent: </label> <% list.rent %></span><br />
+                <span><label>Area: </label> <% list.area %></span><br />
+              </div>
+          </td>
+          <td class="text-right w100 middle-align tb_border-left">
+            <div ng-if="list.type !='deal'" >
+              <label>Price:</label> <i class="fa fa-dollar"></i><% list.price | limitTo : 7 %>              
+            </div>
+            <div ng-if="list.type =='deal'" class="listPrice">
+              <label>Price:</label><i class="fa fa-dollar"></i>
+              <del ng-if="list.price==0" class="text-muted ng-binding"><% list.price | limitTo : 7 %></del>
+              <strong><% list.saving | limitTo : 7 %></strong>
+            </div>
+          </td>
+          <td class="text-center account_social_links w70 middle-align">
+              <a href="javascript:;" socialshare socialshare-provider="facebook" socialshare-text="<%list.title%>"
+                socialshare-description="<%list.description%>" socialshare-url="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>"
+                socialshare-type="feed" socialshare-media="<% listingCtrl.host %><%list.assets[0].path%><%list.assets[0].name%>"
+                socialshare-via="647543305681906"><i class="fa fa-facebook fb"></i>
+              </a>
+              <a href="javascript:;" socialshare socialshare-provider="twitter" socialshare-text="<%list.title%>"
+                socialshare-hashtags="<%list.title%>" socialshare-url="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>"><i
+                  class="fa fa-twitter tw"></i>
+              </a>
+              <a href="javascript:;" socialshare socialshare-provider="linkedin" socialshare-text="<%list.title%>"
+                socialshare-description="<%list.description%>" socialshare-url="<% listingCtrl.host %>/<%list.url%>?id=<%base64_encode(list.id)%>"><i
+                  class="fa fa-linkedin link"></i>
+              </a>
+          </td>
+          <td class="actionIcons w70 middle-align">
+            <a ng-href="#" ui-sref="listing.create.list.update({listing_type:list.type,list_id:base64_encode(list.id)})" title="Edit"><i
+                class="fa fa-pencil-square-o"></i></a>
+            <a ng-href="#" prevent-default ng-click="listingCtrl.delete_options($event, list.id)" title="Delete"><i
+                class="fa fa-trash text-danger"></i></a>
+            <div class="delte_selection" id="delete_options_<%list.id%>">
+              <p>Sure to Delete!<p>
+                  <button class="ok btn btn-xs btn-default" ng-href="#" prevent-default ng-click="listingCtrl.delete($event, list.id)">Yes</button>
+                  <button class="cancel  btn btn-xs btn-default" ng-href="#" prevent-default ng-click="listingCtrl.delete_options_cancel($event, list.id)">No</button>
+            </div>
+          </td>        
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

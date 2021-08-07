@@ -1,0 +1,78 @@
+<div class="profileTitle">
+  <div class="profileAvatar text-center mr-15">
+    <figure class="square120">
+        <img src="<% _acountCtrl.userProfilepic %>" alt="" class="center-block img-circle img-responsive img-center" />
+    </figure>      
+    <div flow-init="_acountCtrl.flowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+      flow-file-success="_acountCtrl.fileUploadSuccess($file,$message)">
+      <div class="drop" flow-drop ng-class="dropClass">
+        <span class="change_pic individual">
+          <span flow-btn flow-attrs="{accept:'image/*'}">Upload Image</span>
+        </span>
+      </div>
+      <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+          <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                   aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                  <span class="sr-only"><%file.progress()%>% Complete</span>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="profileRelated">
+    <form class="flex flexCol">
+      <div class="flex align-items-center mb-15">
+          <h4 class="m-0">Looking For work?</h4>
+          <div class="ml-50">
+            <label for="looking_work_yes" class="mr-10">YES</label><input id="looking_work_yes" type="checkbox" name="work" ng-disabled="_acountCtrl.lookingJob" ng-checked="_acountCtrl.lookingJob" ng-click="_acountCtrl.lookingWork(true)">
+            <label for="looking_work_no" class="ml-20 mr-10">NO</label><input id="looking_work_no" type="checkbox" name="work" value="no" ng-checked="!_acountCtrl.lookingJob" ng-disabled="!_acountCtrl.lookingJob"  ng-click="_acountCtrl.lookingWork(false)">
+            <div class="citizens"></div>
+          </div>
+      </div>
+      <div class="flex align-items-center">
+        <h4 class="m-0">Are You an Australian Citizen?</h4>
+        <div class="ml-50">
+          <label for="works_yes" class="mr-10">YES</label><input id="works_yes" type="checkbox" name="work" ng-disabled="_acountCtrl.isAustralian" ng-checked="_acountCtrl.isAustralian" ng-click="_acountCtrl.Australian(true)">
+          <label for="works_no" class="ml-20 mr-10">NO</label><input id="works_no" type="checkbox" name="work" ng-disabled="!_acountCtrl.isAustralian" ng-checked="!_acountCtrl.isAustralian" ng-click="_acountCtrl.Australian(false)">
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="col-md-12">
+    <div class="media">
+      <div class="media-left cls_pic text-center">
+        <figure class="square120">
+            <img src="<% _acountCtrl.userProfilepic %>" alt="" class="center-block img-circle img-responsive img-center" />
+        </figure>      
+        <div flow-init="_acountCtrl.flowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+          flow-file-success="_acountCtrl.fileUploadSuccess($file,$message)">
+          <div class="drop" flow-drop ng-class="dropClass">
+            <span class="change_pic individual">
+              <span flow-btn flow-attrs="{accept:'image/*'}">Upload Image</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="media-body looking_for_job">
+        <form>
+          <div class="form-group row">
+            <div class="col-sm-4 col-sm-offset-2">
+              <h4>Looking For work?</h4>
+              <label for="looking_work_yes" class="mr-10">YES</label><input id="looking_work_yes" type="checkbox" name="work" ng-disabled="_acountCtrl.lookingJob" ng-checked="_acountCtrl.lookingJob" ng-click="_acountCtrl.lookingWork(true)">
+              <label for="looking_work_no" class="ml-20 mr-10">NO</label><input id="looking_work_no" type="checkbox" name="work" value="no" ng-checked="!_acountCtrl.lookingJob" ng-disabled="!_acountCtrl.lookingJob"  ng-click="_acountCtrl.lookingWork(false)">
+              <div class="citizens"></div>
+            </div>
+            <div class="col-sm-4">
+              <h4>Are You an Australian Citizen?</h4>
+              <label for="works_yes" class="mr-10">YES</label><input id="works_yes" type="checkbox" name="work" ng-disabled="_acountCtrl.isAustralian" ng-checked="_acountCtrl.isAustralian" ng-click="_acountCtrl.Australian(true)">
+              <label for="works_no" class="ml-20 mr-10">NO</label><input id="works_no" type="checkbox" name="work" ng-disabled="!_acountCtrl.isAustralian" ng-checked="!_acountCtrl.isAustralian" ng-click="_acountCtrl.Australian(false)">
+            </div>
+          </div>        
+          </div>
+        </form>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+  </div> -->
+</div>

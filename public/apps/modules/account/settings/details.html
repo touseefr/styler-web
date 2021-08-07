@@ -1,0 +1,132 @@
+<div id="listing" class="tab-pane account_list pt-25">
+    <form name="accountForm" class="form-horizontal" role="form" novalidate>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : accountForm.firstsname.$invalid && !accountForm.firstsname.$pristine }">
+                    <label class="control-label col-sm-4" for="firstsname">
+                        <span>Name</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="firstsname" ng-model="_self.userModel.name" name="firstsname"
+                               placeholder="First name" required />
+                        <p ng-show="accountForm.firstsname.$invalid && !accountForm.firstsname.$pristine" class="help-block">First Name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : accountForm.contactnumber.$invalid && !accountForm.contactnumber.$pristine }">
+                    <label class="control-label col-sm-4" for="contactnumber">
+                        <span>Contact Number</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" ng-pattern="/^([0-9][0-9]*)$/" class="form-control" id="contactnumber" name="contactnumber"
+                               ng-model="_self.userModel.contactnumber" placeholder="Contact Number" maxlength="15" required />
+                        <p ng-show="accountForm.contactnumber.$invalid && !accountForm.contactnumber.$pristine" class="help-block">Enter valid contact number .</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="_self.Role == 'Distributor' || _self.Role == 'Individual'">
+                    <label class="control-label col-sm-4" for="suburb">
+                        <span>Suburb</span>
+                    </label>
+                    <div class="col-sm-8 typeahead">
+                        <ui-select ng-model="_self.userModel.suburb" ng-model-options="_self.modelOptions" ng-disabled="disabled"
+                                   reset-search-input="true" title="Suburb or Postcode" append-to-body="true">
+                            <ui-select-match>
+                                <%$select.selected.location%> -
+                                <%$select.selected.state%>,
+                                <%$select.selected.postcode%>
+                            </ui-select-match>
+                            <ui-select-choices repeat="address in _self.suburbList track by $index" refresh="_self.getLocation($select.search)"
+                                               refresh-delay="0">
+                                <span ng-bind-html="address.location | highlight: $select.search"></span> - <span ng-bind-html="address.state | highlight: $select.search"></span>,
+                                <span ng-bind-html="address.postcode | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="email">
+                        <span>E-mail</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">
+                            <%_self.userModel.email%>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="password">
+                        <span>Old Password</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="error-msg" ng-show="accountForm.old_password.$invalid && !accountForm.old_password.$pristine">
+                            Password should be at least 8 characters long and should contain 1 capital letter, 1 special  character and at least 1 digit.
+                        </div>
+                        <input type="password"  class="form-control" id="password" name="password" placeholder="Password" ng-model="_self.userModel.old_password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="password">
+                        <span>New Password</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="error-msg" ng-show="accountForm.password.$invalid && !accountForm.password.$pristine">
+                            Password should be at least 8 characters long and should contain 1 capital letter, 1 special  character and at least 1 digit.
+                        </div>
+                        <input type="password" ng-pattern="/^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,50}$/" class="form-control" id="password" name="password" placeholder="Password" ng-model="_self.userModel.password" />
+                    </div>
+                </div>
+                <div class="form-group row" ng-if="_self.Role == 'Distributor' || _self.Role == 'Individual'" ng-class="{ 'has-error' : accountForm.about.$invalid && !accountForm.about.$pristine }">
+                    <label class="control-label col-sm-4" for="address">
+                        <span>About You</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="about" name="about" placeholder="About you" ng-model="_self.userModel.about"
+                                  required></textarea>
+                        <p ng-show="accountForm.about.$invalid && !accountForm.about.$pristine" class="help-block">About is required.</p>
+                    </div>
+                </div>        
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-if="_self.Role == 'Distributor' || _self.Role == 'Individual'">
+                    <label class="control-label col-sm-4" for="logo"><span>Logo</span></label>
+                    <div class="col-sm-8">
+                        <img ng-src="<% _self.userModel.logo %>" alt="" class="img-circle img-responsive img-center" />
+                        <div flow-init="_self.flowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                             flow-file-success="_self.fileUploadSuccess($file,$message)">
+
+                            <div class="drop" flow-drop ng-class="dropClass">
+                                <span class="change_pic">
+                                    <button flow-btn class="btn btn-default">Upload Logo</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-if="_self.Role == 'Distributor' || _self.Role == 'Individual'">
+                    <label class="control-label col-sm-4" for="video"><span>Video</span></label>
+                    <div class="col-sm-8">
+                        <span class="video-name"><% _self.userModel.video %> </span>
+                        <div flow-init="_self.videoflowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{mp4:1}[$file.getExtension()]"
+                             flow-file-success="_self.videoUploadSuccess($file,$message)">    
+                            <div class="drop" flow-drop ng-class="dropClass">
+                                <span class="change_pic">
+                                    <button flow-btn class="btn btn-default">Upload Video</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>    
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn bg-teal text-white no-radius" ng-click="_self.saveuser()" ng-disabled="accountForm.$invalid">Update</button>
+            </div>
+        </div>
+    </form>
+</div>

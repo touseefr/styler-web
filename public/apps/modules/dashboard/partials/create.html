@@ -1,0 +1,350 @@
+<div class="row">
+        <!-- left navigation -->
+        <div class="col-md-2 col-xs-12">
+            <ul class="nav nav-tabs toggle_tab">
+                <li ng-class="{active: tabCtrl.type == '1'}" data-ng-click="tabCtrl.changeType('1');">
+                    <a data-toggle="tab" href="#classified" class="news_icon"></a>
+                </li>
+                <li ng-class="{active: tabCtrl.type == '7'}" data-ng-click="tabCtrl.changeType('7');">
+                    <a data-toggle="tab" href="#deals" class="delear_icon"></a>
+                </li>
+                <li ng-class="{active: tabCtrl.type == '4'}" data-ng-click="tabCtrl.changeType('4');">
+                    <a data-toggle="tab" href="#jobs" class="group_icon"></a>
+                </li>
+                <li ng-class="{active: tabCtrl.type == '8'}" data-ng-click="tabCtrl.changeType('8');">
+                    <a data-toggle="tab" href="#businessforsale" class="idea_icon"></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /left navigation -->
+        <!-- Start Classifieds -->
+        <div class="col-md-10" ng-show="tabCtrl.showform=='classifieds'">
+            <form class="form-horizontal" role="form">
+                <div id="listing" class="tab-pane pt-15 mb-20">
+                    <h4>Create a Classifieds</h4>
+                    <div class="category_select">
+                        <label>within</label>
+                        <select data-ng-model="tabCtrl.classifiedsModel.seletecdcategory" ng-change="tabCtrl.getclassifiedsSubcategories();">
+                            <option value="">Select Category</option>
+                            <option ng-repeat="options in tabCtrl.categories" value="((options.id))">((options.name))</option>
+                        </select>
+                        <select data-ng-model="tabCtrl.classifiedsModel.seletecdsubcategory">
+                            <option value="">Select Sub Category</option>
+                            <option ng-repeat="options in tabCtrl.subcategories" value="((options.id))">((options.name))</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="list_left">
+                                <input type="text" data-ng-model="tabCtrl.classifiedsModel.listingTitle" placeholder="Title of Listing" Name="Title of Listing" required />
+                                <input type="text" data-ng-model="tabCtrl.classifiedsModel.contactNumber" placeholder="Contact Number" Name="Contact number" required />
+                                <input type="text" data-ng-model="tabCtrl.classifiedsModel.contactEmail" placeholder="Contact Email" required/>
+                                <input type="text" data-ng-model="tabCtrl.classifiedsModel.locationInfo" placeholder="Locational Information" required/>
+                                <label>Write a Description</label>
+                                <textarea data-ng-model="tabCtrl.classifiedsModel.description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="list_right">
+                                <ul class="sub_price">
+                                    <li>
+                                        <label>Price</label>:
+                                        <input type="text" data-ng-model="tabCtrl.classifiedsModel.originalPrice" placeholder="Price" />
+                                    </li>
+                                </ul>
+                                <div class="upload_pics">
+                                    Upload Pictures
+                                    <div class="group_btn">
+                                        <span class="del_btn">
+                                            <img src="images/del_btn.png" alt="del" />
+                                        </span>
+                                    </div>
+                                    <ul class="after_upload">
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--upload_pics-->
+                                <button class="btn pull-right" type="button" data-ng-click="tabCtrl.saveClassifieds();">Submit</button>
+                            </div>
+                            <!--list_right-->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--  End Classifieds -->
+        <!--  Start Deals -->
+        <div class="col-md-10" ng-show="tabCtrl.showform=='deals'">
+            <form class="form-horizontal" role="form">
+                <div id="listing" class="tab-pane pt-15 mb-20">
+                    <h4>Create a Deal</h4>
+                    <div class="category_select">
+                        <label>within</label>
+                        <select data-ng-model="tabCtrl.dealsModel.seletecdcategory" ng-change="tabCtrl.getdealsSubcategories();">
+                            <option value="">Select Category</option>
+                            <option ng-repeat="options in tabCtrl.categories" value="((options.id))">((options.name))</option>
+                        </select>
+                        <select data-ng-model="tabCtrl.dealsModel.seletecdsubcategory">
+                            <option value="">Select Sub Category</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="list_left">
+                                <input type="text" data-ng-model="tabCtrl.dealsModel.listingTitle" placeholder="Title of Listing" Name="Title of Listing" required />
+                                <input type="text" data-ng-model="tabCtrl.dealsModel.contactNumber" placeholder="Contact Number" Name="Contact number" required />
+                                <input type="text" data-ng-model="tabCtrl.dealsModel.contactEmail" placeholder="Contact Email" required/>
+                                <input type="text" data-ng-model="tabCtrl.dealsModel.locationInfo" placeholder="Locational Information" required/>
+                                <input type="text" placeholder="Deal Expiry Date" ng-click="tabCtrl.open($event)" uib-datepicker-popup data-ng-model="tabCtrl.jobExpiry" is-open="tabCtrl.status.opened" min-date="tabCtrl.minDate" datepicker-options="tabCtrl.dateOptions" date-disabled="tabCtrl.disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <label>Write a Description</label>
+                                <textarea data-ng-model="tabCtrl.dealsModel.description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="list_right">
+                                <ul class="sub_price">
+                                    <li>
+                                        <label>Original Price</label>:
+                                        <input type="text" data-ng-model="tabCtrl.dealsModel.originalPrice" placeholder="Price" />
+                                    </li>
+                                    <li>
+                                        <label>Discount</label>:
+                                        <input type="text" data-ng-model="tabCtrl.dealsModel.discount" placeholder="%OFF" />
+                                    </li>
+                                    <li>
+                                        <label>Savings</label>:
+                                        <input type="text" data-ng-model="tabCtrl.dealsModel.saving" placeholder="Saving" />
+                                    </li>
+                                </ul>
+                                <div class="upload_pics">
+                                    Upload Pictures
+                                    <div class="group_btn">
+                                        <span class="del_btn">
+                                            <img src="images/del_btn.png" alt="del" />
+                                        </span>
+                                    </div>
+                                    <ul class="after_upload">
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--upload_pics-->
+                                <button class="btn pull-right" type="button" data-ng-click="tabCtrl.saveDeals();">Submit</button>
+                            </div>
+                            <!--list_right-->
+                            {!! Form::close() !!}
+                            <div class=""></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End deals -->
+        <!-- Start Job -->
+        <div class="col-md-10" ng-show="tabCtrl.showform=='jobs'">
+            <form class="form-horizontal" role="form">
+                <div id="listing" class="tab-pane pt-15 mb-20">
+                    <h4>Post a Job</h4>
+                    <div class="category_select">
+                        <label>within</label>
+                        <select data-ng-model="tabCtrl.jobsModel.seletecdcategory" ng-change="tabCtrl.getjobsSubcategories();">
+                            <option value="">Select Category</option>
+                            <option ng-repeat="options in tabCtrl.categories" value="((options.id))">((options.name))</option>
+                        </select>
+                        <select data-ng-model="tabCtrl.jobsModel.seletecdsubcategory">
+                            <option value="">Select Sub Category</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="list_left">
+                                <input type="text" data-ng-model="tabCtrl.jobsModel.listingTitle" placeholder="Title of Listing" Name="Title of Listing" required />
+                                <input type="text" data-ng-model="tabCtrl.jobsModel.contactNumber" placeholder="Contact Number" Name="Contact number" required />
+                                <input type="text" data-ng-model="tabCtrl.jobsModel.contactEmail" placeholder="Contact Email" required/>
+                                <input type="text" data-ng-model="tabCtrl.jobsModel.locationInfo" placeholder="Locational Information" required/>
+                                <label>Write a Description</label>
+                                <textarea data-ng-model="tabCtrl.jobsModel.description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="list_right create-job">
+                                <ul class="sub_price">
+                                    <li class="category_select">
+                                        <label>Job Type</label>:
+                                        <select data-ng-model="tabCtrl.jobsModel.jobType">
+                                            <option value="">Select Job Type</option>
+                                            <option value="parttime">Part Time</option>
+                                            <option value="fulltime">Full Time</option>
+                                            <option value="casual">Casual</option>
+                                        </select>
+                                    </li>
+                                    <li class="category_select">
+                                        <label>Job Visa</label>:
+                                        <select data-ng-model="tabCtrl.jobsModel.visa_id">
+                                            <option value="">Select Job Visa</option>
+                                            <option value="1">Australian Visa</option>
+                                            <option value="2">Working</option>
+                                            <option value="3">Holiday</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                                <div class="upload_pics">
+                                    Upload Pictures
+                                    <div class="group_btn">
+                                        <span class="del_btn">
+                                            <img src="images/del_btn.png" alt="del" />
+                                        </span>
+                                    </div>
+                                    <ul class="after_upload">
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--upload_pics-->
+                                <button class="btn pull-right" type="button" data-ng-click="tabCtrl.saveJobs();">Submit</button>
+                            </div>
+                            <!--list_right-->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Job -->
+        <!-- Start Business For Sale -->
+        <div class="col-md-10" ng-show="tabCtrl.showform=='businessforsale'">
+            <form class="form-horizontal" role="form">
+                <div id="listing" class="tab-pane pt-15 mb-20">
+                    <h4>Create a business for sale</h4>
+                    <div class="category_select">
+                        <label>within</label>
+                        <select data-ng-model="tabCtrl.businessforsaleModel.seletecdcategory" ng-change="tabCtrl.getbusinessforsaleSubcategories();">
+                            <option value="">Select Category</option>
+                            <option ng-repeat="options in tabCtrl.categories" value="((options.id))">((options.name))</option>
+                        </select>
+                        <select data-ng-model="tabCtrl.businessforsaleModel.seletecdsubcategory">
+                            <option value="">Select Sub Category</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="list_left">
+                                <input type="text" data-ng-model="tabCtrl.businessforsaleModel.listingTitle" placeholder="Title of Listing" Name="Title of Listing" required />
+                                <input type="text" data-ng-model="tabCtrl.businessforsaleModel.contactNumber" placeholder="Contact Number" Name="Contact number" required />
+                                <input type="text" data-ng-model="tabCtrl.businessforsaleModel.contactEmail" placeholder="Contact Email" required/>
+                                <input type="text" data-ng-model="tabCtrl.businessforsaleModel.locationInfo" placeholder="Locational Information" required/>
+                                <label>Write a Description</label>
+                                <textarea data-ng-model="tabCtrl.businessforsaleModel.description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="list_right">
+                                <ul class="sub_price">
+                                    <li>
+                                        <label>Price</label>:
+                                        <input type="text" data-ng-model="tabCtrl.businessforsaleModel.originalPrice" placeholder="Price" />
+                                    </li>
+                                </ul>
+                                <div class="upload_pics">
+                                    Upload Pictures
+                                    <div class="group_btn">
+                                        <span class="del_btn">
+                                            <img src="images/del_btn.png" alt="del" />
+                                        </span>
+                                    </div>
+                                    <ul class="after_upload">
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                        <li>
+                                            <img src="images/blank_img.jpg" alt="" />
+                                            <input type="checkbox" value="" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--upload_pics-->
+                                <button class="btn pull-right" type="button" data-ng-click="tabCtrl.saveBusinessforsale();">Submit</button>
+                            </div>
+                            <!--list_right-->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Business For Sale -->
+    </div>

@@ -1,0 +1,21 @@
+<div class="sub-horizontal-nav">
+  <ul class="horizontal-inner-tabs" ng-if="$state.current.name == 'settings.details'">
+    <li><a ng-href="#" ui-sref="settings.details" ng-class="{'active_text' : $state.includes('settings.details')}">&verbar; Account details</a></li>
+    <!--<li ng-if="$state.current.name == 'settings.teams'"><a ng-href="#" ui-sref="settings.teams" ng-class="{'active_text' : $state.includes('settings.teams')}">&verbar; Teams</a></li>-->
+  </ul>
+  <!--------------top navigation for the gallery --------------------->
+
+  <ul class="horizontal-inner-tabs" ng-if="$state.current.name == 'settings.mygallery' || $state.current.name == 'settings.myvideos'">
+    <li><a ng-href="#" ui-sref="settings.mygallery" ng-class="{'active_text' : $state.includes('settings.mygallery')}">&verbar; Gallery</a></li>
+    <li ng-if="dashboardCtrl.checkstatus(dashboardCtrl.userRole, dashboardCtrl.planid)"><a ng-href="#" ui-sref="settings.myvideos" ng-class="{'active_text' : $state.includes('settings.myvideos')}">&verbar; Videos</a></li>
+  </ul>
+  <!--------------End navigation for the gallery --------------------->
+  <ul class="horizontal-inner-tabs" ng-if="$state.current.name == 'settings.paymethod' || $state.current.name == 'settings.transactions' || $state.current.name == 'settings.subscriptions' || $state.current.name == 'settings.invoices'">
+    <li><a ng-href="#" ui-sref="settings.paymethod" ng-class="{'active_text' : $state.includes('settings.paymethod')}">&verbar; Payment Method</a></li>
+    <li ng-if="!dashboardCtrl.hasRole('distributor') && !dashboardCtrl.hasRole('serviceprovider')"><a ng-href="#"
+        ui-sref="settings.transactions" ng-class="{'active_text' : $state.includes('settings.transactions')}">&verbar; Transactions</a></li>
+    <li ng-if="!dashboardCtrl.hasRole('distributor') && !dashboardCtrl.hasRole('serviceprovider')"><a ng-href="#"
+        ui-sref="settings.subscriptions" ng-class="{'active_text' : $state.includes('settings.subscriptions')}">&verbar; Subscriptions</a></li>
+<!--    <li><a ng-href="#" ui-sref="settings.invoices" ng-class="{'active_text' : $state.includes('settings.invoices')}">&verbar; Invoices</a></li>-->
+  </ul>
+</div>

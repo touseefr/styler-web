@@ -1,0 +1,55 @@
+<div id="listing" class="tab-pane account_list faq_list ng-scope">
+  <div class="table-responsive">
+    <div class="faq_form">
+      <div class="panel-heading px-0">
+        <h4 class="mt-10">Create a Faq</h4>
+      </div>
+      <form method="post" class="form-horizontal form-beautyCollective col-md-12" name="bussfaq">
+        <div class="form-group" ng-class="{ 'has-error' : _self.faq.question.$invalid && !_self.faq.question.$pristine }">
+          <input ng-model="_self.faq.question" value="" type="text" placeholder="Enter Frequently Asked Question here"
+            class="form-control" required>
+          <p ng-show="_self.faq.question.$invalid && !_self.faq.question.$pristine" class="help-block">Faq  Question is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : _self.faq.answer.$invalid && !_self.faq.answer.$pristine }">
+          <textarea ng-model="_self.faq.answer" class="form-control" placeholder="Enter Answer here" required></textarea>
+          <p ng-show="_self.faq.answer.$invalid && !_self.faq.answer.$pristine" class="help-block">Faq Answer is
+            required.</p>
+        </div>
+        <div class="form-group">
+          <button class="btn bg-teal text-white no-radius" type="button" ng-click="_self.businesfaq()" ng-disabled="bussfaq.$invalid">Create</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="clearfix"></div>
+
+    <div id="faq_listt" ng-repeat="faq in _self.BussFaq.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index">
+      <div class="faq_item">
+        <h3>Q<% $index +_self.currentPage*_self.pageSize +1 %>. <%faq.question%> &nbsp;&nbsp;&nbsp; 
+          <small>
+              <a ng-href="#" ui-sref="business_info.update({faq_id:faq.id})" data-toggle="tooltip" title="Edit" class="mr-10"><i class="fa fa-pencil-square-o text-warning"></i></a>
+              <a ng-href="#" prevent-default ng-click="_self.delete_options($event, faq.id)" data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+          </small>
+        </h3>
+        <span class="text-right1">            
+          <div class="delte_selection" id="delete_options_<%faq.id%>">
+            <p>Are you sure you want to delete this FAQ?<p>
+            <button class="ok btn btn-xs btn-default" ng-href="#" prevent-default ng-click="_self.faqdelete($event, faq.id)">Yes</button>
+            <button class="cancel btn btn-xs btn-default" ng-href="#" prevent-default ng-click="_self.delete_options_cancel($event, faq.id)">Cancel</button>
+          </div>
+        </span>
+        <p><%faq.answer%></p>
+      </div>
+    </div>
+    <hr class="mb-10">
+  </div>
+
+</div>
+<div class="reviews_pagination mt-10" ng-if=" _self.BussFaq.data.length">
+  <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn bg-teal text-white no-radius">
+    Previous
+  </button>
+  <%_self.currentPage+1%>/
+  <%_self.numberOfPages()%>
+  <button ng-disabled="_self.currentPage >= _self.BussFaq.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1" class="btn bg-teal text-white no-radius">Next</button>
+</div>

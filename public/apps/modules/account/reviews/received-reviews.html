@@ -1,0 +1,70 @@
+<div id="listing" class="tab-pane pt-15">    
+    <h4 class="num_of_reviews px-15"><% _self.ReceivedUserRating.data.length %> Reviews</h4>
+    <div class="resultsItems row incoming_review">
+        <div class="job_content listing_item mb-20 col-sm-6" ng-repeat="review in _self.ReceivedUserRating.data| startFrom:_self.currentPage * _self.pageSize | limitTo:_self.pageSize track by $index">
+            <div class="border-bottom p-15 clearfix">
+                <div class="title_rating mb-0">                    
+                    <h3 ng-if="review.anonymously==0" class="titleHeading" ng-bind-html="_self.showTitle(review)"><% review.name %></h3>
+                    <h3 ng-if="review.anonymously==1" class="titleHeading" >Anonymous User</h3>
+                    <span class="date_text pull-right" ng-bind-html="_self.dateformatedat(review.created_at)"></span>
+                </div>
+                <div class="rating_count mb-10">
+                    <span>
+                        <uib-rating ng-model="review.rating" max="5" readonly="true" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>        
+                    </span>
+                </div>
+                <div class="pull-left mr-15">
+                    <figure class="square50"><img ng-src="<% review.profile_pic || 'images/user_pic.jpg' %>" class="img-responsive img-circle center-block" title="<%review.title%>" /></figure>            
+                </div>
+                <div class="item_detail">                    
+                    <!-- <a ng-if="review.status == 4" class="btn btn-primary" style="cursor: default;background-color: #f97923 !important;border-color: #f97923 !important;padding: 5px;font-size: 12px;float: right;">Report</a>                  
+                    <a ng-if="review.status != 4" class="btn btn-primary" data-toggle="modal" data-target="#reportfake-<%review.id%>"  style="cursor: pointer;padding: 5px;font-size: 12px;float: right;">Report</a>                   -->
+                    <p class="review_text"><% review.review_comment| limitTo :60  %></p>
+                </div>
+                <div class="text-right">
+                    <button type="button" class="btn btn-warning btn-xs px-15 mr-10" ng-if="review.status == 4" class="btn btn-primary" style="cursor: default;">Reported</button>                  
+                    <button type="button" class="btn btn-primary btn-xs px-15 mr-10" ng-if="review.status != 4" data-toggle="modal" data-target="#reportfake-<%review.id%>">Report this review</button>
+                    <!-- <button type="button" class="btn btn-primary btn-sm mr-10" data-toggle="modal" data-target="#reportfake-<%review.id%>">Report</button> -->
+                    <button type="button" class="btn btn-primary btn-xs px-15" data-toggle="modal" data-target="#reviewdeatil-<%review.id%>">View Detail</button>
+                    <div class="modal fade text-left" id="reviewdeatil-<%review.id%>" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Description</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><% review.review_comment%></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="modal fade text-left" id="reportfake-<%review.id%>" role="dialog">
+                        <div class="modal-dialog">                           
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Enter Detail</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea class="form-control" rows="5" ng-model="_self.fakeDetail"></textarea>
+                                </div>
+                                <div class="modal-footer text-right">
+                                    <button type="button" ng-click="_self.ReportFake(review)" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="reviews_pagination" ng-if=" _self.ReceivedUserRating.data.length">
+        <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage = _self.currentPage - 1" class="btn bg-teal text-white no-radius">Previous</button>
+        <%_self.currentPage+1%>/
+        <%_self.numberOfPages()%>
+        <button ng-disabled="_self.currentPage >= _self.ReceivedUserRating.data.length / _self.pageSize - 1" ng-click="_self.currentPage = _self.currentPage + 1" class="btn bg-teal text-white no-radius">Next</button>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div id="transactions" class="tab-pane pt-15 mb-20 account_list numbr_list" style="width:102%">
+<table class="table table-striped table-bordered">
+                     <thead>
+                        <tr>
+                           <!--<th>S.No</th>-->
+                           <th>Txn ID</th>
+                           <th>Mode</th>
+                           <th>Membership</th>
+                           <th>Duration</th>
+                           <th>Price($)</th>
+                           <th style="width: 82px;">Purchase Date</th>
+						   <th style="width: 86px;">Expires On</th>
+        
+                           <!--<th >Actions</th>-->
+                        </tr>
+                     </thead>
+                     <tbody>		 																	
+								<tr  ng-repeat="trans in _self.transactions.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index"" >
+								<!--<td><% $index +_self.currentPage*_self.pageSize +1 %></td>-->
+							
+								<td><%trans.transaction_id%></td>
+								<td><%trans.mode%></td>
+								<td><%trans.plan_name%></td>
+								<td><%trans.plan_duration%></td>
+								<td ><%trans.plan_price%></td>
+								<td><%trans.purchased_date%></td>
+								<td><%trans.expired_date%></td>
+								
+								<td class="actions" style="width:84px;">
+								
+								<!--<a title="View Transaction" target="_blank" href="http://beautycollective.com.au/account/transactions/view/<%trans.transaction_id%>" class="btn bg-orange btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+								
+								<!--<a title="Print Invoice" target="_blank" href="http://beautycollective.com.au/account/invoice/print?txn_id=<%trans.transaction_id%>&amp;print=true" class="btn bg-orange btn-xs"><i class="fa fa-print" aria-hidden="true"></i></a>
+								
+								<a title="Download Invoice" target="_blank" href="http://beautycollective.com.au/account/invoice/download?txn_id=<%trans.transaction_id%>" class="btn bg-orange btn-xs"><i class="fa fa-download" aria-hidden="true"></i></a>-->
+								
+								</td>
+								</tr>
+													 					 					 
+                       
+                     </tbody>
+                  </table>
+				  
+		
+</div>	
+	<div class="reviews_pagination" ng-if=" _self.transactions.data.length">
+                <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn">
+                    Previous
+                </button>
+                <%_self.currentPage+1%>/<%_self.numberOfPages()%>
+                <button ng-disabled="_self.currentPage >= _self.transactions.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1" class="btn">
+                    Next
+                </button>
+             </div>			  

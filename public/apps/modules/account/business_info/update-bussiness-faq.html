@@ -1,0 +1,27 @@
+<div id="listing" class="tab-pane pt-15 mb-20 account_list faq_list ng-scope">	
+<div class="table-responsive">      	  
+
+<div class="faq_form">
+	<div class="panel-heading" style = "padding-left:0px;">
+            <h3>Update Business Faq Information</h3>
+        </div>
+		
+	<form  method ="post" class="form-horizontal form-beautyCollective col-md-12" name="bussfaq" ng-repeat="ff in _self.updateBussFaq.data">
+	
+			<div class="form-group" >
+				<input ng-model="ff.question" type = "text" placeholder = "Enter Frequently Asked Question here" class="form-control"  autocomplete="off" name="question"  required>
+				 
+			</div>
+			<div class="form-group" >
+				<textarea ng-model="ff.answer" class="form-control" placeholder = "Enter Answer here"required></textarea>
+				 
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" type="button" ng-click="_self.updatebusinesfaq()" ng-disabled="bussfaq.$invalid">Update</button>
+			</div>
+			
+			
+	</form>
+</div>
+<div class="clearfix"></div>
+</div>

@@ -1,0 +1,35 @@
+<div >
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Change Card</h3>        
+    </div>
+    <form stripe-form="handleChangeCard" >
+        <div class="modal-body p30" id="modal-body">
+            <style type="text/css">            
+                .error{
+                    border:1px solid red;
+                }            
+            </style>
+            <div class="form-group row">                        
+                <div class="col-sm-12" >
+                    <div class="cardNumberInput" ng-class="{error:$changeCard.stripe_error}">
+                        <div class="cardinput"><i class="fa fa-credit-card"></i></div>
+                        <div class="cardinput"><input type="text" class="form-control" placeholder="Card Number" ng-model="number" payments-validate="card" payments-format="card"
+                                                      payments-type-model="type" /></div>
+                        <div class="cardinput"><input type="text" class="form-control" placeholder="MM / YY" ng-model="expiry" payments-validate="expiry" payments-format="expiry"/></div>
+                        <div class="cardinput"><input type="text" class="form-control" placeholder="CVC" ng-model="cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type"/></div>
+                    </div>                
+                </div>
+
+            </div>            
+            <div ng-show="$changeCard.stripe_error" class="text-color-red">
+                <%$changeCard.stripe_error.message%>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="span4">
+                <button type="submit" class="btn btn-primary btn-large">Submit</button>
+                <button class="cancel btn btn-defaul" type="button" ng-click="$changeCard.cancel()">Cancel</button>
+            </div>        
+        </div>
+    </form>
+</div>

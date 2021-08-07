@@ -1,0 +1,240 @@
+<!-- Modal -->
+<div class="modal fade" id="page_info" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+          electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+          Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+          electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+          Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<section class="container search_result ">
+  <div class="row">
+    >
+    <div class="business_overlay" ng-init="">
+      <div class="col-md-12 business_deal">
+        <div ng-bind-html="windowWidth"></div>
+        <h2 ng-bind-html="self.selectedtext" ng-click="self.showmenu()"></h2>
+        <ul class="row-1" ng-if="self.showbar==1">
+          <li ng-class="item.active ? 'active' : ''" ng-repeat="item in self.tabs2">
+            <a ng-click="self.selectTabOther(item, $index)">
+              <img src="<% item.icons %>" op-change="opimg1{{$index}}" ng-class="{shiny: $index==0}" alt="">
+              <p><% item.content %></p>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="row-2" ng-show="self.showbar==2">
+          <li ng-class="item.active ? 'active' : ''" ng-repeat="item in self.tabs">
+            <a ng-click="self.selectTab(item, $index)">
+              <img src="<% item.icons %>" op-change="opimg2{{$index}}" ng-class="{shiny: $index==4}" alt="">
+              <p><% item.content %></p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--            &lt;!&ndash;business_overlay&ndash;&gt;-->
+    </div>
+  </div>
+</section>
+<div class="clear" />
+</div>
+<div class="bg_search_filter ng-scope hide" ng-repeat="tabs in self.selectedTabs" ng-class="{hide: !tabs.showfilter}">
+  <span class="close_filter" ng-click="self.hideFilterTab()">X</span>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 refine">Refine Search</div>
+      <div class="col-md-10 filter-form">
+        <span class="tab-name"><% tabs.label %></span>
+        <form class="form-inline">
+
+          <div class="form-group" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor'">
+            <label class="sr-only">Rating</label>
+            <select class="form-control rating" ng-model="tabs.rating">
+              <option value="<% rating.id %>" ng-repeat="rating in self.ratings">
+                <% rating.value %>
+              </option>
+            </select>
+          </div>
+          <div class="form-group" ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor'">
+            <label class="sr-only">Sub-Category</label>
+
+            <select class="form-control sub-category" ng-model="tabs.sub_category">
+              <option value="">Sub Category</option>
+              <option value="<% cat.id %>" ng-repeat="cat in tabs.subCategories">
+                <% cat.name %>
+              </option>
+            </select>
+          </div>
+          <div class="search-btn">
+            <button type="submit" class="btn btn-default" ng-click="self.filterRecords(tabs)">GO</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- dropdown-menu -->
+
+
+<div class="clear" />
+<section class="bg_gray border_top">
+  <div class="container">
+    <div class="clear" />
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content tab_review shadow_del">
+          <div class="row pt-15 mb-20" infinite-scroll='self.nextPage()' infinite-scroll-disabled='self.busy'>
+
+            <div ng-class="{'col-md-4' : self.selectedTabs.length == 3,'col-md-6' : self.selectedTabs.length == 2, 'col-md-12' : self.selectedTabs.length == 1 }"
+              class="beauty-deals search-listing" ng-repeat="tabs in self.selectedTabs">
+
+              <div class="row">
+                <div class="col-md-12 border_right">
+                  <div class="top_head">
+                    <h2 class="h2-title <% tabs.label %>">
+                      <% tabs.label %>
+                      <span class="<% tabs.label %>">
+                        <i title="Refine Search" class="fa fa-search" ng-click="self.showFilterTab(tabs)"></i>
+                        <i title="View Info" class="fa fa-question-circle" data-name="<% tabs.label %>" onclick="set_header_name(this);" data-toggle="modal" data-target="#page_info"></i>
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+                <div ng-class="self.selectedTabs.length == 1 ? 'col-md-4' : 'col-md-12'" class="col-sm-6" ng-repeat="data in tabs.data track by $index">
+
+
+                  <div class="listing_item">
+                    <div class="item_image" style="z-index: 1">
+                      <a ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'deal'"
+                        href="<%self.host+'/'+tabs.url %>?id=<% data.id %><%self.queryString%>">
+                        <figure ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'deal'">
+                          <img ng-src="<% self.host + data.assets[0].path + data.assets[0].name %>" class="img-responsive img-circle center-block" title="<% data.title %>" fallback-src="images/no-image.png">
+                        </figure>
+                      </a>
+                      <a ng-if="tabs.id == 'serviceprovider'" href="<%self.host %>/profile?id=<% data.id %>&type=ServiceProvider<%self.queryString%>">
+                        <figure ng-if="tabs.id == 'serviceprovider'">
+                          <img ng-if="data.profilepic" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>" class="img-responsive img-circle center-block" title="<% data.name %>" fallback-src="images/no-image.png">
+                          <img ng-if="!data.profilepic" ng-src="../images/user_pic.jpg" class="img-responsive img-circle center-block" title="<% data.name %>" fallback-src="images/no-image.png">
+                        </figure>
+                      </a>
+                      <a ng-if="tabs.id == 'distributor'" href="<%self.host %>/profile?id=<% data.id %>&type=Distributor<%self.queryString%>">
+                        <figure ng-if="tabs.id == 'distributor'">
+                          <img ng-if="data.profilepic" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>" class="img-responsive img-circle center-block" title="<% data.name %>" fallback-src="images/no-image.png">
+                          <img ng-if="!data.profilepic" ng-src="../images/user_pic.jpg" class="img-responsive img-circle center-block" title="<% data.name %>" fallback-src="images/no-image.png">
+                        </figure>
+                      </a>
+                    </div>
+                    <div class="title_rating">
+
+                      <span ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor'" class="title truncate" title="<% data.name %> " style="width: 100%;">
+                        <a href="<%self.host %>/profile?id=<% data.id %>&type=ServiceProvider<%self.queryString%>"
+                          ng-bind="data.name" title="<%data.name%>"></a>
+                      </span>
+
+                      <span ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'deal'"
+                        class="title truncate" title="<% data.title %> " style="width: 100%;">
+                        <a href="<%self.host%>/<%tabs.url %>?id=<% data.id %> <%self.queryString%>" ng-bind="data.title" title="<%data.title%>"></a>
+                      </span>
+                      <a ng-if="tabs.id == 'serviceprovider'" href="<%self.host %>/profile?id=<% data.id %>&type=ServiceProvider<%self.queryString%>">
+                        <div class="item_detail" style="position: relative;">
+                          <p><% data.user_business.about | limitTo : 120 %></p>
+
+                        </div>
+                      </a>
+                      <div ng-if="tabs.id != 'serviceprovider'" class="item_detail" style="position: relative;">
+                        <a ng-if="tabs.id != 'serviceprovider'" href="<%self.host+'/'+tabs.url %>?id=<% data.id%>
+                          <%self.queryString%>">
+                          <p ng-if="tabs.id != 'serviceprovider'"><% data.description | limitTo : 120 %></p>
+                        </a>
+
+                        <span ng-if="tabs.id == 'deal'" style="position: absolute;bottom: 0;right: 0;">
+                          <a href="<%self.host+'/'+tabs.url %>?id=<% data.id %><%self.queryString%>">$
+                            <% data.dealprice %>
+                          </a>
+                        </span>
+
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="white-panel">
+                      <ul class="social_icon listing_social_links">
+                        <li ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'serviceprovider' || tabs.id == 'distributor'">
+
+                          <i class="fa fa-phone"></i>
+                          <% data.contact %>
+
+                        </li>
+
+                        <li>
+                          <span class="label label-info" ng-if="tabs.id == 'deal'">
+                            <%data.discount%> %off</span>
+                          <span class="rating" ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'serviceprovider' || tabs.id == 'distributor'">
+                            <i class="fa fa-map-marker"></i>
+                            <% data.locations[0].name  %>
+
+                          </span>
+
+                        </li>
+                        <li ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job'">
+
+                          <span class="review_rating rr" ng-init="rate = data.user.rating">
+                            <uib-rating ng-model="rate" max="5" readonly="true" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+                          </span>
+
+                        </li>
+                        <li ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor'">
+
+                          <span class="review_rating rr" ng-init="rate = data.rating">
+                            <uib-rating ng-model="rate" max="5" readonly="true" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+                          </span>
+
+                        </li>
+
+
+
+                      </ul>
+                    </div>
+
+                    <ul class="left_area">
+                      <li ng-if="data.type == 'job11'">
+                        <shortlist-job id="<%data.id%>" title="Shortlist This Job">+</shortlist-job>
+                      </li>
+                    </ul>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+<!--bg_gray-->

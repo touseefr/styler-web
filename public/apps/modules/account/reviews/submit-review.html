@@ -1,0 +1,46 @@
+<form class="form-horizontal form-beautyCollective submit-review" role="form">
+  <div class="panel panel-default panel-beautyCollective">
+    <div class="panel-heading">
+      <h2 class="panel-title"></h2>
+    </div>
+    <div class="panel-body ">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 text-left text-muted">User</label>
+            <div class="col-md-10">
+              <ui-select ng-model="_self.user" theme="select2" ng-model-options="_self.modelOptions" ng-disabled="disabled" reset-search-input="true" title="Type Name Or Email" append-to-body="true">
+                <ui-select-match placeholder="Search Name Or Email"><% _self.user.name %></ui-select-match>
+                <ui-select-choices repeat="user in _self.userList" refresh="_self.getUsers($select.search)"
+                  refresh-delay="0">
+                  <span ng-bind-html="user.name | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 text-left text-muted">Your Rating</label>
+            <div class="col-md-10">
+              <uib-rating ng-model="_self.rate" max="_self.max" readonly="_self.isReadonly" on-hover="_self.hoveringOver(value)" on-leave="_self.overStar = null" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 text-left text-muted">Your Review</label>
+            <div class="col-md-10">
+              <textarea class="form-control" rows="7" placeholder="Describe Your Experience" data-ng-model="_self.review"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="panel-footer text-right">
+      <button class="btn btn-primary" type="button" data-ng-click="_self.saveReview();">Submit</button>
+    </div>
+    <!-- /.box-footer -->
+  </div>
+</form>

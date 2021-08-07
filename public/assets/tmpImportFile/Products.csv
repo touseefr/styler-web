@@ -1,0 +1,127 @@
+PK,AllDay,PreExpires,PreInstructions,PreLot,PreManufacturer,PreQuantity,PreRefills,Prescription,RequiresProcess,ResourceID,ResourceLinkType,Tax1,Tax2,Tax3,Favorite,ID,IDNumeric,Name,Make,Category,Size,WholeSale,Retail,Vendor,StockCount,ReorderPoint,ReorderQuantity,OnOrder,OrderDate,DateOrderHold,CommissionBonus,ComType,Balance,BackBar,Inactive,ReorderAuto,QuickBooksExport,CustomField1,CustomField2,CustomField3,Alias1,Alias2,Alias3,ComPurType,ComPurValue,ComUsedType,ComUsedValue,LoyaltyPoints
+125,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,PARLUX1,1,Hair Dryer 3200,Parlux,accessories,,0,195,DATELINE,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+137,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,BABYLISS,0,ceramic curling  iron 25m,dateline,accessories,,0,145,DATELINE,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+217,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,RUSK1,1,W8LESS HAIR SPRAY PLUS,rusk,rusk,359ml,0,18.95,,13,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+225,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,DIFFUSORE,0,Diffuser,TURNLEYS,accessories,,0,20,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+291,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK1,1,Whipped Cream,milk_shake,milk_shake,200ml,0,29.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+292,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK 2,2,Incredible Milk,milk_shake,milk_shake,150ml,0,29.95,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+293,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK 3,3,Glistening Serum,milk_shake,milk_shake,50ml,0,29.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+294,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK4,4,Colour Maintain Shampoo ,milk_shake,milk_shake,300ml,0,25.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+295,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK 5,5,Colour Maintain Conditioner,milk_shake,milk_shake,300ml,0,25.95,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+296,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK 6,6,Nourishing Shampoo,milk_shake,milk_shake,300ml,0,28,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+297,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK7,7,Nourishing Conditioner,milk_shake,milk_shake,300ml,0,28,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+298,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK8,8,Leave In Conditioner,milk_shake,milk_shake,350ml,0,28,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+299,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK9,9,Glistening Spray,milk_shake,milk_shake,100ml,0,24.95,,0,0,0,0,,,0,,0,TRUE,FALSE,TRUE,,,,,,,,,,,,0
+300,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK10,10,Integrity Treatment,milk_shake,milk_shake,200ml,0,29.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+302,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK11,11,Incredible Milk,milk_shake,milk_shake,50ml,0,18.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+303,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK12,12,Colour Care Shampoo,milk_shake,milk_shake,50ml,0,18.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+307,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,15,15,Hybrid,terra,SARYNA,,120,0,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+309,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK13,13,Colour Maintain Conditioner,milk_shake,milk_shake,50ml,0,18.95,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+311,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK17,17,Sensorial Mint Shampoo,milk_shake,milk_shake,300ml,0,29.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+312,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,18,18,sensorial mint conditioner,terra,SARYNA,,0,29.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+315,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK21,21,Sensorial Mint Conditioner,milk_shake,milk_shake,300ml,0,29.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+316,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK22,22,Silver Shine Shampoo,milk_shake,milk_shake,300ml,0,27.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+317,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK23,23,Silvershine Whipped Cream,milk_shake,milk_shake,200ml,0,27.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+318,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,CORIOLISS1,1,Hair Brush,Corioliss,accessories,,0,30,,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+327,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF0,0,Hair and Body Shampoo,ref,ref,285ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+328,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF1,1,Cool Silver shampoo,ref,ref,285ml,0,33.5,ref,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+329,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF2,2,Intense Hydrate Shampoo,ref,ref,285ml,0,33.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+330,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF3,3,Intense Hydrate Conditioner,ref,ref,245ml,0,33.5,ref,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+331,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF4,4,Illuminate Colour Shampoo,ref,ref,285ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+332,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF5,5,Illuminate Colour Conditioner,ref,ref,245ml,0,32.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+333,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF6,6,Weightless Volume Shampoo,ref,ref,285ml,0,33.5,ref,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+334,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF7,7,Weightless Volume Condioner,ref,ref,245ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+335,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF8,8,Ultimate Repair Shampoo,ref,ref,285ml,0,33.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+336,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF9,9,Ultimate Repair Conditioner,ref,ref,245ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+337,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF10,10,543 Moisture Shampoo,ref,ref,75ml,0,11.5,ref,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+338,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF11,11,543 Moisture conditioner,ref,ref,50ml,0,11.5,ref,8,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+339,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF12,12,544 Colour Shampoo,ref,ref,75ml,0,11.5,ref,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+340,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF13,13,544 Colour Condioner,ref,ref,50ml,0,11.5,ref,10,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+341,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF14,14,551 Repair Shampoo,ref,ref,75ml,0,11.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+342,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF15,15,551 Repair conditioner,ref,ref,50ml,0,13.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+343,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF16,16,542 Colour Treatment Mask,ref,ref,50ml,0,13.5,ref,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+344,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF17,17,522 Moisture Treatments Mask,ref,ref,50ml,0,13.5,ref,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+345,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF19,19,550 Pomade,ref,ref,75ml,0,29,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+346,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF20,20,424 Forming cream,ref,ref,75ml,0,29,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+347,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF21,21,534 Styling Wax,ref,ref,75ml,0,33,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+348,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF22,22,505 Rough Wax,ref,ref,75ml,0,33,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+349,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF23,23,325 rough Paste,ref,ref,75ml,0,18.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+350,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF24,24,215 Thickening Spray,ref,ref,300ml,0,37.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+351,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF25,25,545 Hold and Shine Spray,ref,ref,300ml,0,33.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+352,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF26,26,525 Extreme Hold Spray,ref,ref,300ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+353,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF27,27,333 Flexible Spray ,ref,ref,300ml,0,33.5,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+354,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF28,28,434 Spray Wax,ref,ref,250ml,0,33.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+355,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF29,29,335 Root to top,ref,ref,250ml,0,35.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+356,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF30,30,435 Mousse,ref,ref,250ml,0,37.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+357,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF31,31,345 Fiber Mousse,ref,ref,250ml,0,37.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+358,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF32,32,050 Shine Spray,ref,ref,150ml,0,35.5,ref,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+359,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF33,33,204 Dry shampoo,ref,ref,220ml,0,33.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+360,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF34,34,303 Ocean Mist,ref,ref,175ml,0,35.5,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+361,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF35,35,230 Heat Protection,ref,ref,175ml,0,35.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+362,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF36,36,141 Stay Smooth,ref,ref,100ml,0,29,ref,5,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+364,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF38,38,433 Sculpting Gel,ref,ref,100ml,0,29,ref,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+365,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF39,39,204 Dry Shampoo,ref,ref,75ml,0,14.5,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+366,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF40,40,545 Hold and Shine Spray,ref,ref,75ml,0,14.5,ref,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+367,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF41,41,Leave In Conditioner,ref,ref,175ml,0,33.5,ref,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+368,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF42,42,230 Heat protection spray,ref,ref,200ml,0,35,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+369,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY0,0,Gloss Spray,SarynaKEY,SarynaKEY,300ml,0,43,SARYNA ,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+370,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY1,1,Damage Repair Treatment,SarynaKEY,SarynaKEY,500ml,0,55,SARYNA ,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+371,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY2,2,Colour Lasting Treatment,SarynaKEY,SarynaKEY,50ml,0,55,SARYNA ,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+372,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY3,3,Leave In Moisturiser,SarynaKEY,SarynaKEY,500ml,0,31,SARYNA ,5,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+373,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY4,4,60% 40% Leave In Moisturiser,SarynaKEY,SarynaKEY,500ml,0,31,SARYNA ,7,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+374,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY5,5,80% 20% Leave In Moisturiser,SarynaKEY,SarynaKEY,500ml,0,31,SARYNA ,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+375,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY6,6,Damage Repair Shampoo,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+376,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY7,7,Damage Repair Conditioner,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+377,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY8,8,Volume Lift Shampoo,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+378,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY9,9,Volume Lift Conditioner,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+379,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY10,10,Colour Lasting Shampoo,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+380,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY11,11,Colour Lasting Conditioner,SarynaKEY,SarynaKEY,500ml,0,30,SARYNA ,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+381,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY12,12,Neutralising Pigment Shampoo,SarynaKEY,SarynaKEY,500ml,0,32,SARYNA ,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+382,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY13,13,Damage Reapair OIL,SarynaKEY,SarynaKEY,110ml,0,49,SARYNA ,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+383,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY14,14,Volume Lift OIL,SarynaKEY,SarynaKEY,110ml,0,49,SARYNA ,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+384,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY16,16,Damage Repair PACK,SarynaKEY,SarynaKEY,,0,19.95,SARYNA ,29,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+385,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY17,17,Boha Shea Treatment,SarynaKEY,SarynaKEY,25ml,0,25,SARYNA ,8,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+386,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF43,43,03 Maintainer,ref,ref,100ml,0,38,ref,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+387,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,KHAIRPEP0,0,Masque,khairpep,ref,118ml,0,85,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+388,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,KHAIRPEP1,1,Masque,khairpep,ref,15ml,0,45,ref,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+389,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER0,0,Deep Fortifying Shampoo,TerreAMer,TerreAMer,250ml,0,39.95,,-4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+390,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER1,1,Deep Fortifying Conditioner,TerreAMer,TerreAMer,250ml,0,39.95,,-3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+391,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER2,2,Pure Hydration Shampoo,TerreAMer,TerreAMer,250ml,0,39.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+392,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER3,3,Pure Hydration Conditioner,TerreAMer,TerreAMer,250ml,0,39.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+393,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER4,4,Intensive Rescue Therapy,TerreAMer,TerreAMer,120ml,0,55,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+394,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,TERREAMER5,5,Thermo Mist,TerreAMer,TerreAMer,100ml,0,52.95,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+395,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SILVERBULLET0,0,Ceramic Straightening Brush,silver bullet,accessories,,0,90,,-1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+396,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SILVERBULLET1,1,Keratin 230 Titanium,silver bullet,accessories,,0,210,DATELINE,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+397,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF0,0,Coloured Hair,Precious Nature,Alfaparf,500ml,0,45,ALFAPARF,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+398,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF1,1,Curly and Wavy,Precious Nature,Alfaparf,500ml,0,45,ALFAPARF,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+399,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF3,3,Long and Straight,Precious Nature,Alfaparf,500ml,0,45,ALFAPARF,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+400,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF4,4,Frizz Control Smoothing cream,Semi Di Lino,Alfaparf,,0,25.95,ALFAPARF,-3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+401,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF5,5,Frizz Control Butter Mask,Semi Di Lino,Alfaparf,200ml,0,25.95,ALFAPARF,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+402,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF6,6,Illuminating Conditioner,Semi Di Lino,Alfaparf,250ml,0,32.5,ALFAPARF,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+403,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF7,7,Mens Energy Concentrate,Alfaparf,Alfaparf,6pieces,0,0,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+404,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,KHAIRPEP2,2,Masque,khairpep,ref,50ml,0,85,ref,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+406,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF44,44,Illuminate Colour Shampoo,ref,ref,60ml,0,10,ref,6,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+407,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF45,45,Illuminate Colour Conditioner,ref,ref,60ml,0,10,ref,7,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+408,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF46,46,244 Curl Power,ref,ref,125ml,0,35.5,ref,5,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+409,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF47,47,Leave In Treatment,ref,ref,125ml,0,39.5,ref,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+410,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,REF48,48,Wonder Oil,ref,ref,125ml,0,42.5,ref,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+414,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ROUND BRUSH ,0,nano technology ceramic brush ,just brushes,just brushes,,0,35,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+415,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,SARYNAKEY15,15,leave in moisturizer,SarynaKEY,SarynaKEY,1000ml,55,55,,0,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+416,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,YUDIVA 1,1,Yudiva Hydrate Shampoo,Corioliss,CORIOLISS,,0,39.95,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+417,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,YUDIVA,0,Yudiva Hydrate Conditioner,,,,0,39.95,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+419,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,PEPTAME 1,1,Taming shampoo,peptame,PEPTAME,300ml,0,35,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+420,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,PEPTAME 2,2,taming mask,peptame,PEPTAME,300ml,0,35,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+421,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,PEPTAME 3,3,blonde shampoo,peptame,PEPTAME,300ml,0,35,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+422,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,PEPTAME 4,4,blonde conditioner,peptame,PEPTAME,300ml,0,35,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+423,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK14,14,Moisture plus whipped cream,milk_shake,milk_shake,200ml,0,27.95,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+424,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK15,15,Moisture plus shampoo,milk_shake,milk_shake,300ml,0,29.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+425,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,MILK16,16,Moisture Plus conditioner,milk_shake,milk_shake,250ml,0,29.95,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+426,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF,0,original hairspray,Alfaparf,ALFAFARF,500ml,0,29,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+427,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF 2,2,extreme hairspray,Alfaparf,ALFAFARF,500ml,0,29,,5,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+428,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF 3,3,orignal hairsrpay ,Alfaparf,Alfaparf,100ml,0,14.95,,7,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+429,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF 4,4,texturing dry shampoo,Alfaparf,ALFAFARF,75ml,0,14.95,,12,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+430,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF 5,5,sea spray,ALFARPAF,Alfaparf,150ml,0,29,,2,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+431,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,ALFAPARF 6,6,vintage powder ,Alfaparf,ALFAFARF,8g,0,22,,-1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+435,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,7.35002E+12,7.35002E+12,REF Intense Hydrate Shampoo,ref,ref,60 ml,0,10,,4,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+436,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,7.35002E+12,7.35002E+12,REF Intense Hydrate Conditioner,ref,ref,60 ml,0,10,,3,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0
+438,,,,,,0,0,FALSE,,,,FALSE,FALSE,FALSE,,KHAIRPEP3,3,serum,khairpep,KHAIRPEP,50ML,0,85,,1,0,0,0,,,0,,0,FALSE,FALSE,TRUE,,,,,,,,,,,,0

@@ -1,0 +1,21 @@
+<div id="listing" class="tab-pane account_list px-15 received-reviews">
+  <h4 class="cust_review">Enter your customers’ details and we will email them a request to review your business.</h4>
+  <p class="text-muted">**IMPORTANT: We do not store these details or use them for marketing purpose</p>
+  <span>Customer</span>
+  <form name="requestReviewForm" class="form-inline" ng-submit="_self.requestReview()">
+    <div class="form-group" ng-class="{ 'has-error' : requestReviewForm.cutomername.$invalid && !requestReviewForm.cutomername.$pristine }">
+      <label class="sr-only" for="cutomername">Name</label>
+      <input type="text" ng-model="_self.customerName" class="form-control" id="cutomername" name="cutomername"
+             placeholder="Name" autocomplete="off" required="">
+      <p ng-show="requestReviewForm.cutomername.$invalid && !requestReviewForm.cutomername.$pristine" class="help-block">Name is required.</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : requestReviewForm.cutomeremail.$invalid && !requestReviewForm.cutomeremail.$pristine }">
+      <label class="sr-only" for="cutomeremail">Email address</label>
+      <input type="email" ng-model="_self.emailAddress" autocomplete="off" class="form-control" id="cutomeremail" name="cutomeremail" placeholder="E-mail" required="">
+      <p ng-show="requestReviewForm.cutomeremail.$invalid && !requestReviewForm.cutomeremail.$pristine" class="help-block">Valid email address is required.</p>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn bg-teal text-white no-radius" ng-disabled="requestReviewForm.$invalid">Send</button>
+    </div>
+  </form>
+</div>

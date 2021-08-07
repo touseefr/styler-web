@@ -1,0 +1,36 @@
+<form class="search_box header-serach-box formbackground" id="search-frm-main" name="frmsearch" action="/search" id="search-frm-main"
+      style="padding-bottom: 0px;" autocomplete="off">
+    <div class="col-md-7 col-sm-6 col-xs-12 search-text">
+        <input type="text" id='textfield' placeholder="Search by services & business names…" class="input-search-pgs" name="q" ng-model="self.searchStr" ng-keyup="self.keyPressed($event)" autocomplete='off' />
+        <div id="<%id%>_dropdown" class="items search_dropdown" ng-show="self.showDropdown">
+            <div ng-show="self.searching" class="searcinf-forNow">Searching...</div>
+            <div class="angucomplete-searching" ng-show="!self.searching && (!self.results || self.results.length == 0)">No results found</div>
+            <div class="group-item" ng-repeat="(key, value) in self.results" ng-if="value.length > 0">
+                <div ng-show="self.showAjaxCall((value | filter:self.searchStr).length)"  style="text-align: center;padding: 15px;">No record found</div>
+                <div ng-show="(value | filter:self.searchStr).length > 0">
+                    <h5 class="">{{key}}</h5>
+                    <div ng-if="key == 'Category'"  class="item" ng-repeat="result in value| filter:self.searchStr" ng-click="self.selectResult(result)" ng-mouseover="self.hoverRow()" >
+                        <p class="title" ><% result.name %></p>                                            
+                    </div>
+                    <div ng-if="key == 'Service Provider'" class="item" ng-repeat="result in value| filter:self.searchStr" ng-click="self.spOpen(result.id)" ng-mouseover="self.hoverRow()" >
+                        <p class="title" ><% result.name %></p>                                            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="searchFor" name="label" value="Service Provider">
+        <input type="hidden" id="searchFor_hidden" name="searchFor" value="serviceprovider">
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-7 search-postcode">
+        <input   type="text" maxlength="4" placeholder="Postcode / Suburb" id="suburb_input" name="location_address" ng-keyup='fetchSuberbs()' ng-keypress="alphaValidate($event)"
+                 ng-model='searchText' placeholder="Post/Suburb" ng-model="self.post" ng-class="self.showclass" />
+        <ul id='searchResult' style="display: none;">
+            <li ng-click='setValue($index)' ng-repeat="address in self.suburbList">{{ address.location}},{{
+                address.state}},{{ address.postcode}}</li>
+        </ul>
+    </div>
+    <div class="col-md-2 col-sm-3 col-xs-5 search-button">
+        <button type="button" class="btn-green-1" ng-click="self.CheckPostCodeValidation()"><i class="fa fa-search"></i>
+            SEARCH</button>
+    </div>
+</form>

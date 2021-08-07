@@ -1,0 +1,98 @@
+<!--<button    class="review_search_btn btn-yellow-1" data-toggle="modal" data-target=".bs-example-modal-review" ng-click="self.checkbusinessfield()" ng-disabled="bsearchbutton">Search</button>-->
+<button    class="review_search_btn btn-yellow-1"  data-target=".bs-example-modal-review" ng-click="self.checkbusinessfield()" ng-disabled="bsearchbutton">Search</button>
+<div  id="business-rating" class="modal fade bs-example-modal-review" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-busi-popup" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Review : <lable id="business_name">&nbsp;</lable></h4>
+            </div>
+            <form class="form-horizontal" role="form" name="ratingform" id="ratingformpopup">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="address">
+                            <span>Rating :</span>
+                        </label>
+                        <div class="col-sm-9 margin-top-7 font-increase">
+                            <uib-rating ng-model="self.rate" max="self.max" readonly="self.isReadonly" on-hover="self.hoveringOver(value)" on-leave="self.overStar = null" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="review"> 
+                            <span>Your Review :</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea onkeyup="char_length_home_pg()" minlength="30" class="form-control textarea-busi-popup" id="review" placeholder="Your Review" ng-model="self.review" required="" style="margin-bottom: 14px;"></textarea>                            
+                            <text class="red text-right note " style="color: #333;">Characters (30 min): <text class="remaining_char">30</text>                                           
+                                <div class="div_show_char_bar">
+                                    <div class="div_char_bar" ></div>                                            
+                                </div>                             
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                    <div ng-if="self.userfrom == 0" class="review-user-info review-profile-login">
+                        <div align="left" class="your_info_title">Your information</div>
+                        <div class="text-center">
+                            <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-scope="public_profile, email" onlogin="checkLoginState();"></div>
+                            <a href="/auth/login/facebook" title="login with facebook" class="btn-link facebook-login">
+                                <img src="images/log in with facebook button.png">
+                            </a>
+                        </div>
+                        <div class="text-center">
+                            ------------------------- OR -------------------------
+                        </div>
+                        <div style="padding-bottom: 20px;" class="text-center">
+                            <input type="text" placeholder="First Name" ng-model="self.first_name" name="first_name" id="rating_first_name" style="width: 210px;" class="input_lineheight">
+                            <input type="text" placeholder="Last Name" ng-model="self.last_name" name="last_name" id="rating_last_name" style="width: 210px;" class="input_lineheight">
+                        </div>
+                        <div class="text-center">
+                            <input type="text" style="width: 420px;" placeholder="Your email" id="rating_email" ng-model="self.email" class="input_lineheight">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="text-center">
+                            <p>
+                                Your Last name and email address will never be published.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-5" for="review">
+                                <span>Publishing as</span>
+                            </label>
+                            <div class="col-sm-7" style="padding-top: 5px;">
+                                <select ng-model="self.anonymously" name="anonymously">
+                                    <option value="0" ng-selected="true">You</option>
+                                    <option value="1">Anonymously</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+
+                    <div class="clear"></div>
+                    <div class="modal-footer">
+                        <!--                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary" ng-click="self.saveReview();" ng-disabled="ratingform.$invalid" data-dismiss="modal" >Submit Review</button>
+                    </div>
+
+                    <div class="text-center">
+                        make sure you read the <a href="/review_guide" class="review-guide-link" target="_blank">Review Guidelines</a> before posting.
+                    </div>
+
+                    <div class="text-center">
+                        By clicking publish, I accept policy
+                    </div>
+
+                </div> 
+
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+
+
+</script>

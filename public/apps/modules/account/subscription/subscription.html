@@ -1,0 +1,22 @@
+<div class="row packagesPricing">
+    <div class="col-xs-12 col-md-3" ng-repeat='(plan_index,plans) in subscriptionCtrl.subscriptionDetail track by $index'>
+        <div class="free" ng-class="{glamour:plans.top_circle_text=='1'}">
+            <div class="packageTitle" ng-bind-html='subscriptionCtrl.checkFirstPlan(plans.plan_type, plans.plan_detail)'></div>
+            <div class="availableFeatures" ng-class="{currentPackage:subscriptionCtrl.showBtnValue(plans.plan_type,plans.booking_type,plans.id)=='Selected Plan'}" ng-style="{'background-color': plans.bg_colour}" >
+                <h2 class="font-bold" ng-bind-html='plans.name'></h2>                               
+                <div class="featureItem" ng-repeat="(desc_index,desc_value) in  plans.template_description track by $index"  >
+                    <span ng-bind-html='desc_value.text'></span>                    
+                    <span ng-if='desc_value.type=="cb" && desc_value.inputValue == "1"'><i class="fa fa-check"></i></span>                                        
+                    <span ng-if='desc_value.type=="cb" && desc_value.inputValue == "0"'><i class="fa fa-times"></i></span>                  
+                    <span ng-if='desc_value.type=="txt"'  ng-bind-html="desc_value.inputValue"></span>                    
+                </div>                
+                <div class="buyNow">
+                    <button type="button" class="btn btn-lg btn-block text-uppercase value" ng-disabled="subscriptionCtrl.showBtnValue(plans.plan_type,plans.booking_type,plans.id)=='Selected Plan'" ng-click="subscriptionCtrl.openDialog(plans.plan_type, plans.id)">
+                        <span ng-bind-html="subscriptionCtrl.showBtnValue(plans.plan_type,plans.booking_type,plans.id)">Get free</span>
+                        <!-- <span ng-if="subscriptionCtrl.userplanid == plans.id">Selected Plan</span> -->
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>

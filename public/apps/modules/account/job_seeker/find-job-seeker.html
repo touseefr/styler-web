@@ -1,0 +1,107 @@
+<div id="listing1" class="tab-pane account_list numbr_list account_list pt-25">
+  <form role="form" method="post">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="form-group row">
+          <label class="control-label col-sm-4 text-right pt-5" for="jobtype">
+            <span>Search by Job Title</span>
+          </label>
+          <div class="col-sm-8">
+            <select ng-model="_self.search.jobtype" name="jobtype" class="form-control" ng-required="false">
+              <option value="">Select job type</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Casual">Casual</option>
+              <option value="Holiday Visa">Holiday Visa</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="control-label col-sm-4 text-right pt-5" for="address">
+            <span>Address</span>
+          </label>
+          <div class="col-sm-8">
+            <div class="typeahead">
+              <ui-select ng-model="_self.search.locations" style="width:100%" ng-disabled="disabled"
+                reset-search-input="true" title="Addess? (suburb, postcode, or city)" append-to-body="true"
+                ng-required="false">
+                <ui-select-match placeholder="Suburb or Postcode">
+                  <%$select.selected.name%>,
+                  <%$select.selected.state%>-
+                  <%$select.selected.postcode%>
+                </ui-select-match>
+                <ui-select-null-choice>Select address</ui-select-null-choice>
+                <ui-select-choices repeat="address in _self.suburbList track by $index" refresh="_self.getLocation($select.search)"
+                  refresh-delay="0">
+                  <span ng-bind-html="address.name | highlight: $select.search"></span>,
+                  <span ng-bind-html="address.state | highlight: $select.search"></span>-
+                  <span ng-bind-html="address.postcode | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="form-group row">
+          <label class="control-label col-sm-4 text-right pt-5" for="gender">
+            <span>Gender</span>
+          </label>
+          <div class="col-sm-8">
+            <select ng-model="_self.search.gender" name="gender" class="form-control" ng-required="false">
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="control-label col-sm-4 text-right pt-5" for="category">
+            <span>Categories</span>
+          </label>
+          <div class="col-sm-8">
+              <ui-select multiple limit="1" ng-model="_self.search.categories['cats']" theme="select2" ng-model-options="_self.modelOptions"
+              ng-disabled="disabled" reset-search-input="true" title="Categories" append-to-body="true" style="width:100%">
+              <ui-select-match placeholder="Categories">
+                <%$item.name%>
+              </ui-select-match>
+              <ui-select-choices repeat="category in _self.categoriesList track by $index" refresh="_self.getCategories11($select.search)"
+                refresh-delay="0">
+                <span ng-bind-html="category.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-12 mt-25">
+        <div class="go_link pl-15">
+          <a href="javascript:;" ng-click="_self.getJobSeaker2()" role="button" class="btn bg-teal text-white no-radius">GO</a>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive11">
+      <table class="table">
+        <tbody>
+          <tr ng-repeat="user in _self.jobseekerList11.data track by $index">
+            <td class="applicant_profile">
+              <p>(
+                <% user.name %>) Seeking:
+                <% user.jobtype %> work, Job-title:(
+                <% user.jobtitle %>)</p>
+            </td>
+            <td class="view_pro"><a href="/profile?id=<% user.user_id %>&type=JobSeeker">View Profile</a></td>
+            <td class="add_to_wishlist">
+              <addto-watch id="<% user.user_id %>" class="view_pro" watchtype="jobseeker" type="Job Seeker"></addto-watch>
+            </td>
+          </tr>
+          <tr ng-if="_self.jobseekerList11.data.length==''">
+            <td class="applicant_profile">Record Not Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</form>
+</div>

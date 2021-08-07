@@ -1,0 +1,44 @@
+<style type="text/css">
+    input.has-error {
+    border-color: red !important;
+}
+    input.has-error:focus {
+    border-color: red !important;
+}
+</style>
+<div ng-if="_self.callForm == 1" class="mb-10 p-15 skipWizard">
+    <button  class="btn no-radius bg-teal text-white" ng-click="_self.finishWizard(_self.callForm)">Skip Wizard</button>
+</div>
+<div id="social_media" class="tab-pane pt-15 mb-20 account_list">
+  <form class="form-horizontal" role="form" name="social_media_form" id="social_media_form">
+    <input type="hidden" name="user_id" value="<%_self.userBusinessModel.id%>">
+    <table class="table table-responsive mt-0">
+      <tbody>
+        <tr ng-repeat="social_media in _self.userBusinessModel.social_media_list  track by $index" ng-if="social_media.is_active==1" >
+            
+          <td align="right">              
+            <img ng-src="<%social_media.media_logo%>" width="32">
+          </td>
+          <td ng-init="inputName=data-$index"  >
+              <ng-form name="innerForm">
+                <input type="hidden" name="data[<%$index%>][user_id]" value="<%_self.userBusinessModel.id%>">
+                <input type="hidden" name="data[<%$index%>][key]" value="<%social_media.media_key%>" class="form-control" />
+                <input type="text" ng-class="{'has-error' : innerForm.foo.$invalid}"  ng-pattern="/^(?:(?:http|https):\/\/)?([-a-zA-Z0-9.]{2,256}\.[a-z]{2,4})\b(?:\/[-a-zA-Z0-9@:%_\+.~#?&=]*)?/" id="foo" name="foo" ng-model="_self.userBusinessModel.userSocialMediaAccounts[social_media.media_key]" autocomplete="off"  class="form-control" />
+              </ng-form>
+          </td>
+          <td></td>
+          <td style="border-right: 1px solid #ddd"></td>
+        </tr>
+      </tbody>
+      <tfoot>
+          <tr>
+              <td colspan="5" class="text-right">
+                  <button ng-if="_self.callForm==1"  class="btn no-radius bg-teal text-white mt-10" ng-click="_self.skipAndNext(_self.callForm)">Skip and Next</button>
+                  <button ng-if="_self.callForm==1" type="submit" class="btn bg-teal text-white mt-10 no-radius" ng-click="_self.updateUserSocialAccounts(this,_self.callForm)">Save and next</button>
+                  <button ng-if="_self.callForm==0" type="submit" class="btn bg-teal text-white mt-10 no-radius" ng-click="_self.updateUserSocialAccounts(this,_self.callForm)" ng-disabled="social_media_form.$invalid">Save</button>
+              </td>
+          </tr>
+      </tfoot>
+    </table>      
+  </form>
+</div>

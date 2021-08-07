@@ -1,0 +1,113 @@
+<div id="SMS_Packages" class="tab-pane ng-scope">
+    <div class="row">
+        <h4 class="font-bold col-sm-8 col-xs-12">Facebook Messenger Setting</h4>
+    </div>
+    <div class="row">
+        <p>&nbsp;</p>
+    </div>
+    <div class="row">
+        <form class="form-horizontal" role="form" name="frmfacebookChat">
+            <div class="col-xs-12 col-md-8">
+                <div class="form-group row" ng-class="{ 'has-error' : frmfacebookChat.fb_app_id.$invalid && !frmfacebookChat.fb_app_id.$pristine }">
+                    <label class="control-label col-sm-4" for="fb_app_id">                    
+                        <span >Facebook Application Id <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-8">                        
+                        <input type="text" autocomplete="off" class="form-control" id="fb_app_id" name="fb_app_id" placeholder="Facebook Application Id" ng-model="_self.facebookChat.facebook_app_id" required/>
+                        <p ng-show="frmfacebookChat.fb_app_id.$invalid && !frmfacebookChat.fb_app_id.$pristine"  class="help-block">Facebook Application id is required.</p>
+                    </div>
+                </div>
+                <div class="form-group row" ng-class="{ 'has-error' : frmfacebookChat.fb_page_id.$invalid && !frmfacebookChat.fb_page_id.$pristine }">
+                    <label class="control-label col-sm-4" for="fb_page_id">                    
+                        <span > Facebook Page Id <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" autocomplete="off" class="form-control" id="fb_page_id" name="fb_page_id" placeholder="Facebook Page Id" ng-model="_self.facebookChat.facebook_page_id" required />
+                        <p ng-show="frmfacebookChat.fb_page_id.$invalid && !frmfacebookChat.fb_page_id.$pristine"  class="help-block">Facebook Page Id is required.</p>
+                    </div>
+                </div>           
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group row">
+                    <div  class="col-sm-9" style="margin-left: 22.3%;">
+                        <button type="submit" class="btn no-radius bg-teal text-white" ng-disabled="frmfacebookChat.$invalid" ng-click="_self.UpdateCredential()" >Update</button>
+                    </div>               
+                </div>
+            </div>
+        </form>
+    </div>    
+    <section>
+        <div class="row">
+            <div class="col-md-12">                
+                <p>Please follow the below steps to link Facebook Chat Messenger:</p>               
+                <div class="clear" style="clear: both;"></div>
+                <h3><b>Step 1:</b> <br /> <br />  Add you Stylerzone profile link to your Facebook page</h3>
+                <ul class="fb-guide-line">
+                    <li>Go to your Facebook page and login.</li>
+                    <li>Open Settings and from left column click on Advanced Messaging.
+                        <ul >                          
+                            <li>
+                                <img src="images/fbsz/advanced_messagingpng.png" alt="fbsetting" />
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        You’ll find Whitelisted Domains Option in the bottom, please  add your Stylerzone profile link there. Your SZ profile link is.                       
+                        <div id="profileurl" style="display:none" ng-bind-html="_self.profile_url"></div>
+                        <button ng-click="_self.copyInputMessage()" id="getcopytext" value="click to copy" class="copybutton"><i class="fas fa-clipboard"></i><div class="copiedtext" style="display: none;">Copied!</div></button>
+                        <ul> 
+                            <li style="margin-bottom: 15px;">
+                                <img src="images/fbsz/white-list.PNG" alt="fbsetting" />
+                            </li>
+                        </ul>                    
+                    </li>
+                </ul>
+                <div class="clear" style="clear: both;"></div>
+                <h3><b>Step 2:</b> <br /> <br /> Create Facebook Page Id</h3>
+                <ul class="fb-guide-line">
+                    <li>Go to your Facebook page and login.</li>
+                    <li>From left hand menu select About.                        
+                    </li>
+                    <li>On this page look for Page ID, copy the Page ID and paste above
+                        <ul> 
+                            <li style="margin-bottom: 15px;">
+                                <img src="images/fbsz/PageId.png" alt="fbsetting" />
+                            </li>
+                        </ul>   
+                    </li>
+                </ul>
+                <div class="clear" style="clear: both;"></div>
+               <h3><b>Step 3:</b><br /> <br />  Create Facebook Application</h3>
+                <ul class="fb-guide-line">
+                    <li>Create facebook application from the <a href="https://developers.facebook.com/">facebook developer account</a>.</li>
+                    <li>Create a new App.
+                        <ul> 
+                            <li style="margin-bottom: 15px;">
+                                <img src="images/fbsz/createApp.png" alt="fbsetting" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Copy app id of the application and save it above application id field.
+                    
+                     <ul> 
+                            <li style="margin-bottom: 15px;">
+                                <img src="images/fbsz/applicationId.png" alt="fbsetting" />
+                            </li>
+                        </ul>
+                    
+                    </li>
+                </ul>    
+               <p><b>Note:</b><br />Following three things are mandatory for Messenger Integration.</p>
+                <ul class="fb-guide-line" >
+                    <li>Profile Url Must be in Page Whitelist.</li>
+                    <li>Facebook Page Id</li>
+                    <li>Facebook App Id for Messenger Communication.</li>
+                </ul>  
+                <div class="clear" style="clear: both;"></div>
+                <br />
+                <p><b>If you have any issues, please contact us <a href="mail: info@stylerzone.com.au">info@stylerzone.com.au</a> and we will help you.</b></p>
+            </div>
+        </div>
+    </section>
+</div>

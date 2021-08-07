@@ -1,0 +1,53 @@
+<div id="transactions" class="tab-pane account_list numbr_list pt-25">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Invoice ID</th>
+        <th>Status</th>
+        <th>Plan Name</th>
+        <th>Duration</th>
+        <th>Price($)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="invs in _self.my_invs.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index">
+        <td>
+          <% invs.id%>
+        </td>
+        <td>
+          <% invs.inv_status%>
+        </td>
+        <td>
+          <% invs.plan_info.name%>
+        </td>
+        <td>
+          <% invs.plan_info.duration%>
+        </td>
+        <td>
+          <% invs.plan_info.price%>
+        </td>
+        <td class="actions">
+          <a ng-if="invs.inv_status == 'Unpaid'" href="/plans?inv_id=<% invs.id%>" class="btn bg-green btn-xs spacing-btn">Pay</a>
+          <a title="Print Invoice" target="_blank" href="http://beautycollective.com.au/account/invoice/print?inv_id=<% invs.id%>&amp;print=true"
+            class="btn bg-green btn-xs"><i class="fa fa-print" aria-hidden="true"></i></a>
+          <a title="Download Invoice" target="_blank" href="http://beautycollective.com.au/account/invoice/download?inv_id=<% invs.id%>"
+            class="btn bg-green btn-xs"><i class="fa fa-download" aria-hidden="true"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+<div class="reviews_pagination" ng-if=" _self.my_invs.data.length">
+  <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn">
+    Previous
+  </button>
+  <%_self.currentPage+1%>/
+  <%_self.numberOfPages()%>
+  <button ng-disabled="_self.currentPage >= _self.my_invs.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1"
+    class="btn">
+    Next
+  </button>
+</div>

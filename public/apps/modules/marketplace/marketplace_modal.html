@@ -1,0 +1,44 @@
+<style type="text/css">
+    .slickNormalAdaptive{width: 100%;height: 100%;}
+    .ModalNewDiv{height:100%;}
+    .ModalSlick{height:100%;margin-bottom: 0;}
+    .ModalSlickDiv{height:100%;}
+    .modal-content{height:90%}
+</style>
+<button type="button" class="close" ng-click="$close()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+<div class="modal-body p-0 marketplaceModal round5p">
+    <div class="modalSlider col-sm-12 col-md-9 px-0">
+        <div class="slickNormalAdaptive">
+            <div class="ModalNewDiv">
+                <slick ng-if="_self.ModalData.assets.length > 0" settings="slickConfig" class="ModalSlick" >
+                    <div ng-repeat="images in _self.ModalData.assets" class="ModalSlickDiv">
+                        <img ng-src="<%_self.getAssetsUrlConvert(images)%>" alt="pic" class="img-responsive">
+                    </div>
+                </slick>
+                <div ng-if="_self.ModalData.assets.length == 0">
+                    <img ng-src="images/user_pic.jpg" alt="pic" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="commenting col-sm-12 col-md-3">
+        <div>
+            <h3 ng-bind-html="_self.ModalData.title"></h3>                                                
+            <p class="text-muted"><%_self.ModalData.suburb+','+ _self.ModalData.state%></p>
+            <hr/>
+        </div>
+        <div class="commentsCount" ng-init="_self.ShowDescription = 0;_self.showBtnText='Show More'">
+            <h4 class="text-success font-bold">$<%_self.ModalData.price%></h4>
+            <div class="ModalDescriptionDiv" ng-class="{less: _self.ShowDescription == 1}" ng-bind-html="_self.htmlToPlaintext(_self.ModalData.description)"></div>
+            <button id="moreInfo" type="button" class="btn btn-sm btn-primary mt-10 mb-10" ng-click = '_self.showDescriptionFun()' ng-bind-html="_self.showBtnText"></button>
+            <div ng-if="_self.checkFeatures(_self.ModalData.business_feature_stock)" class="ModalFeatureDiv">
+                <h3>Features</h3>
+                <div ng-bind-html="_self.featuresAre(_self.ModalData.business_feature_stock)"></div>
+            </div>
+        </div>
+        <div class="border-top mt-auto pt-10">
+            <button type="button" class="btn btn-block btn-primary" ng-click="_self.contactModal()">Ask For Details</button>
+        </div>
+    </div>
+</div>

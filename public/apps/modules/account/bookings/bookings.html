@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+      <div class=" bg-teal text-white p-15">
+        <h3 class="panel-title">Customer Booking</h3>
+      </div>
+      <div class="panel-body">
+        <table ng-if="_self.TeamInfo1.data" class="table table-bordered bordered table-vertically-center table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+          <thead>
+            <tr>
+              <!--                    <th>Sr No.</th>-->
+              <th>Booking Id</th>
+              <th>Service Name</th>
+              <th>Customer Name</th>
+              <th>Date</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="team1 in _self.TeamInfo1.data">
+              <!--                    <td><% $index +_self.currentPage*_self.pageSize +1 %></td>-->
+              <td>
+                <%team1.booking%>
+              </td>
+              <td>
+                <%team1.title%>
+              </td>
+              <td>
+                <%team1.customerName%>
+              </td>
+              <td>
+                <%team1.date %></td>
+                <td>
+                  <%team1.stime%>
+                </td>
+                <td>
+                  <%team1.etime%>
+                </td>
+                <td>
+                  <%team1.status %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>  

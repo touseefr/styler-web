@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="col-md-12 col-sm-12 col-xs-12"  ng-class="{search_home: <% self.ishome %>,search_collection:!<% self.ishome %>}" >
+    <form class="search_box header-serach-box formbackground" id="search-frm-main" style="padding-bottom: 0px;" action="/search" autocomplete="off">
+      <!-- <ul> -->
+      <div class="searchbar_background">
+        <div class="row">
+          <div class="col-md-7 col-sm-7 col-xs-12 header_search_field">
+            <div class="input_search">
+              <input type="text" name="q" placeholder="Search..." class="input_search_center"  ng-model="self.searchStr" ng-keyup="self.keyPressed($event)"  autocomplete='off'  />
+            </div>
+            <div id="<%id%>_dropdown" class="items search_dropdown" ng-if="self.showDropdown" >
+              <div ng-show="self.searching" class="searcinf-forNow">Searching...</div>
+              <div class="angucomplete-searching" ng-show="!self.searching && (!self.results || self.results.length == 0)">No results found</div>
+              <div class="item" ng-repeat="result in self.results" ng-click="self.selectResult(result)" ng-mouseover="self.hoverRow()">
+                <p class="title"><% result.title %></p>
+                <p class="subtitle" ng-if="result.originalObject.categories.length">in <% result.originalObject.categories[0].name %></p>
+              </div>
+            </div>
+            <input type="hidden" id="searchFor" name="label" value="Service Provider">
+            <input type="hidden" id="searchFor_hidden" name="searchFor" value="serviceprovider">
+          </div>               
+          <div class="col-md-3 col-sm-3 col-xs-7 header_postcode_field">
+            <!-- <li class="second"> -->
+            <div class="input-search-postcode">
+              <input id="suburb_input" name="location_address" type='text' class="input_postcode" ng-keyup='fetchSuberbs()' ng-model='searchText' placeholder="Post/Suburb" ng-model="self.post">
+              <ul id='searchResult' style="display: none;">
+                <li ng-click='setValue($index)' ng-repeat="address in self.suburbList" >{{ address.location}},{{ address.state}},{{ address.postcode}}</li>
+              </ul>  
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-4 header_search_button">
+            <button  type="submit" class="header_search_btn"><i class="fa fa-search"></i> SEARCH</button>
+          </div>  
+        </div>
+      </ul><!-- ul end here -->
+      </div>
+    </form><!-- form end here -->
+  </div>
+</div>

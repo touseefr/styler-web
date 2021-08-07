@@ -1,0 +1,60 @@
+<div  ng-if="_self.latest_reviews.length > 0" class="reviews latest_reviews_section" style="margin-bottom: 0;padding-bottom: 50px;">    
+    <h3 class="review2">Reviews</h3>
+
+    <div class="container">        
+        <div class="col-md-6" ng-repeat="($index,$reviews) in _self.latest_reviews" style="height:150px;" >
+            <div class="col-md-12 padd0">
+                <div class="block-head">
+                    <div class="text-heading">
+                        <a href="/profile?id={{_self.base64_encode($reviews.UserFrom.id)}}">
+                            <div ng-if="$reviews.userBusiness.business_name.length > 0">
+                                <p ng-if="$reviews.userBusiness.business_name.length > 0 && $reviews.review.anonymously == 0"><%$reviews.userBusiness.business_name%></p>
+                            </div>                             
+                            <div ng-if="$reviews.userBusiness.business_name.length == 0">
+                                <p ng-if="$reviews.userBusiness.business_name.length == 0 && $reviews.review.anonymously == 0"><%$reviews.UserFrom.name%></p>
+                            </div>
+                            <div ng-if="($reviews.roles.name == 'Individual' || $reviews.roles.name == 'JobSeeker') && $reviews.review.anonymously == 0">
+                                <p><%$reviews.UserFrom.name%></p>
+                            </div>
+                            <p ng-if="$reviews.review.anonymously == 1">Anonymous User</p>
+                        </a>
+                    </div>                   
+                    <div ng-if="$reviews.userBusiness.business_suburb" class="location"><%$reviews.userBusiness.business_suburb%><%(!$reviews.userBusiness.state) && !$reviews.userBusiness.business_suburb?',':''%> <%$reviews.userBusiness.state%></div>                    
+                </div>
+                <div class="block-sub-head">  
+                    <div class="profile_star">
+                        <div ng-bind-html=""></div>
+                        <uib-rating ng-model="$reviews.review.rating" max="5" readonly="true" titles="['one','two','three','four','five']" aria-labelledby="default-rating" class="rating"></uib-rating>
+                    </div>
+<!--                    <div class="time_ago">                      
+                        <% _self.timeSince($reviews.review.created_at) %>
+                    </div>-->
+                </div> 
+                <div class="block-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <a ng-if="$reviews.profilepic" href="/{{ 'profile?id=' + _self.base64_encode($reviews.UserFrom.id)}}">                                
+                                <img ng-src="{{$reviews.profilepic.path + 'thumb_small_' + $reviews.profilepic.name}}" alt="" width="75" height="75" class="img-circle center-block"/>                                
+                            </a>
+                            <a ng-if="!$reviews.profilepic" href="/profile?id={{_self.base64_encode($reviews.UserFrom.id)}}">
+                                <img src="images/user_pic.jpg" alt="" class="img-responsive img-circle center-block"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p>
+                                {{$reviews.review.review_comment| limitTo : 180 : 0}}...                               
+                            </p>
+                        </div>
+                        <div class="review_by_name">
+                            {{ $reviews.roles.name}}
+                            <a class="review_detail_pop floatright" data-review-detail="{{$reviews.review.review_comment}}" to-user-id="{{$reviews.review.to_user_id}}" comment_id="{{$reviews.review.id}}" from-user-id="{{$reviews.review.from_user_id}}" data-reply-comment="{{$reviews.review.reply_comments}}" href="#popup-1">Read Detail</a>
+                        </div>
+                    </div>
+                </div>   
+
+                <hr>
+            </div>
+        </div>      
+
+    </div>
+</div>

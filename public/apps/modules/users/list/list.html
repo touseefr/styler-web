@@ -1,0 +1,72 @@
+<!-- /app/modules/users/list/list.html -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">User List</h3>
+        <div class="box-tools">
+          <a href="#" ui-sref="users.create" class="btn btn-primary btn-sm" ng-if="can('USER','ADD')">
+            <i class="fa fa-plus"></i> Add user</a>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover" role="grid">
+          <tbody>
+            <tr role="row">
+              <th>
+                <a ng-href="#" ng-click="_self.sortColumnBy('firstName');" prevent-default>
+                  Name
+                  <span ng-show="_self.isSortColumnBy('firstName') && !_self.isSortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="_self.isSortColumnBy('firstName') && _self.isSortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>Email</th>
+              <th>
+                <a ng-href="#" ng-click="_self.sortColumnBy('username');" prevent-default>
+                  Username
+                  <span ng-show="_self.isSortColumnBy('username') && !_self.isSortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="_self.isSortColumnBy('username') && _self.isSortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>Status</th>
+              <th align="center" ng-if="(can('USER','UPDATE') || can('USER','DELETE'))">Action</th>
+            </tr>
+            <tr role="row" ng-repeat="(key, user) in _self.users track by $index" ng-hide="user.id === currentUser.id">
+              <!-- td>{{user.id}}</td -->
+              <td>{{user.firstName}} {{user.lastName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.username}}</td>
+              <td>
+                <small class="label " ng-class="{'bg-green' : user.active, 'bg-red' : !user.active }" ng-show="user.verified">
+                  {{user.active ? 'Active' : 'Inactive'}}
+                </small>
+                <small class="label bg-yellow" ng-show="!user.verified">Pending Verification</small>
+              </td>
+              <td >
+                <a ng-if="can('USER','UPDATE')" href="#" ui-sref="users.update({'user_id':user.id})" class="btn btn-default btn-xs" title="" tooltip="{{'userslist.action_button.edit.tooltip' | translate}}" tooltip-placement="top">
+                  <i class="fa fa-pencil text-green"></i>
+                </a>
+                <a ng-if="can('USER','DELETE')" href="#" class="btn btn-default btn-xs" ng-click="_self.deleteUser(user)" tooltip="{{'userslist.action_button.delete.tooltip' | translate}}" tooltip-placement="top">
+                  <i class="fa fa-times text-red"></i>
+                </a>
+                <button  type="button" class="btn btn-xs" ng-class="{'btn-success' : !user.active, 'btn-danger' : user.active}" ng-model="user.active" tooltip="{{ (user.active ? 'userslist.action_button.disable.tooltip' : 'userslist.action_button.enable.tooltip') | translate}}" tooltip-placement="top" ng-click="_self.updateUserStatus(user)" ng-if="user.verified && can('USER','UPDATE')">
+                  {{ (user.active ? 'userslist.action_button.disable.label' : 'userslist.action_button.enable.label') | translate}}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <!-- /.box-footer -->
+      <div class="box-footer clearfix"  ng-show="_self.perPage < _self.totalCount" >
+        <pagination total-items="_self.totalCount" items-per-page="_self.perPage" ng-model="_self.currentPage" max-size="_self.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="_self.numPages" ng-change="_self.pageChanged()"></pagination>
+      </div>
+      <!-- /.box-footer -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /app/modules/users/list/list.html -->

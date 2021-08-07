@@ -1,0 +1,421 @@
+<form name="listingForm" class="form-beautyCollective tab-pane" role="form" novalidate>
+    <h4 class="mb-15 mt-0"><% (createListCtrl.listing.id ? 'Update' : 'Create') %> a Deal</h4>
+    <div class="row panel-beautyCollective">
+        <div class="col-md-6">
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine }">
+                <label for="inputEmail3" class="control-label text-right col-sm-4 pt-5">Title of Listing <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" data-ng-model="createListCtrl.listing.title" placeholder="Title of Listing *" autocomplete="off" name="listingtitle" required />
+                    <p ng-show="listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine" class="help-block">Title is required.</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Contact Number <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text"  autocomplete="off" class="form-control" data-ng-model="createListCtrl.listing.contact" placeholder="Contact Number *" Name="Contact number" maxlength="15" />
+                </div>
+            </div>
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine }">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Contact Email <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" data-ng-model="createListCtrl.listing.email" placeholder="Contact Email *" name="contactemail" autocomplete="off" required />
+                    <p ng-show="listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine" class="help-block">Enter valid email .</p>
+                </div>
+            </div>
+            <input type="hidden" id="latitude-n1" class="form-control" data-ng-model="createListCtrl.listing.latitude"
+                   placeholder="latitude" name="listinglatitude" />
+            <input type="hidden" id="longitude-n1" data-ng-model="createListCtrl.listing.longitude" value="">
+            <input type="hidden" id="suburb-n1" ng-model="createListCtrl.listing.suburb" value="">
+            <input type="hidden" id="state-n1" ng-model="createListCtrl.listing.state" value="">
+            <input type="hidden" id="postcode-n1" ng-model="createListCtrl.listing.postcode" value="">
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label text-right col-sm-4">Address (suburb, postcode, or city)  <span class="text-red">*</span></label>               
+                <div class="col-sm-8 select-postcode">
+
+                    <ui-select  on-select="createListCtrl.selectLocation($item, $model)" ng-model="createListCtrl.listing.locations" ng-disabled="disabled" reset-search-input="true"  title="Address? (suburb, postcode, or city)" append-to-body="true" style="width:100%" required>
+
+                        <ui-select-match  placeholder="suburb, postcode *">
+                            <%$select.selected.location%> -
+                            <%$select.selected.state%>,
+                            <%$select.selected.postcode%>
+                        </ui-select-match>
+                        <ui-select-choices ui-disable-choice="locdeal.no_found"  repeat="locdeal in createListCtrl.suburbList track by $index"  refresh="createListCtrl.getLocation($select.search)" refresh-delay="0">
+                            <span ng-if="!locdeal.no_found" ng-bind-html="locdeal.location | highlight: $select.search"></span> <span ng-if="!locdeal.no_found">-</span> <span ng-if="!locdeal.no_found" ng-bind-html="locdeal.state | highlight: $select.search"></span><span ng-if="!locdeal.no_found">,</span> <span ng-if="!locdeal.no_found" ng-bind-html="locdeal.postcode | highlight: $select.search"></span>
+                            <span ng-if="locdeal.no_found">Records not found.</span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <div ng-show="createListCtrl.showspinner == 1" class="inner-pg-serach-loader"><i class="fas fa-spinner fa-spin"></i></div>    
+                </div>
+            </div>      
+            <div class="form-group row" ng-if="createListCtrl.userRole != 'schoolcollege'">
+
+                <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Services <span class="text-red">*</span></label>
+                <div class="col-sm-8 select-postcode">                    
+                    <ui-select multiple ng-model="createListCtrl.spservice" theme="bootstrap"  close-on-select="true" title="Services" style="width:100%" ng-required="true">
+                        <ui-select-match placeholder="Services"><% $item.title %></ui-select-match>
+                        <ui-select-choices repeat="service in createListCtrl.services track by $index">
+                            <span ng-bind-html="service.title | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <p ng-show="createListCtrl.spservice.$invalid && !createListCtrl.spservice.$pristine"></p>                   
+                    <p ng-if="createListCtrl.services.length == 0" style="text-align: left;margin-top: 4px;"><small style="color:#333;" >(These services must be added from the booking system under your selected category. <a href="<% createListCtrl.bookingUrl() %>" style="color: #4abdac">Click here</a> to add services section.)</small></p>
+                </div>
+            </div>
+            <div class="form-group row" ng-if="createListCtrl.userRole == 'schoolcollege'">
+
+                <label for="inputPassword3" class="control-label text-right col-sm-4 pt-5">Courses <span class="text-red">*</span></label>
+                <div class="col-sm-8 select-postcode">
+                    <div ng-bind-html="createListCtrl.listing.courses[0].course_title"></div>
+                    <ui-select multiple ng-model="createListCtrl.courses" theme="bootstrap" close-on-select="true" title="Courses" style="width:100%" ng-required="false">
+                        <ui-select-match placeholder="Courses"><% $item.course_title %></ui-select-match>
+                        <ui-select-choices repeat="service in createListCtrl.scCourses track by $index">
+                            <span ng-bind-html="service.course_title | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <p ng-show="createListCtrl.scCourses.$invalid && !createListCtrl.scCourses.$pristine"></p>
+                </div>
+            </div>
+            <div ng-if="createListCtrl.userRole == 'schoolcollege'">
+                <div class="form-group row">
+                    <label for="sc_deal_delivery_mode" class="control-label text-right col-sm-4 setfontfordeal pt-5">Delivery Mode</label>
+                    <div class="col-sm-8">
+                        <select class="form-control marginbottom" name="sc_deal_delivery_mode" ng-model="createListCtrl.listing.sc_deal_delivery_mode">
+                            <option value="">Delivery Mode</option>
+                            <option value="0">Face To Face</option>
+                            <option value="1">Online</option>                                
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sc_deal_intakes" class="control-label text-right col-sm-4 setfontfordeal pt-5">Intakes</label>
+                    <div class="col-sm-8" >
+                        <select  class="form-control marginbottom" ng-model="createListCtrl.listing.sc_deal_intakes">           
+                            <option value="0">Weekly</option>                           
+                            <option value="1">Monthly</option>                                
+                            <option value="2">Six Month</option>                                
+                            <option value="3">Yearly</option>                                
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="sc_deal_prerequisite" class="control-label text-right col-sm-4 setfontfordeal pt-5">Prerequisite</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_prerequisite"
+                               name="sc_deal_prerequisite" autocomplete="off" placeholder="Prerequisite">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sc_deal_assessment" class="control-label text-right col-sm-4 setfontfordeal pt-5">Assessment Mode</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_assessment"
+                               name="sc_deal_assessment" autocomplete="off" placeholder="Assessment Mode">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sc_deal_requirements" class="control-label text-right col-sm-4 setfontfordeal pt-5">Entry Requirements</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_requirements"
+                               name="sc_deal_requirements" autocomplete="off" placeholder="Entry Requirements">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine }">
+                <label for="inputPassword3" class="col-sm-12 setfontfordeal mt-10">Write a Description <span class="text-red">*</span></label>
+                <div class="col-sm-12">                    
+                    <trix-editor angular-trix ng-model='createListCtrl.listing.description'   class="trix-content"></trix-editor>
+                    <!--                    <p ng-show="listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine" class="help-block">Enter
+                                            listing description.</p>-->
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Category <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <ui-select ng-required="true" on-select="createListCtrl.selectCategory($item, $model)" ng-model="createListCtrl.listing.parentCategory"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select a category">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in createListCtrl.categories | propsFilter: {name: $select.search, age: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <ui-select ng-required="true" on-select="createListCtrl.selectsubCategory($item, $model)" ng-model="createListCtrl.listing.categories" theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;margin-top:15px">
+                        <ui-select-match placeholder="Select a sub-category">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="subcategory in createListCtrl.subCategories | propsFilter: {name: $select.search, age: $select.search}">
+                            <div ng-bind-html="subcategory.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <!--            <div class="form-group row other_opt">
+                            <label for="inputPassword3" class="control-label text-right col-sm-4"></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.other_subcat"
+                                       placeholder="Other sub-category" Name="other_subcat" maxlength="11" />
+                            </div>
+                        </div>            -->
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.originalprice.$invalid && !listingForm.originalprice.$pristine }">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Original Price <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="number" class="form-control width200" data-ng-model="createListCtrl.listing.price"
+                               placeholder="Original Price" ng-change="createListCtrl.calculateDiscount()" name="originalprice"
+                               maxlength="11" required />
+                    </div>
+                    <p ng-show="listingForm.originalprice.$invalid && !listingForm.originalprice.$pristine"  class="help-block">Enter original price.</p>
+                </div>
+            </div>
+            <!--ng-class="{ 'has-error' : listingForm.discount.$invalid && !listingForm.discount.$pristine }"-->
+            <div class="form-group row" >
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Discount</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="number" class="form-control width200" ng-model="createListCtrl.listing.discount"
+                               ng-change="createListCtrl.calculateDiscount()" placeholder="Discount" Name="discount"  maxlength="11" />
+                        <!--                        <p ng-show="listingForm.discount.$invalid && !listingForm.discount.$pristine" class="help-block">Enter discount in ($).</p>-->
+                    </div>          
+                </div>
+            </div>
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.saving.$invalid && !listingForm.saving.$pristine }">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Total Price</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="number" class="form-control width200" data-ng-model="createListCtrl.listing.saving"
+                               placeholder="Saving" name="saving" maxlength="11" disabled="true"  />
+                        <p ng-show="listingForm.saving.$invalid && !listingForm.saving.$pristine" class="help-block">Enter saving amount.</p>
+                    </div>          
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="expiry" class="control-label text-right col-sm-4 setfontfordeal pt-5">Expiry</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" class="form-control" uib-datepicker-popup="<%self.format%>" ng-model="createListCtrl.listing.expire"
+                           is-open="createListCtrl.popup1.opened" min-date="createListCtrl.minDate" max-date="createListCtrl.maxDate"
+                           datepicker-options="createListCtrl.dateOptions" ng-required="true" close-text="Close"
+                           alt-input-formats="altInputFormats" disabled="disabled" />
+                </div>
+            </div>
+            <div class="form-group row" ng-if="createListCtrl.userRole != 'schoolcollege'">
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Video</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.listing_video"
+                           name="listing_video" autocomplete="off" placeholder="Embed youtube video url">
+                </div>
+            </div>
+            <div class="form-group row" >
+                <label for="inputPassword3" class="control-label text-right col-sm-4 setfontfordeal pt-5">Gallery</label>
+                <div class="col-sm-8">                    
+                    <div class="upload_pics">
+                        <div flow-init="createListCtrl.flowConfig()" flow-files-submitted="createListCtrl.uploadfiles($flow)"
+                             flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="createListCtrl.fileUploadSuccess($file,$message,$flow)"
+                             flow-file-error="createListCtrl.UserGalleryfileUploadError($file,$message)">                          
+                            <div class="row after_upload">
+                                <div class="uploadImageSize col-md-12" ng-if="createListCtrl.listing.assets && createListCtrl.showgallery == 1">
+                                    <div ng-if="$flow.files.length == 0" ng-repeat="image in  createListCtrl.listing.assets">
+                                        <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img ng-src="<%image.path%><%image.name%>" src="" class="img-responsive img-rounded">
+                                        </div>
+                                    </div>
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+                                        <div ng-if="$flow.files.length > 0" class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}" >
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+                                        <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                                                 aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                                <span class="sr-only"><%file.progress()%>% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-ng-repeat=" j in [1]">
+                                        <div class="uploadImageSize" ng-if="j > createListCtrl.listing.assets.length + $flow.files.length">
+                                            <div class="ng-scope" flow-btn flow-attrs="{accept:'image/*'}">
+                                                <div class="fileupload upldbrd">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                 
+                                <div class="col-md-12" ng-if="createListCtrl.showgallery == 0" >
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files"    style="flex-direction: column;">
+                                        <div class="fileupload upldbrd" ng-show="$flow.files.length" flow-btn="" flow-attrs="{accept:'image/*'}"> 
+                                            <!--<span class="x_one"><a class="" prevent-default="" ng-click="createListCtrl.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+
+                                        <div ng-show="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div  ng-show="file.isUploading() && createListCtrl.showprogressbar == 1" class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                                                     aria-valuemin="0" aria-valuemax="100" ng-style="{width: my = (file.progress() * 100) + '%'}">
+                                                    <span class="sr-only">
+                                                        <%file.progress()%>% Complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="uploadImageSize" data-ng-repeat="i in [1]" >
+                                        <div ng-if="i > $flow.files.length">
+                                            <div class="ng-scope">
+                                                <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <input type="hidden" data-ng-model="createListCtrl.listing.flowFiles"/>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="createListCtrl.userRole == 'schoolcollege'">
+
+                <div class="form-group row">
+                    <label for="sc_deal_duration" class="control-label text-right col-sm-4 setfontfordeal pt-5">Duration</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_duration"
+                               name="sc_deal_duration" autocomplete="off" placeholder="Duration">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sc_deal_enrolment" class="control-label text-right col-sm-4 setfontfordeal pt-5">Enrolment Link</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_enrolment"
+                               name="sc_deal_enrolment" autocomplete="off" placeholder="Enrolment Link">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">      
+                        <label for="Domestic"> Domestic
+                            <input type="radio" ng-model="createListCtrl.listing.sc_deal_course_type" value="0" name="course_type" id="Domestic" checked="checked"/>
+                        </label>
+                        <label for="International">International 
+                            <input type="radio" ng-model="createListCtrl.listing.sc_deal_course_type" value="1" name="course_type" id="International"/>
+                        </label>
+                        <label for="Both"> Both
+                            <input type="radio" ng-model="createListCtrl.listing.sc_deal_course_type" value="2" name="course_type" id="Both"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="sc_deal_total_tuition_hours" class="control-label text-right col-sm-4 setfontfordeal pt-5">Total Tuition Hours</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control width200" data-ng-model="createListCtrl.listing.sc_deal_total_tuition_hours"
+                               name="sc_deal_total_tuition_hours" autocomplete="off" placeholder="Total Tuition Hours">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" ng-if="createListCtrl.userRole != 'schoolcollege'">
+            <h4>Specifications</h4>
+            <hr class="mt-5 mb-5 hr-color">
+            <br />
+            <div class="form-group row">
+
+                <div class="col-sm-4">           
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">Limit upto</label>
+                    <select name="limit_upto" placeholder="Limit upto" ng-model="createListCtrl.listing.listing_meta.limit_upto" class="form-control marginbottom">
+                        <option value="" disabled="disabled">Limit upto</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">Phone bookings?</label>
+                    <select name="phone_bookings" ng-model="createListCtrl.listing.listing_meta.phone_bookings" class="form-control marginbottom">
+                        <option value="" disabled="disabled">Phone bookings?</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">New customer only?</label>
+                    <select name="new_customer_only" ng-model="createListCtrl.listing.listing_meta.new_customer_only" class="form-control">
+                        <option value="" disabled="disabled">New customer only?</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">              
+
+                <div class="col-sm-4">
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">Valid for age?</label>
+                    <select name="valid_for_age" ng-model="createListCtrl.listing.listing_meta.valid_for_age" class="form-control marginbottom">
+                        <option value="" disabled="disabled">Valid for age?</option>
+                        <option value="above_18">Above 18</option>
+                        <option value="below_18">Below 18</option>                      
+                    </select>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">Refunds?</label>
+                    <select name="refunds" ng-model="createListCtrl.listing.listing_meta.refunds" class="form-control marginbottom">
+                        <option value="" disabled="disabled">Refunds?</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="specification" class="control-label col-sm-7" style="padding-left: 0px;">Surcharge applicable?</label>
+                    <select name="surchage_apply" ng-model="createListCtrl.listing.listing_meta.surchage_apply" class="form-control">
+                        <option value="" disabled="disabled">Surcharge applicable?</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+            </div>
+            <h5>Days Valid:</h5>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label class="mr-15" ng-repeat="day in createListCtrl.weekday">
+                        <%day%> <input ng-init="createListCtrl.listing.listing_meta.days_valid[day]='false'" type="checkbox" ng-model="createListCtrl.listing.listing_meta.days_valid[day]" value="<%day%>" ng-true-value="true" ng-false-value="false" />
+                    </label>
+                    <label>
+                        Public Holidays<input style="margin-left: 5px;" type="checkbox" ng-model="createListCtrl.listing.listing_meta.pulic_holidays" ng-true-value="'true'" ng-false-value="'false'" >
+                        </lable>                    
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <!--        </div>-->
+                        <!-- /.box-body -->                       
+                        <div class="">
+                            <p>By clicking Save button you agree to our <a href="../termsandconditions" target="_blank">Terms and Conditions</a>.</p>
+                            <button ng-if="createListCtrl.userRole != 'schoolcollege'" class="btn btn-primary" type="button" data-ng-click="createListCtrl.savelisting();" ng-disabled="createListCtrl.dealListinDisableSaveBtn(1, listingForm.$invalid, createListCtrl.spservice.length)">Save</button>
+                            <button ng-if="createListCtrl.userRole == 'schoolcollege'" class="btn btn-primary" type="button" data-ng-click="createListCtrl.savelisting();" ng-disabled="createListCtrl.dealListinDisableSaveBtn(1, listingForm.$invalid)">Save</button>
+                        </div>
+                        <!-- /.box-footer -->
+                        <!--    </div>-->
+                        </form>

@@ -1,0 +1,395 @@
+<style >
+    .tooltip2 {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip2 .tooltiptext2 {
+        visibility: hidden;
+        width: 294px;
+        background-color:rgb(0,0,0,0.7);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 7px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        top: 11px;
+    }
+
+    .tooltip2:hover .tooltiptext2 {
+        visibility: visible;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="page_info" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="search_result">
+    <div class="container padd0">
+        <div class="business_deal1">
+            <!--      <h2 ng-bind-html="self.selectedtext" ng-click="self.showmenu()"></h2>-->
+            <ul class="row-1 " ng-if="self.showbar == 1">
+                <li ng-class="item.active ? 'active' : ''" ng-repeat="item in self.tabs2" >
+                    <a ng-click="item.active || self.selectTabOther(item, $index)" >
+                        <img ng-src="<% item.icons %>" op-change="opimg1{{$index}}" ng-class="{shiny: $index == 0}" alt="">
+                        <p><% item.content %></p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul class="row-2 businessDealIcons" ng-show="self.showbar == 2">
+            <li class="sectionSelector" ng-if="(self.userRole == 'ServiceProvider' && item.id != 'serviceprovider') || (self.userRole == 'Distributor' && item.id != 'distributor') || (self.userRole != 'Distributor' && self.userRole != 'ServiceProvider')" ng-repeat="item in self.tabs" ng-class="{'btn-disabled tooltip2': item.id == 'job' && self.plan != 2,'active' : item.active}">
+                <a style="background-color: transparent;" class="bg-transparent" ng-click="self.selectTab(item, $index)" ng-disabled="item.active" >
+                    <img ng-src="<% item.icons %>" op-change="opimg2{{$index}}" ng-class="{shiny: $index == 4}" alt="">
+                    <p ng-class="{'tooltip2': item.id == 'job' && self.plan != 2}">
+                        <% item.content %>
+                        <span ng-if="item.id == 'job' && self.plan != 2" class="tooltiptext2">Only Premiere member can search staff. </span>
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="container search_result padd0">
+    <div class="row padd0" style="margin:0;">
+        <div class="business_overlay" >
+            <div class="col-md-12 col-xs-12 business_deal padd0">
+
+
+            </div>
+            <!--&lt;!&ndash;business_overlay&ndash;&gt;-->
+        </div>
+    </div>
+</section>
+<div class="bg_search_filter ng-scope hide" ng-repeat="tabs in self.selectedTabs" ng-class="{hide: !tabs.showfilter}">
+    <div class="container">
+        <div class="panel panel-default mt-15">
+            <div class="panel-heading refine1 clearfix">
+                <h4 class="pull-left font-bold"><% tabs.label %></h4>
+                <span class="close_filter font-double pointer pull-right" ng-click="self.hideFilterTab()">&times;</span>
+            </div>
+            <div class="panel-body filter-form">
+                <form class="form-inline mb-0">
+                    <label class="mr-15 font-normal">Refine Search</label>
+                    <div class="form-group mb-0" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses'">
+                        <label class="sr-only">Rating</label>
+                        <select class="form-control rating1" ng-model="tabs.rating">
+                            <option value="<% rating.id %>" ng-repeat="rating in self.ratings">
+                                <% rating.value %>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-0" ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor'">
+                        <label class="sr-only">Sub-Category</label>
+                        <select class="form-control sub-category form-control" ng-model="tabs.sub_category">
+                            <option value="">Sub Category</option>
+                            <option value="<% cat.id %>" ng-repeat="cat in tabs.subCategories">
+                                <% cat.name %>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="search-btn">
+                        <button type="submit" class="btn bg-teal text-white" id="btn-filter-records" ng-click="self.filterRecords(tabs)" tabs-data="<%tabs%>">GO</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- dropdown-menu -->
+<div class="clear"></div>
+<section class="bg_gray border_top searchpage">
+    <div class="container padd0">
+        <div class="row padd0">
+            <div class="col-md-12 col-ms-12">
+                <div class="tab_review shadow_del" >
+                    <div class="row padd0" infinite-scroll='self.nextPage()' infinite-scroll-disabled='self.busy'
+                         infinite-scroll-immediate-check="false" infinite-scroll-container='".content"' infinite-scroll-parent="true">
+                        <div ng-class="{'col-md-4' : self.selectedTabs.length == 3,'col-md-6' : self.selectedTabs.length == 2, 'col-md-12' : self.selectedTabs.length == 1 }"
+                             class="beauty-deals search-listing  padd0 col-ms-12" ng-repeat="tabs in self.selectedTabs" >
+                            <div class="searchArea mb-20 mt-25 row">
+                                <h2 class="col-sm-7 col-xs-12 font-bold h2-title m-0 ng-binding text-align-filter-heading">
+                                    <% tabs.label %>
+                                </h2>
+                                <div class="col-xs-12 one-col-filte  col-sm-4">
+                                    <div class="btn-group filterBtn">
+                                        <button type="button"  class="btn btn-default btn-block dropdown-toggle flex align-items-center justify-between" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;"><span>Filter</span><span class="fa fa-angle-down font-double" style="border-left: 1px solid rgb(173, 173, 173);padding-left: 17px;"></span></button>
+                                        <ul class="dropdown-menu ddlNewFilterLook">
+                                            <li class="submenu right">
+                                                <a href="#" >Rating </a>
+                                                <ul class="submenuL1"  >
+                                                    <li><a ng-click="self.searchFilterRecords('rating', 'ASC');">Low to High</a></li>
+                                                    <li><a ng-click="self.searchFilterRecords('rating', 'DESC')">High to Low</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="submenu right">
+                                                <a href="#">Reviews</a>
+                                                <ul class="submenuL1">
+                                                    <li><a ng-click="self.searchFilterRecords('review', 'ASC')">Low to High</a></li>
+                                                    <li><a ng-click="self.searchFilterRecords('review', 'DESC')">High to Low</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="submenu right categoriesFilter">
+                                                <a href="#" ng-bind-html="self.filterSelectedCat">Categories</a>
+                                                <ul class="submenuL1" style="height: 415px;overflow-y: scroll;overflow-x: hidden;">
+                                                    <li ng-repeat="(key,cat) in self.sercats track by $index" ><a ng-bind-html="cat.name" ng-click="self.addFilterCategor(cat.name)"></a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="submenu right">
+                                                <a href="#">Area</a>
+                                                <ul class="submenuL1" style="width: 135%;">
+                                                    <li style="text-align: center;">
+                                                        <input type="text" autocomplete="off" ng-keyup='fetchSuberbs()' id="name" ng-model="self.areanSearch2"  placeholder="Area" style="width: 100%;padding: 5px 10px;border: 1px solid #ccc!important;" />
+                                                    </li>
+                                                    <li ng-show="self.searchButtonText == 'Searching'" style="text-align: center;"><i class="fas fa-spinner fa-spin"></i></li>
+                                                    <li style="overflow-wrap: break-word;" ng-if="self.LocationFilterList && address.location + ',' + address.state + ',' + address.postcode != self.areanSearch2" ng-click="self.selectLocationFilter(address.location + ',' + address.state + ',' + address.postcode)" ng-repeat="address in self.LocationFilterList" ><span   ng-bind-html="address.location + ',' + address.state + ',' + address.postcode"></span></li>
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 text-right pr-0">
+                                    <div class="flex justify-end locationTags block-alignment">
+                                        <div class="btn-group px-10 mr-10 py-5 bgYellow submenuL1-block1" ng-class="{bgCyan:self.showbar == 2}" ng-show='self.showselectedContent' style="font-size: 12px;margin-bottom: 0px;">
+                                            <span><%self.showselectedContent%></span>
+                                            <a href="javascript:;" class="text-white remove ml-10" ng-click='self.removeSearchFor()'><i class="fa fa-times text-white"></i></a>
+                                        </div>
+                                        <div ng-show='self.showAddress' class='px-10 inlineFlex align-items-center bgYellow submenuL1-block2' ng-class="{bgCyan:self.showbar == 2}" style="font-size: 12px;margin-bottom: 0px;">
+                                            <i class="fas fa-map-marker-alt mr-2"></i><%self.showAddress%>
+                                        </div>
+                                        <div ng-show='self.areanSearch' class='px-10 inlineFlex align-items-center bgCyan submenuL1-block3' style="margin-left: 5px;font-size: 12px;margin-bottom: 0px;">
+                                            <i class="fas fa-map-marker-alt mr-2"></i><%self.areanSearch%>
+                                            <a href="javascript:;" class="text-white remove ml-10" ng-click='self.removeSearchFor()'><i class="fa fa-times text-white"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 four-col-filter new-search-block">
+                                    <div class="btn-group" style="width:100%">
+                                        <button type="button" class="btn btn-default btn-block dropdown-toggle flex align-items-center justify-between" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;"><span ng-bind-html="self.filterSelectedRating">Rating</span><span class="fa fa-angle-down font-double" style="border-left: 1px solid rgb(173, 173, 173);padding-left: 17px;"></span></button>
+                                        <ul class="dropdown-menu ddlNewFilterLook">
+                                            <li  ng-click="self.searchFilterRecords('rating', 'ASC')">
+                                                <a >Low to High</a>
+                                            </li>
+                                            <li ng-click="self.searchFilterRecords('rating', 'DESC')">
+                                                <a >High to Low</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 four-col-filter new-search-block">
+                                    <div class="btn-group" style="width:100%">
+                                        <button type="button" class="btn btn-default btn-block dropdown-toggle flex align-items-center justify-between" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;"><span ng-bind-html="self.filterSelectedReviews">Reviews</span><span class="fa fa-angle-down font-double" style="border-left: 1px solid rgb(173, 173, 173);padding-left: 17px;"></span></button>
+                                        <ul class="dropdown-menu ddlNewFilterLook">
+                                            <li ng-click="self.searchFilterRecords('review', 'ASC')"><a >Low to High</a></li>
+                                            <li ng-click="self.searchFilterRecords('review', 'DESC')"><a >High to Low</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 four-col-filter  new-search-block">
+                                    <div class="btn-group" style="width:100%">
+                                        <button type="button" class="btn btn-default btn-block dropdown-toggle flex align-items-center justify-between" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;"><span ng-bind-html="self.filterSelectedCat">Categories</span><span class="fa fa-angle-down font-double" style="border-left: 1px solid rgb(173, 173, 173);padding-left: 17px;"></span></button>
+                                        <ul class="dropdown-menu ddlNewFilterLook" style="height: 415px;overflow-y: scroll;overflow-x: hidden;">
+                                            <li ng-repeat="(key,cat) in self.sercats track by $index" ><a ng-bind-html="cat.name" ng-click="self.addFilterCategor(cat.name)"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 four-col-filter  new-search-block">
+                                    <div class="btn-group" style="width:100%">
+                                        <button type="button" class="btn btn-default btn-block dropdown-toggle flex align-items-center justify-between" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;"><span ng-bind-html="self.areanSearch2">Area</span><span class="fa fa-angle-down font-double" style="border-left: 1px solid rgb(173, 173, 173);padding-left: 17px;" ></span></button>
+                                        <ul class="dropdown-menu ddlNewFilterLook">
+                                            <li style="text-align: center;">
+                                                <form>
+                                                    <input type="text" autocomplete="off" ng-keyup='fetchSuberbs()' id="name" ng-model="self.areanSearch2"  placeholder="Area" style="width: 100%;padding: 5px 10px;border: 1px solid #ccc!important;" />
+                                                </form>
+                                            </li>
+                                            <li ng-show="self.searchButtonText == 'Searching'" style="text-align: center;"><i class="fas fa-spinner fa-spin"></i></li>
+                                            <li ng-if="self.LocationFilterList && address.location + ',' + address.state + ',' + address.postcode != self.areanSearch2" ng-click="self.selectLocationFilter(address.location + ',' + address.state + ',' + address.postcode)" ng-repeat="address in self.LocationFilterList" ><span   ng-bind-html="address.location + ',' + address.state + ',' + address.postcode"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class=' col-lg-extra-large col-md-4 col-sm-6 col-xs-12 new-search-block' ng-repeat="data in tabs.data track by $index" >
+                                    <div class="col-md-12 inner-portion-l1">
+                                        <a ng-if="tabs.content != 'FIND JOBSEEKER' && (tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'deal')" href="<%self.host+'/'+tabs.url %>?id=<% self.base64Convertion(data.id) %><%self.queryString%>">
+                                            <figure   ng-if="tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job' || tabs.id == 'deal'">
+                                                <img  ng-if="data.assets.length > 0" ng-src="<% self.host + data.assets[0].path + data.assets[0].name %>" class="img-responsive center-block"
+                                                      title="<% data.title %>" fallback-src="images/user_pic.png">
+                                                <img  ng-if="data.profilepic.length > 0" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>" class="img-responsive center-block"
+                                                      title="<% data.title %>" fallback-src="images/user_pic.png">
+                                            </figure>
+                                        </a>
+                                        <a ng-if="tabs.id == 'serviceprovider' || tabs.id == 'findcourses'" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">
+                                            <figure  ng-if="tabs.id == 'serviceprovider' || tabs.id == 'findcourses'">
+                                                <img ng-if="data.profilepic" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>"
+                                                     class="img-responsive center-block" title="<% data.name %>" fallback-src="images/user_pic.png">
+                                                <img ng-if="!data.profilepic" ng-src="../images/user_pic.png" class="img-responsive center-block"
+                                                     title="<% data.name %>" fallback-src="images/user_pic.png">
+                                            </figure>
+                                        </a>
+                                        <a ng-if="tabs.content == 'FIND JOBSEEKER' && tabs.id == 'job'" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">
+                                            <figure  >
+                                                <img ng-if="data.profilepic" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>"
+                                                     class="img-responsive center-block" title="<% data.name %>" fallback-src="images/user_pic.png">
+                                                <img ng-if="!data.profilepic" ng-src="../images/user_pic.png" class="img-responsive center-block"
+                                                     title="<% data.name %>" fallback-src="images/user_pic.png">
+                                            </figure>
+                                        </a>
+                                        <a ng-if="tabs.id == 'distributor'" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=Distributor<%self.queryString%>">
+                                            <figure  ng-if="tabs.id == 'distributor'">
+                                                <img ng-if="data.profilepic" ng-src="<% self.host + data.profilepic.path + data.profilepic.name%>"
+                                                     class="img-responsive center-block" title="<% data.name %>" fallback-src="images/user_pic.png">
+                                                <img ng-if="!data.profilepic" ng-src="../images/user_pic.png" class="img-responsive center-block"
+                                                     title="<% data.name %>" fallback-src="images/user_pic.png">
+                                            </figure>
+                                        </a>
+
+                                        <div class="inner-portion-l2">
+                                            <h4 ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses'" class="truncate cardTitle"
+                                                title="<% data.name %>">
+                                                <a class="" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">
+                                                    <span ng-if="data.user_business.business_name.length <= 15">
+                                                        <% data.user_business.business_name  | limitTo : 15 %>
+                                                    </span>
+                                                    <span ng-if="data.user_business.business_name.length > 15">
+                                                        <% data.user_business.business_name  | limitTo : 15 %>..
+                                                    </span>
+                                                </a>
+                                            </h4>
+                                            <h4 ng-if="tabs.content == 'FIND JOBS' && tabs.id=='job'">
+                                                <span >
+                                                    <% data.title  | limitTo : 15 %></span>
+                                            </h4>
+                                            <h4 ng-if="((tabs.content != 'FIND DISTRIBUTOR') && (tabs.content != 'FIND JOBSEEKER') && (tabs.content != 'FIND COURSES') )&& (tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified'  || tabs.id == 'deal')"
+                                                class="truncate cardTitle" ng-class="{'display-hide':tabs.id == 'findcourses' || tabs.id == 'serviceprovider'}">
+                                                <a class="h5" href="<%self.host%>/<%tabs.url %>?id=<% self.base64Convertion(data.id) %><%self.queryString%>" title="<%data.title%>">
+                                                    <span ng-if="data.title.length <= 15" style="font-size: 20px;font-weight: bold;">
+                                                        <% data.title  | limitTo : 15 %></span>
+                                                    <span ng-if="data.title.length > 15" style="font-size: 20px;font-weight: bold;">
+                                                        <% data.title  | limitTo : 15 %>..</span>
+                                                </a>
+                                                <small class="pull-right text-darkGray m-0 h6" ng-if="tabs.id == 'deal'">
+                                                    $
+                                                    <% data.dealprice %>
+                                                </small>
+                                            </h4>
+                                            <h4 ng-if="tabs.content == 'FIND JOBSEEKER' && tabs.id == 'job'" class="truncate cardTitle ">
+                                                <a  href="<%self.host%>/profile?id=<% self.base64Convertion(data.id) %> <%self.queryString%>" title="<%data.title%>">
+                                                    <span ng-if="data.name.length <= 15" >
+                                                        <% data.name  | limitTo : 15 %></span>
+                                                    <span ng-if="data.name.length > 15">
+                                                        <% data.name  | limitTo : 15 %>..</span>
+                                                </a>
+                                            </h4>
+                                            <p style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;height: 40px;">
+                                                <b><span class="label label-info search_pg_white_color" ng-if="tabs.id == 'deal'">
+                                                    $
+                                                    <%data.discount%> off</span>
+                                                <span class="location" ng-if="tabs.content != 'FIND JOBSEEKER' && (tabs.id == 'businessforsale' || tabs.id == 'schoolcolleges' || tabs.id == 'gallery' || tabs.id == 'classified' || tabs.id == 'job')">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    <% data.suburb | limitTo : 15 %>,
+                                                    <% data.state | limitTo : 5 %>
+                                                </span>
+                                                <span  class="location" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses'"  title="<% data.user_business.business_address +', '+data.user_business.business_suburb +', '+data.user_business.state  %>">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    <% data.user_business.business_address %><span ng-if="data.user_business.business_address.length>0">,</span>
+                                                    <% data.user_business.business_suburb | limitTo : 15 %>,
+                                                    <% data.user_business.state | limitTo : 5 %>
+                                                </span>
+                                                <span class="location" ng-if="tabs.content == 'FIND JOBSEEKER' && tabs.id == 'job' && self.showbar == 2">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    <% data.user_info.suburb | limitTo : 15 %><span ng-if="data.user_info.suburb.length>0">,</span>
+                                                    <% data.user_info.state | limitTo : 5 %>
+                                                </span>
+                                            </b>
+                                            </p>
+                                            <p>
+                                                <span class="review_rating rr" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses' || tabs.id == 'job'"
+                                                      ng-init="rate = data.rating" style="font-size: 6px;margin: 0;padding: 0;">
+                                                    <uib-rating ng-model="rate" max="5" readonly="true" titles="['one','two','three','four','five']"
+                                                                aria-labelledby="default-rating" class="rating"></uib-rating>
+                                                </span>
+                                                <span class="review_rating rr" ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor' && tabs.id != 'findcourses' && tabs.id != 'job'"
+                                                      ng-init="rate = data.user.rating" style="font-size: 6px;margin: 0;padding: 0;">
+                                                    <uib-rating ng-model="rate" max="5" readonly="true" titles="['one','two','three','four','five']"
+                                                                aria-labelledby="default-rating" class="rating"></uib-rating>
+                                                </span>
+                                                <span style="font-size: 12px;" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses'">
+                                                    Reviews (
+                                                    <% data.review_to.length %>)
+                                                </span>
+                                                <span style="font-size: 12px;" ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor' && tabs.id != 'findcourses' && tabs.content != 'FIND JOBSEEKER'">
+                                                    Reviews (
+                                                    <% data.user.review_to.length %>)
+                                                </span>
+                                                <span style="font-size: 12px;" ng-if="tabs.id == 'job' && tabs.content == 'FIND JOBSEEKER'">
+                                                    Reviews (
+                                                    <% data.review_to.length %>)
+                                                </span>
+                                            </p>
+                                            <div class="sp-text-desc" >
+                                                <span ng-bind-html="data.user_business.about | limitTo:230" class="cardInfo overflow-hidden" ng-if="tabs.id == 'serviceprovider' || tabs.id == 'distributor' || tabs.id == 'findcourses'" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">
+                                                </span>
+                                                <span class="cardInfo overflow-hidden" ng-if="tabs.content == 'FIND JOBSEEKER' && tabs.id == 'job'" href="<%self.host %>/profile?id=<%self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>" ng-bind-html="data.resuma.coverletter">
+                                                </span>
+                                                <span ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor' && tabs.id != 'findcourses' && tabs.content != 'FIND JOBSEEKER'" ng-bind-html="self.htmlToPlaintext(data.description) | limitTo:230"></span>
+                                                <a ng-if="data.user_business.about.length > 230" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">Read More</a>
+                                                <a ng-if="data.resuma.coverletter.length > 230" href="<%self.host %>/profile?id=<% self.base64Convertion(data.id) %>&type=ServiceProvider<%self.queryString%>">Read More</a>
+                                                <a ng-if="data.description.length > 230" href="<%self.host+'/'+tabs.url %>?id=<% self.base64Convertion(data.id)  %> <%self.queryString%>">Read More</a>
+                                                <!--<a ng-if="data.user_business.about.length < 50 || data.resuma.coverletter.length < 50 || data.description.length < 50" style="margin-top: 21px;"></a>-->
+                                            </div>
+
+
+                                        </div>
+                                        <div class="btn-block" >
+                                            <a ng-class="!data.user_business.about.length ? 'mt-60' : ''" ng-if="tabs.id == 'serviceprovider'" href="<%self.host %>/booking/<% self.base64Convertion(data.id) %>" class="btn btn-xs bg-black">
+                                                Make Appointment
+                                            </a>
+                                            <a  ng-class="!data.user_business.about.length ? 'mt-60' : ''" ng-if="tabs.id == 'distributor'" href="<%self.host %>/profile?id=<%self.base64Convertion(data.id) %>" class="btn btn-xs bg-black">View Details</a>
+
+                                            <a ng-class="!data.description ? 'mt-60' : ''"  ng-if="tabs.id != 'serviceprovider' && tabs.id != 'distributor' && tabs.id != 'findcourses' && tabs.id != 'job' && tabs.id != 'businessforsale'" href="<%self.host %>/booking/<% self.base64Convertion(data.user.id) %>" class="btn btn-xs bg-black">Make Appointment</a>
+
+                                            <a ng-class="!data.user_business.about ? 'mt-60' : ''" ng-if="tabs.id == 'job' && tabs.content != 'FIND JOBSEEKER'" href="<%self.host %>/jobs?id=<% self.base64Convertion(data.id)%>" class="btn btn-xs bg-black">Apply Job</a>
+
+                                            <a  ng-class="!data.resuma.coverletter ? 'mt-60' : ''" ng-if="(tabs.id == 'job' && tabs.content == 'FIND JOBSEEKER') || tabs.id == 'findcourses'" href="<%self.host %>/profile?id=<%self.base64Convertion(data.id) %>" class="btn btn-xs bg-black">View Details</a>
+
+                                            <a  ng-class="!data.description ? 'mt-60' : ''"ng-if="tabs.id == 'businessforsale'" href="<%self.host+'/'+tabs.url %>?id=<% self.base64Convertion(data.id)  %> <%self.queryString%>" class="btn btn-xs bg-black">View Details</a>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="not-found" ng-show="self.selectedTabs[0].data.length == 0">
+                            <p>No Results Found.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--bg_gray-->
+

@@ -1,0 +1,38 @@
+<div id="listing" class="tab-pane pt-15 mb-20 account_list payments">
+	 <div class="table-responsive">   
+	  <table class="table" ng-if = "_self.userModel.paymentInfo.length && !_self.is_plan_expire">
+		<tbody>
+	
+		  <tr>
+			<td><% _self.userModel.paymentInfo[_self.userModel.paymentInfo.length-1].packages.package_name %></td>
+			<td>:</td>
+			<td class="text_detail"><% _self.userModel.paymentInfo[_self.userModel.paymentInfo.length-1].packages.price %>$</td>
+		  </tr>
+		  <tr>
+			<td>Payment method</td>
+			<td>:</td>
+			<td class="text_detail"><% _self.userModel.paymentInfo[_self.userModel.paymentInfo.length-1].payment_method %></td>
+		  </tr>
+		  <tr>
+			<td>Next Payment Date</td>
+			<td>:</td>
+			<td class="text_detail"><% _self.userModel.paymentInfo[_self.userModel.paymentInfo.length-1].next_payment_date 			%></td>
+		  </tr>
+		</tbody>
+	  </table>
+	  <table class="table" ng-if = "! _self.userModel.paymentInfo.length || _self.is_plan_expire">
+		<tbody>
+		  <tr>
+			<td colspan="3">
+			
+			<form action="/dopayments" method="post">
+			  <input type="hidden" name="packageId" value="1">
+			  <button type="submit">Pay Now</button>
+			</form>
+			</td>
+		  </tr>
+		</tbody>
+	  </table>
+	</div>
+	
+</div>

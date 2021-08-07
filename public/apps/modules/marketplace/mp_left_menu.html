@@ -1,0 +1,51 @@
+<div class="col-md-2 col-xs-12">
+        <div class="vertical_tabs pl-15f pt-5f">
+            <div class="text-center p-15 mt-10 mr-15 mb-15 borderAll">
+                <a class="text-teal" >
+                    <h3 class="m-0" ng-bind-html="listingCtrl.total">               
+                    </h3>
+                    <p class="mt-10 mb-0">Total</p>
+                </a>
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a class="text-teal"  >
+                    <h3 class="m-0" ng-bind-html="listingCtrl.active">                        
+                    </h3>
+                    <p class="mt-10 mb-0">Active</p>
+                </a>
+
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a class="text-teal">
+                    <h3 class="m-0" ng-bind-html="listingCtrl.expired">                        
+                    </h3>
+                    <p class="mt-10 mb-0">Expired</p>
+                </a>
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a class="text-teal">
+                    <h3 class="m-0" ng-bind-html="listingCtrl.sold">
+                        
+                    </h3>
+                    <p class="mt-10 mb-0">Sold</p>
+                </a>
+            </div>
+            <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <a class="text-teal">
+                    <h3 class="m-0" ng-bind-html="listingCtrl.deactive - listingCtrl.sold >= 0 ? listingCtrl.deactive - listingCtrl.sold: 0">
+                        
+                    </h3>
+                    <p class="mt-10 mb-0">Deactive</p>
+                </a>
+            </div>
+            <!-- <div class="text-center p-15 mr-15 mb-15 borderAll">
+                <button ng-disabled="listingCtrl.activeFindStaff==0" ng-click="listingCtrl.openNewPage('/search?q=&label=job&searchFor=job&location_address=')"
+                    class="text-teal" style="background-color: transparent;">
+                    <h4 class="m-0">
+                        Find Staff
+                    </h4>
+
+                </button>
+            </div> -->
+        </div>
+    </div>

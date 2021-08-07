@@ -1,0 +1,81 @@
+<div ng-if="_self.callForm == 1" class="mb-10 p-15 skipWizard">
+    <button  class="btn no-radius bg-teal text-white" ng-click="_self.finishWizard(_self.callForm)">Skip Wizard</button>
+</div>
+<div id="listing" class="tab-pane account_list faq_list ng-scope">
+  <div class="">
+    <div class="faq_form">
+      <div class="panel-heading px-0">
+        <h4 class="mt-10">Create A Brand</h4>
+      </div>
+      <form method="post" class="form-horizontal form-beautyCollective col-md-12" name="servicesform">
+        <div class="form-group" ng-class="{ 'has-error' : servicesform.title.$invalid && !servicesform.title.$pristine }">           
+            <input ng-model="_self.brand.title" name="title" id="title" type="text" placeholder="Enter the title" class="form-control" autocomplete="off" required>
+          <p ng-show="servicesform.title.$invalid && !servicesform.title.$pristine" class="help-block">Title is
+            required.</p>
+        </div>
+        <div class="form-group">           
+          <button ng-if="_self.callForm==0" class="btn bg-teal text-white no-radius" type="button" ng-click="_self.create_businessbrand()" ng-disabled="servicesform.$invalid">Create</button>
+          <button ng-if="_self.callForm==1" class="btn bg-teal text-white no-radius" type="button" ng-click="_self.create_businessbrand_Modal()" ng-disabled="servicesform.$invalid">Create</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div id="faq_listt" class="listing_items tableOverflow">
+      <table class="table table-striped table-bordered table-hover my-0">
+        <thead>
+          <tr>
+<!--            <th class="w60 text-center">Sr No.</th>-->
+            <th>Brands</th>
+            <th ng-if="_self.callForm==0" class="w120 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="busservice in _self.BussBrand.data| startFrom:_self.currentPage * _self.pageSize | limitTo:_self.pageSize track by $index">
+<!--            <td class="w60 text-center">
+              <% $index +_self.currentPage*_self.pageSize +1 %>
+            </td>-->
+            <td>
+              <% busservice.title %>
+            </td>
+            <td ng-if="_self.callForm==0" class="w120 text-center">
+              <div class="action-cell clearfix">
+                <div class="">                                                           
+                  <a ng-href="#" ng-if="_self.callForm==0" ui-sref="business_info.update2({brand_id:base64_encode(busservice.id)})" data-toggle="tooltip" title="Edit" class="mr-10"><i class="fa fa-pencil-square-o text-warning"></i></a>
+                  <a ng-href="#"  prevent-default ng-click="_self.delete_options($event, busservice.id)" title="Delete" class="mr-10"><i class="fa fa-trash text-danger"></i></a>                  
+                </div>
+                <div class="delte_selection mt-10" id="delete_options_<%busservice.id%>">       
+                  <p>Sure to delete?<p>
+                  <button class="ok btn btn-xs btn-default" ng-href="#" prevent-default ng-click="_self.busbranddelete($event, busservice.id)">Yes</button>
+                  <button class="cancel btn btn-default btn-xs" ng-href="#" prevent-default ng-click="_self.delete_options_cancel($event, busservice.id)">Cancel</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div class="reviews_pagination px-15" ng-if=" _self.BussBrand.data.length">
+                        <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage = _self.currentPage - 1" class="btn bg-teal text-white no-radius">
+                          Previous
+                        </button>
+                        <%_self.currentPage+1%>/                        
+                        <%_self.calculateNumberofpages(_self.BussBrand.data.length)%>
+                        <button ng-disabled="_self.currentPage >= _self.BussBrand.data.length / _self.pageSize - 1" ng-click="_self.currentPage = _self.currentPage + 1"
+                          class="btn bg-teal text-white no-radius">
+                          Next
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div ng-if="_self.callForm==1" class="px-15 mb-15 text-right">   
+    <hr>       
+    <button ng-if="_self.roles=='schoolcollege'"  class="btn no-radius bg-teal text-white mt-10" ng-click="_self.skipAndNext(_self.callForm)">Skip and Next</button>
+    <button ng-if="_self.roles=='schoolcollege'" type="submit" class="btn bg-teal text-white mt-10 no-radius" ng-click="_self.updateUserSocialAccounts(this,_self.callForm)">Save and next</button>
+    <button ng-if="_self.roles!='schoolcollege'" class="btn bg-teal text-white no-radius" ng-disabled="_self.BussBrand.data.length==0" ng-click="_self.saveandFinish()">Save</button>        
+</div>

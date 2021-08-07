@@ -1,0 +1,94 @@
+<div class="col-sm-12 alert alert-info" id="upgrade_subscript" style="display:none;"></div>
+<h4 class="panel-heading px-0">Upload Video Gallery </h4>
+
+<form method="post" class="form-beautyCollective tab-pane" name="gallery">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" ng-class="{ 'has-error' : _self.gallery.category.$invalid &&  !_self.gallery.category.$pristine }">
+        <select class="form-control" ng-model="_self.gallery.category" required>
+          <option value="">Select Category</option>
+          <option ng-repeat="categorys in _self.GetClassCats" value="<%categorys.id%>">
+            <%categorys.name%>
+          </option>
+        </select>
+        <p ng-show="_self.gallery.category.$invalid && !_self.gallery.category.$pristine" class="help-block">Category title is required.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" ng-class="{ 'has-error' : _self.gallery.videotitle.$invalid && !_self.gallery.videotitle.$pristine }">
+        <input ng-model="_self.gallery.videotitle" class="form-control" type="text" value="" placeholder="Enter video title"
+          ng-keypress="limitKeypress($event,_self.gallery.videotitle,5)" required />
+        <p ng-show="_self.gallery.videotitle.$invalid && !_self.gallery.videotitle.$pristine" class="help-block">video title is required.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="form-group col-md-12">
+      <div class="" ng-class="{ 'has-error' : _self.gallery.videolink.$invalid && !_self.gallery.videolink.$pristine }">
+        <input ng-model="_self.gallery.videolink" class="form-control" type="text" value="" placeholder="Enter youtube video link "
+          required />
+        <p ng-show="_self.gallery.videolink.$invalid && !_self.gallery.videolink.$pristine" class="help-block">video title is required.</p>
+      </div>
+    </div>
+
+    <div class="col-md-2 form-group">
+      <div class="">
+        <button class="btn bg-teal text-white no-radius" type="button" ng-click="_self.CreatMyVideoGallery();" ng-disabled="gallery.$invalid">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<!----------------------------start of video gallery ----------------------------------->
+<div class="clear"></div>
+<div class="tableOverflow">
+  <table  class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+<!--        <th class="w60 text-center">Sr No.</th>-->
+        <th>Video</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="video in _self.MyVideos.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index">
+
+<!--        <td>
+          <% $index +_self.currentPage*_self.pageSize +1 %>
+        </td>-->
+        <td class="parent-container-icon">
+          <a href="https://www.youtube.com/watch?v=<%video.video_id%>" class="f-icon video" ng-click="_self.playOtherVideo()">
+            <img src="https://img.youtube.com/vi/<%video.video_id%>/default.jpg" width="100" height="100">
+          </a>
+        </td>
+        <td>
+          <%video.video_title%>
+        </td>
+        <td>
+          <%video.video_cat%>
+        </td>
+        <td class="text-center">
+          <!------------------------------------------------->
+          <span class="">
+            <a ng-href="#" prevent-default ng-click="_self.DeleteMyvideogallery($event, video.video_id,video.cat_id)" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
+          </span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="clear"></div>
+<!----------------------------End of gallery ----------------------------------->
+<div class="reviews_pagination" ng-if=" _self.MyVideos.data.length">
+  <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn bg-teal text-white no-radius">Previous</button>
+  <%_self.currentPage+1%>/
+  <%_self.numberOfPages()%>
+  <button ng-disabled="_self.currentPage >= _self.MyVideos.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1" class="btn bg-teal text-white no-radius">Next</button>
+</div>
+
+<div class="clear"></div>

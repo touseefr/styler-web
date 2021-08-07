@@ -1,0 +1,51 @@
+<div id="listing" class="tab-pane">
+    <div class="col-md-12">
+
+          <table ng-if="_self.JobListing.length > 0" class="table borderAll table-vertically-center table-responsive bordered table-striped datatable"
+               ui-jq="dataTable" ui-options="dataTableOpt">
+            <thead>
+                <tr style="display:none;">
+                    <th>Type</th>
+                    <th>Gallery</th>
+                    <th>Gallery</th>
+                    <th>Salary</th>                
+                </tr>
+            </thead> 
+            <tbody ng-if="_self.JobListing.length > 0">
+                <tr class="fadeInUp animated" ng-repeat="job in _self.JobListing">
+                    <td>
+                        <div class="pull-left mr-10">                
+                            <img  ng-src="<%job.user.profilepic.path+job.user.profilepic.name || 'images/no-image.png'%>" fallback-src="images/no-image.png" class="img-responsive square60 img-circle border center-block" title="<%job.title%>" />
+                        </div>
+                        <div class="pull-left">
+                            <div class="clearfix">
+                                <h5 class="mt-0  pull-left mb-5" >
+                                    <a style="cursor: pointer;" class="jobing-title1 text-capitalize text-teal d-inlineB" href='/jobs?id=<% base64_encode(job.id) %>' >
+                                        <%job.title%>
+                                    </a>
+                                </h5>                                
+                            </div>
+                            <span class="d-inlineB  mb-5" style="text-transform: capitalize;"><strong>By: </strong><% job.user.user_business.business_name%></span>                                                     
+                            <br>
+                             <span class="d-inlineB  mb-5" style="text-transform: capitalize;"><% job.suburb %></span>-                           
+                            <span class="d-inlineB  mb-5" style="text-transform: capitalize;"><% job.state %></span>  -                          
+                            <span class="d-inlineB  mb-5" style="text-transform: capitalize;"><% job.postcode %></span>                         
+                        </div>                        
+                    </td>
+                    <td class="middle-align">
+                        <p class="m-0"><span class="d-inlineB  mb-5" ><strong>Email: </strong><% job.user.email%></span></p>
+                        <p class="m-0"><strong>Exp Date: </strong><span class="d-inlineB  mb-5" style="text-transform: capitalize;" ng-bind="_self.formatDate(job.expiry) |  date:'dd MMM yyyy'"  ></span></p>
+                    </td>
+                    <td class="middle-align">
+                            <h5><strong>Salary:</strong> <i class="fa fa-dollar"></i> <span class="d-inlineB  mb-5" style="text-transform: capitalize;"><% job.expected_salary%></span></h5>
+                    </td>
+                    <td class="text-right w100 middle-align">
+                        <button class="btn  btn-sm" type="button" ng-disabled="true" >Applied</button>                        
+                    </td>
+                </tr>
+            </tbody>
+            <div class="row"  ng-if="!_self.JobListing.length" ng-if="item.type == 'job'">
+                <div class="col-md-8 col-xs-7 job_content" >No Record Found.</div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="modal-body" ng-swipe-left="Lightbox.nextImage()" ng-swipe-right="Lightbox.prevImage()" data-ng-controller="ImageLightBoxController">
+  <div class="lightbox-nav">
+    <button class="close" aria-hidden="true" ng-click="$dismiss()">×</button>
+    <div class="btn-group">
+      <a ng-href="#" ng-click="openAttachment($event, Lightbox.image.url)"
+          class="btn btn-xs btn-default" title="Open in new tab" data-ng-if="Lightbox.imageUrl"><i class="fa fa-download"></i>
+        Open image in new tab
+      </a>
+    </div>
+  </div>
+
+	<div style="text-align: center;">
+		<img lightbox-src="{{Lightbox.imageUrl}}" alt="" />
+		<p data-ng-if="!Lightbox.imageUrl">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i> Loading ....
+      </p>
+	</div>
+</div>

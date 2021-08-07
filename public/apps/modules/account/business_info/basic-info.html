@@ -1,0 +1,427 @@
+<div ng-if="_self.callForm == 1" class="mb-10 p-15 skipWizard">
+    <button class="btn no-radius bg-teal text-white" ng-click="_self.finishWizard(_self.callForm)">Skip Wizard</button>
+</div>
+<div id="listing" class="tab-pane account_list pt-25 popupForm">
+    <form class="form-horizontal" role="form" name="businessinfoform">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : businessinfoform.name.$invalid && !businessinfoform.name.$pristine }">
+                    <label class="control-label col-sm-4" for="businessname">
+                        <span
+                            ng-if=" _acountCtrl.userRole == 'JobSeeker' || _acountCtrl.userRole == 'Individual' || _self.roles == 'individual' || _self.roles == 'jobseeker'">Customer
+                            Name <span style="color:red">*</span> :</span>
+                        <span
+                            ng-if=" _acountCtrl.userRole != 'JobSeeker' && _acountCtrl.userRole != 'Individual' && _self.roles != 'individual' && _self.roles != 'jobseeker'">Business
+                            Name <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input autocomplete="off" type="text" class="form-control" id="name" name="name"
+                            placeholder="Business name" ng-model="_self.userBusinessModel.name" required />
+                        <p ng-show="businessinfoform.name.$invalid && !businessinfoform.name.$pristine"
+                            class="help-block">Business name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group row"
+                    ng-if="_acountCtrl.userRole != 'Individual' && _acountCtrl.userRole != 'JobSeeker' && _self.roles != 'individual' && _self.roles != 'jobseeker'">
+                    <label class="control-label col-sm-4" for="business_address"><span>Address</span></label>
+                    <div class="col-sm-8">
+                        <input autocomplete="off" type="text" class="form-control" id="address" name="address"
+                            placeholder="Address" ng-model="_self.userBusinessModel.address" />
+
+                    </div>
+                </div>
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : businessinfoform.contactnumber.$invalid && !businessinfoform.contactnumber.$pristine }">
+                    <label class="control-label col-sm-4" for="contactnumber">
+                        <span>Contact Number <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input autocomplete="off" type="text" class="form-control" id="contactnumber"
+                            name="contactnumber" ng-model="_self.userBusinessModel.contactnumber"
+                            placeholder="Contact Number" required />
+                        <p ng-show="businessinfoform.contactnumber.$invalid && !businessinfoform.contactnumber.$pristine"
+                            class="help-block">Contact is required.</p>
+                    </div>
+                </div>
+                <div class="form-group row"
+                    ng-if="_acountCtrl.userRole != 'Individual' && _acountCtrl.userRole != 'JobSeeker' && _self.roles != 'individual' && _self.roles != 'jobseeker'">
+                    <label class="control-label col-sm-4"><span>Business Entity <span
+                                class="text-red">*</span></span></label>
+                    <div class="col-sm-8 select-postcode">
+                        <select class="businessType-select form-control"
+                            ng-model="_self.userBusinessModel.businessType">
+                            <option value="Business">Business</option>
+                            <option value="Freelancer">Freelancer</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : businessinfoform.website.$invalid && !businessinfoform.website.$pristine }">
+                    <label class="control-label col-sm-4" for="website"><span>Website</span></label>
+                    <div class="col-sm-8">
+                        <input autocomplete="off" type="text" class="form-control"
+                            ng-pattern="/^(?:(?:http|https):\/\/)?([-a-zA-Z0-9.]{2,256}\.[a-z]{2,4})\b(?:\/[-a-zA-Z0-9@:%_\+.~#?&=]*)?/"
+                            id="website" name="website" placeholder="Website"
+                            ng-model="_self.userBusinessModel.website" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="suburb"><span>Suburb <span
+                                class="text-red">*</span></span>
+                    </label>
+
+                    <div class="col-sm-8 select-postcode">
+                        <ui-select spinner-enabled="true" ng-model="_self.userBusinessModel.locations"
+                            ng-disabled="disabled" reset-search-input="true" title="Addess? (suburb, postcode, or city)"
+                            append-to-body="false">
+                            <ui-select-match class="select-dropdown">
+                                <% $select.selected.location %> -
+                                <% $select.selected.state %>,
+                                <% $select.selected.postcode %>
+                            </ui-select-match>
+
+                            <ui-select-choices ui-disable-choice="address.no_found"
+                                repeat="address in _self.suburbList track by $index"
+                                refresh="_self.getLocation($select.search)" refresh-delay="0">
+                                <span ng-if="_self.showspinner ==0 && !address.no_found"
+                                    ng-bind-html="address.location | highlight: $select.search"></span> <span
+                                    ng-if="!address.no_found">-</span> <span ng-if="!address.no_found"
+                                    ng-bind-html="address.state | highlight: $select.search"></span><span
+                                    ng-if="!address.no_found">,</span> <span ng-if="!address.no_found"
+                                    ng-bind-html="address.postcode | highlight: $select.search"></span>
+                                <span ng-if="_self.showspinner ==0 && address.no_found">Records not found.</span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <div ng-show="_self.showspinner ==1" class="inner-pg-serach-loader"><i
+                                class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : businessinfoform.email.$invalid && !businessinfoform.email.$pristine }">
+                    <label class="control-label col-sm-4" for="business_email"><span>E-mail <span
+                                class="text-red">*</span></span></label>
+                    <div class="col-sm-8">
+                        <div class="form-control" ng-bind-html="_self.userBusinessModel.email"></div>
+                        <!--                        <input autocomplete="off" type="email" class="form-control" name="email" ng-disabled='true' id="email" placeholder="E-mail" ng-model="_self.userBusinessModel.email"
+                               required />-->
+                        <p ng-show="businessinfoform.email.$invalid && !businessinfoform.email.$pristine"
+                            class="help-block">Email is required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-6">
+
+                <div class="form-group row"
+                    ng-if="_acountCtrl.userRole == 'Distributor' || _acountCtrl.userRole == 'ServiceProvider' || _self.roles == 'serviceprovider' || _self.roles == 'distributor' ">
+                    <label class="control-label col-sm-4" for="pwd"
+                        ng-if="_acountCtrl.userRole == 'SchoolCollege' || _self.roles == 'schoolcollege'"><span>Courses
+                            <span class="text-red">*</span></span>
+                    </label>
+                    <!--<label class="control-label col-sm-4" for="pwd"><span>Categories</span>-->
+                    <label class="control-label col-sm-4" for="pwd"><span>Services</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <ui-select multiple='true' ng-model="_self.userBusinessModel.categories"
+                            ng-model-options="_self.modelOptions" ng-disabled="disabled" reset-search-input="true"
+                            title="Services" append-to-body="true" style="width:100%">
+                            <ui-select-match placeholder="Services">
+                                <%$item.name%>
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="category in _self.categoriesList| filter: $select.search track by $index"
+                                refresh="_self.getCategories($select.search)" refresh-delay="0">
+                                <span ng-bind-html="category.name | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <div ng-show="_self.showCatSpinner ==1" class="inner-pg-serach-loader"><i
+                                class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+                <div ng-if="_acountCtrl.userRole == 'SchoolCollege' || _self.roles == 'schoolcollege'"
+                    class="form-group row">
+                    <label for="" class="col-sm-4 text-right">&nbsp;</label>
+                    <div class="col-sm-8">
+                        <label class="pl-0 font-normal">
+                            <input type="checkbox" id="work_with_overseas_students" name="work_with_overseas_students"
+                                ng-model="_self.userBusinessModel.work_with_overseas_students" ng-true-value="1"
+                                ng-false-value="0"> Working with overseas students
+                        </label>
+                        <label class="pl-0 font-normal">
+                            <input type="checkbox" id="government_assistance" name="government_assistance"
+                                ng-model="_self.userBusinessModel.government_assistance" ng-true-value="1"
+                                ng-false-value="0"> Government assistance
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="logo">
+                        <span
+                            ng-if=" _acountCtrl.userRole == 'JobSeeker' || _acountCtrl.userRole == 'Individual' || _self.roles == 'individual' || _self.roles == 'jobseeker'">Customer
+                            Logo</span>
+                        <span
+                            ng-if=" _acountCtrl.userRole != 'JobSeeker' && _acountCtrl.userRole != 'Individual' && _self.roles != 'individual' && _self.roles != 'jobseeker'">Business
+                            Logo</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <!-- <div class="uploadAvatar">
+                            <img ng-if="_self.userBusinessModel.logo" ng-src="<% _self.userBusinessModel.logo %>" alt="" class="img-circle img-responsive img-center"/>
+                            <div flow-init="_self.flowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="_self.fileUploadSuccess($file,$message)" class="uploadImage">
+                                <div ng-if="_self.userBusinessModel.logo">
+                                    <span class="x_one">
+                                        <a style="background:transparent;" ng-href="#" prevent-default ng-click="_self.removeLogo($event, _self.userBusinessModel.id)">&times;</a>
+                                    </span>
+                                </div>        
+                                <div class="drop" flow-drop ng-class="dropClass">
+                                    <span class="change_pic">
+                                        <button flow-btn flow-attrs="{accept:'image/*'}">Upload</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="upload_pics">
+                            <div flow-init="_self.flowConfigProfile()"
+                                flow-files-submitted="_self.uploadProfilefiles($flow)"
+                                flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                                flow-file-success="_self.fileProfileUploadSuccess($file,$message,$flow)"
+                                flow-file-error="_self.UserProfilefileUploadError($file,$message)">
+                                <!--              <div class="drop pull-right" flow-drop ng-class="dropClass"><span class="btn btn-default" flow-btn flow-attrs="{accept:'image/*'}">Upload Image</span><small>Upload upto 6 images</small></div>
+                                                  <div class="upload-heading mb-10">Upload upto 10 images <span class="req-msg-listing">(Atleast one image required.)</span></div>-->
+                                <div class="row after_upload">
+                                    <div class="uploadImageSize col-md-12" ng-if=" _self.userBusinessModel.logo != '' "">
+                                            <div ng-if=" $flow.files.length==0" ng-repeat="image in  _self.assets">
+                                        <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img ng-src="<%image.path%><%image.name%>" src=""
+                                                class="img-responsive img-rounded">
+
+                                        </div>
+                                        <span class="x_one x-position">
+                                            <a style="background:transparent;" ng-href="#" prevent-default
+                                                ng-click="_self.removeLogo($event,$flow, _self.userBusinessModel.id)">&times;</a>
+                                        </span>
+                                    </div>
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files"
+                                        style="flex-direction: column;">
+                                        <div ng-if="$flow.files.length > 0" class="fileupload upldbrd" flow-btn=""
+                                            flow-attrs="{accept:'image/*'}">
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+                                        <span class="x_one x-position">
+                                            <a style="background:transparent;" ng-href="#" prevent-default
+                                                ng-click="_self.removeLogo($event,$flow, _self.userBusinessModel.id)">&times;</a>
+                                        </span>
+                                        <div ng-if="file.isUploading()" class="progress progress-striped"
+                                            ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                aria-valuenow="<%file.progress() * 100%>" aria-valuemin="0"
+                                                aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                                <span class="sr-only"><%file.progress()%>% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-ng-repeat=" j in [1]">
+                                        <div class="uploadImageSize"
+                                            ng-if="j > _self.assets.length + $flow.files.length">
+                                            <div class="ng-scope" flow-btn flow-attrs="{accept:'image/*'}">
+                                                <div class="fileupload upldbrd">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" ng-if="_self.userBusinessModel.logo == ''">
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files"
+                                        style="flex-direction: column;">
+                                        <div class="fileupload upldbrd" ng-show="$flow.files.length" flow-btn=""
+                                            flow-attrs="{accept:'image/*'}">
+                                            <!--<span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+                                        <span class="x_one x-position">
+                                            <a style="background:transparent;" ng-href="#" prevent-default
+                                                ng-click="_self.removeLogo($event,$flow, _self.userBusinessModel.id)">&times;</a>
+                                        </span>
+                                        <div ng-if="file.isUploading()" class="progress progress-striped"
+                                            ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div ng-if="file.isUploading()" ng-show="obj.showprogressbar == 1"
+                                                class="progress progress-striped"
+                                                ng-class="{active: file.isUploading()}">
+                                                <div class="progress-bar" role="progressbar"
+                                                    aria-valuenow="<%file.progress() * 100%>" aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                    ng-style="{width: my = (file.progress() * 100) + '%'}">
+                                                    <span class="sr-only">
+                                                        <%file.progress()%>% Complete</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="uploadImageSize" data-ng-repeat="i in [1]">
+                                        <div ng-if="i > $flow.files.length">
+                                            <div class="ng-scope">
+                                                <div class="fileupload upldbrd" flow-btn=""
+                                                    flow-attrs="{accept:'image/*'}">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <input type="hidden" data-ng-model="_self.assets" />
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-md-12" style="min-height: 99px;">
+            <div class="form-group row"
+                ng-class="{ 'has-error' : businessinfoform.about.$invalid && !businessinfoform.about.$pristine }">
+                <label class="control-label col-sm-2" for="address">
+                    <span
+                        ng-if="_acountCtrl.userRole != 'Individual' && _acountCtrl.userRole != 'JobSeeker' && _self.roles != 'individual' && _self.roles != 'jobseeker'">Business
+                        Info <span class="text-red">*</span></span>
+                    <span
+                        ng-if="_acountCtrl.userRole == 'Individual' || _acountCtrl.userRole == 'JobSeeker' || _self.roles == 'individual' || _self.roles == 'jobseeker'">Customer
+                        Info <span class="text-red">*</span></span>
+                </label>
+                <div class="col-sm-10 col-md-10">
+                    <trix-editor ng-if="true" angular-trix ng-model='_self.userBusinessModel.about'
+                        class="trix-content"></trix-editor>
+                    <p ng-show="businessinfoform.about.$invalid && !businessinfoform.about.$pristine"
+                        class="help-block">About is
+                        required.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <!-- <div ng-bind-html="_self.hidecross"></div>
+                        <div ng-bind-html="_self.hidetick"></div>
+                        <div ng-bind-html="_self.validabncheck"></div> -->
+        <div class="abnWrapper">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : (businessinfoform.abn.$invalid && !businessinfoform.abn.$pristine) || _self.showerror == 1 }"
+                    ng-if="_acountCtrl.userRole != 'Individual' && _acountCtrl.userRole != 'JobSeeker'">
+                    <label class="control-label col-sm-4" for="address">
+                        <span>ABN <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-7 col-xs-11">
+                        <input autocomplete="off" type="text" class="form-control" placeholder="Please enter ABN"
+                            ng-focus="_self.inputfocus()" ng-keyup="_self.checkkeyup()"
+                            ng-model="_self.userBusinessModel.abn" required />
+                        <p ng-show="businessinfoform.abn.$invalid && !businessinfoform.abn.$pristine"
+                            class="help-block">ABN is required.</p>
+                        <p ng-show="_self.showerror == 1" class="help-block alert-error"
+                            style="padding-left: 15px;padding-top: 5px;padding-bottom: 5px;"> <%_self.errorMsg%></p>
+                        <p style="margin: 0;"><a href="https://abr.business.gov.au/" target="_blank"><small
+                                    class="d-inlineB mt-5"
+                                    style="color:#4abdac;font-weight:bold;    text-decoration: underline;">ABN Business
+                                    Lookup </small></a></p>
+                        <small class="d-inlineB mt-5" style="color:#4abdac;font-weight:bold;">Please verify ABN before
+                            processed</small>
+                    </div>
+
+                    <div class="col-sm-1 col-xs-1 pl-0">
+                        <div ng-show="_self.checkABNNumberVerification() && _self.hidetick == 0" class="mt-5"><span><i
+                                    class="fa fa-check font-double text-success"></i></span></div>
+                        <div ng-show="!_self.checkABNNumberVerification() && _self.hidecross == 0" class="mt-5"><span><i
+                                    class="fa fa-times-circle font-double text-color-red"></i></span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div ng-bind-html="_self.hidecross"></div>
+                        <div ng-bind-html="_self.hidetick"></div>
+                        <div ng-bind-html="_self.validabncheck"></div> -->
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group row"
+                    ng-class="{ 'has-error' : (businessinfoform.abn_name.$invalid && !businessinfoform.abn_name.$pristine) || _self.showerror == 1 }"
+                    ng-if="_acountCtrl.userRole != 'Individual' && _acountCtrl.userRole != 'JobSeeker' && _self.roles != 'individual' && _self.roles != 'jobseeker'">
+                    <label class="control-label col-sm-3" for="address">
+                        <span>ABN Name <span class="text-red">*</span></span>
+                    </label>
+                    <div class="col-sm-5 col-xs-11 mb-10">
+                        <input autocomplete="off" type="text" class="form-control" name="abn_name" id="abn_name"
+                            placeholder="Please enter ABN  name" ng-model="_self.userBusinessModel.abn_name"
+                            ng-focus="_self.inputfocus()" ng-keyup="_self.checkkeyup()" required />
+                        <p ng-show="businessinfoform.abn_name.$invalid && !businessinfoform.abn_name.$pristine"
+                            class="help-block">ABN name is required.</p>
+                    </div>
+                    <div class="col-sm-1 col-xs-1 pl-0">
+                        <div ng-show="_self.checkABNNameVerification() && _self.hidetick == 0" class="mt-5"><span><i
+                                    class="fa fa-check font-double text-success"></i></span></div>
+                        <div ng-show="!_self.checkABNNameVerification() && _self.hidecross == 0" class="mt-5"><span><i
+                                    class="fa fa-times-circle font-double text-color-red"></i></span></div>
+                    </div>
+                    <div class="col-sm-3 col-xs-11 pl-md-0"
+                        ng-show="!_self.checkABNNumberVerification() || !_self.checkABNNameVerification()">
+                        <button type="button" class="btn btn-block no-radius bg-teal text-white"
+                            ng-click="_self.validateAbn()"
+                            ng-disabled="businessinfoform.abn.$invalid || businessinfoform.abn_name.$invalid"
+                            style="font-size: 12px">
+                            <div ng-show="_self.validate_abn ==1" style="display: inline;"><i
+                                    class="fas fa-spinner fa-spin"></i></div>
+                            <%_self.abn_text%>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-md-12">
+            <div class="form-group row">
+                <div class="col-md-10 col-md-offset-2">
+                    <label class="checkbox" for="iagree">
+                        <input type="checkbox" id="iagree" name="iagree" value="0"
+                            ng-model="_self.userBusinessModel.iagree" ng-disabled="_self.userBusinessModel.iagree"
+                            ng-checked="_self.userBusinessModel.iagree" class="busi_info_iagree_ckbx mt-5" required />
+                        <b class="busi_info_iagree_txt_b ml-20">I agree that all provided details are correct</b>
+                    </label>
+                    <div ng-show="_self.userBusinessModel.iagree.$invalid && !_self.userBusinessModel.iagree.$pristine">
+                        <p class="help-block">Please select terms</p>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <div class="form-group row">
+                <div ng-if="_self.callForm == 0" class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn no-radius bg-teal text-white"
+                        ng-click="_self.updateBusinessInfo(_self.callForm)"
+                        ng-disabled="_self.formValidation(businessinfoform.$invalid)">Update</button>
+                </div>
+
+                <div ng-if="_self.callForm == 1" class="col-sm-12 text-right">
+                    <hr>
+                    <button class="btn no-radius bg-teal text-white mt-10"
+                        ng-click="_self.skipAndNext(_self.callForm)">Skip and Next</button>
+                    <button type="submit" class="btn no-radius bg-teal text-white mt-10"
+                        ng-click="_self.updateBusinessInfo(_self.callForm)"
+                        ng-disabled="_self.formValidation(businessinfoform.$invalid)">Save and Next</button>
+                </div>
+
+            </div>
+        </div>
+</div>
+</form>
+</div>

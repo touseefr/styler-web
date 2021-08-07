@@ -1,0 +1,76 @@
+<div ng-if="_self.callForm == 1" class="mb-10 p-15 skipWizard">
+    <button  class="btn no-radius bg-teal text-white" ng-click="_self.finishWizard(_self.callForm)">Skip Wizard</button>
+</div>
+<div id="listing" class="tab-pane pt-15 mb-20 account_list operating_timing">
+    <div class="tableOverflow">
+        <form class="form-horizontal" role="form">
+            <table class="table table-responsive mt-0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Opening Hours</th>
+                        <th>Closing Hours</th>
+                        <th>Open</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <style type="text/css">
+                    .operation-time{
+                        border-radius: 4px;
+                    }
+                </style>
+                <tr ng-repeat="bussinessDay in _self.bussinessDays">
+                    <td>
+                        <span style="text-transform: capitalize;"><%bussinessDay.day%></span>
+                    </td>
+                    <td style="height: 60px;">
+                        <div class="timings" ng-if="_self.bussinessHours[bussinessDay.day]['holiday']==1">                            
+                            <select class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['open']['hours']" ng-change="_self.setDateOnChange(bussinessDay.day, 'open')">
+                                <option ng-repeat="n in  ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']" value="<% n %>" ng-init="_self.businesshoursdata[bussinessDay.day]['open']['hours']=(_self.bussinessHours[bussinessDay.day].open | date: 'hh')"><% n %></option>
+                            </select >
+                            <select class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['open']['minutes']" ng-init="_self.businesshoursdata[bussinessDay.day]['open']['minutes']=_self.setMinuteOnLoad((_self.bussinessHours[bussinessDay.day].open | date: 'mm'))" ng-change="_self.setDateOnChange(bussinessDay.day, 'open')">
+                                <option ng-repeat="n1 in  ['00', '15', '30', '45']" value="<% n1 %>"><% n1 %></option>                   
+                            </select>
+                            <select class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['open']['time']" ng-init="_self.businesshoursdata[bussinessDay.day]['open']['time']=(_self.bussinessHours[bussinessDay.day].open | date: 'a')" style="padding-left: 10px;" ng-change="_self.setDateOnChange(bussinessDay.day, 'open')">
+                                <option ng-repeat="n2 in  ['AM', 'PM']" value="<% n2 %>"><% n2 %></option>                   
+                            </select>
+                        </div>
+                        <div class="timings" ng-if="_self.bussinessHours[bussinessDay.day]['holiday']!=1">
+                            <label>Closed</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="timings" ng-if="_self.bussinessHours[bussinessDay.day]['holiday']==1">
+                            <select class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['close']['hours']" ng-change="_self.setDateOnChange(bussinessDay.day, 'close')">
+                                <option ng-repeat="n in  ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']" value="<% n %>" ng-init="_self.businesshoursdata[bussinessDay.day]['close']['hours']=(_self.bussinessHours[bussinessDay.day].close | date: 'hh')"><% n %></option>
+                            </select>
+                            <select  ng-change="_self.setDateOnChange(bussinessDay.day, 'close')" class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['close']['minutes']" ng-init="_self.businesshoursdata[bussinessDay.day]['close']['minutes']=_self.setMinuteOnLoad((_self.bussinessHours[bussinessDay.day].close | date: 'mm'))">
+                                <option ng-repeat="n1 in  ['00', '15', '30', '45']" value="<% n1 %>"><% n1 %></option>                   
+                            </select>
+                            <select  ng-change="_self.setDateOnChange(bussinessDay.day, 'close')" class="businesstime-select operation-time" ng-model="_self.businesshoursdata[bussinessDay.day]['close']['time']" ng-init="_self.businesshoursdata[bussinessDay.day]['close']['time']=(_self.bussinessHours[bussinessDay.day].close | date: 'a')" style="padding-left: 10px;">
+                                <option ng-repeat="n2 in  ['AM', 'PM']" value="<% n2 %>"><% n2 %></option>                   
+                            </select>
+                        </div>                        
+                    </td>
+                    <td>                        
+                        <label class="inputLabel">                            
+                            <input type="checkbox" ng-model="_self.bussinessHours[bussinessDay.day]['holiday']" ng-change="_self.setHolidayOnChange(bussinessDay.day,_self.bussinessHours[bussinessDay.day]['holiday'])" ng-true-value="1" ng-false-value="0" name="creditcard" value="1" ng-checked="_self.bussinessHours[bussinessDay.day]['holiday']" checked="checked" />
+                            <span class="checkmark"></span>                            
+                        </label>  
+
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class=""  ng-class="{'text-right':_self.callForm == 1}" >                       
+                            <button ng-if="_self.callForm == 0" type="submit" ng-disabled="_self.valideClosingHours == 0" class="btn bg-teal text-white no-radius mt-10" ng-click="_self.updateBusinessInfo(_self.callForm)">Save operation time</button>
+                            <button ng-if="_self.callForm == 1"  class="btn no-radius bg-teal text-white mt-10" ng-click="_self.skipAndNext(_self.callForm)">Skip and Next</button>
+                            <button ng-if="_self.callForm == 1" type="submit" ng-disabled="_self.valideClosingHours == 0" class="btn bg-teal text-white no-radius mt-10" ng-click="_self.updateBusinessInfo(_self.callForm)">Save operation time</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

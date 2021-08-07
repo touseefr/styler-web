@@ -1,0 +1,169 @@
+<div id="listing" class="tab-pane account_list pt-25">
+    <form class="form-horizontal" role="form" name="accountForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row" ng-class="{ 'has-error' : accountForm.firstsname.$invalid && !accountForm.firstsname.$pristine }">
+                    <label class="control-label col-sm-4" for="firstsname"><span >Name <small class="red">*</small>:</span></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="firstsname" name="firstsname" ng-model="_self.userModel.name"
+                               placeholder="First name" required />
+                        <p ng-show="accountForm.firstsname.$invalid && !accountForm.firstsname.$pristine" class="help-block">First name is required.</p>
+                    </div>
+                </div>               
+                <div ng-if="_self.usertype=='JobSeeker'"class="form-group row" ng-class="{ 'has-error' : accountForm.jobtype.$invalid && !accountForm.jobtype.$pristine }">
+                    <label class="control-label col-sm-4" for="jobtype"><span>Job Type :</span></label>
+                    <div class="col-sm-8">
+                        <!-- <select class="form-control" id="jobtype" name="jobtype" ng-model="_self.userModel.jobtype" required>
+                            <option value="">Please select job type</option>
+                            <option value="Full Time">Full Time</option>
+                            <option value="Part Time">Part Time</option>
+                        </select> -->
+                        <!--<input type="text" class="form-control" id="gender" name = "gender" ng-model="_self.userModel.gender" placeholder="Gender" required/>-->
+                        <!-- <p ng-show="accountForm.jobtype.$invalid && !accountForm.jobtype.$pristine" class="help-block">Job Type is
+                            required.</p> -->
+                            <ui-select ng-required="true"  ng-model="_self.userModel.jobtype"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Job Type">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in _self.jobType | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    </div>
+                </div>
+                <div ng-if="_self.usertype=='JobSeeker'" class="form-group row" ng-class="{ 'has-error' : accountForm.jobposition.$invalid && !accountForm.jobposition.$pristine }">
+                    <label class="control-label col-sm-4" for="jobposition"><span>Job Position :</span></label>
+                <div class="col-sm-8">
+                    <ui-select ng-required="true"  ng-model="_self.userModel.jobposition"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Job Position">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in _self.posttitle | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="suburb"><span>Suburb :</span></label>    
+                    <div class="col-sm-8 typeahead">
+                        <ui-select ng-model="_self.userModel.suburb" ng-model-options="_self.modelOptions" ng-disabled="disabled"
+                                   reset-search-input="true" title="Addess? (suburb, postcode, or city)" append-to-body="true">
+                            <ui-select-match placeholder="Suburb or Postcode">
+                                <%$select.selected.location%>,
+                                <%$select.selected.state%>-
+                                <%$select.selected.postcode%>
+                            </ui-select-match>
+                        <ui-select-choices   ui-disable-choice="address.no_found" repeat="address in _self.suburbList track by $index" refresh="_self.getLocation($select.search)" refresh-delay="0">                                
+                                <span ng-if="_self.showspinner ==0 && !address.no_found" ng-bind-html="address.location | highlight: $select.search"></span> <span ng-if="!address.no_found">-</span> <span ng-if="!address.no_found" ng-bind-html="address.state | highlight: $select.search"></span><span ng-if="!address.no_found">,</span> <span ng-if="!address.no_found" ng-bind-html="address.postcode | highlight: $select.search"></span>
+                                <span ng-if="_self.showspinner ==0 && address.no_found">Records not found.</span>
+                            </ui-select-choices>                           
+                        </ui-select>
+                         <div ng-show="_self.showspinner ==1" class="inner-pg-serach-loader"><i class="fas fa-spinner fa-spin"></i></div> 
+                    </div>
+                </div>
+                <div ng-if="_self.usertype=='JobSeeker'" class="form-group row">
+                    <label for="expected_salary" class="control-label text-right col-sm-4 pt-5">Expected Salary :</label>
+                    <div class="col-sm-8">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="text" class="form-control width200"
+                          placeholder="Expected Salary" Name="exp_salary" maxlength="11" ng-model="_self.userModel.exp_salary" />
+                      </div>
+                    </div>
+                </div>               
+                <div  class="form-group row">
+                    <label class="control-label col-sm-4" for="contact">
+                        <span>Contact:</span>
+                    </label>
+                    <div class="col-sm-8">                      
+                        <input type="text" class="form-control" id="contact"  placeholder="Contact" name="contact"  ng-model="_self.userModel.contact" />
+                    </div>
+                </div>               
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row" ng-class="{ 'has-error' : accountForm.gender.$invalid && !accountForm.gender.$pristine }">
+                    <label class="control-label col-sm-4" for="gender"><span>Gender <small class="red">*</small>:</span></label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="gender" name="gender" ng-model="_self.userModel.gender" required>
+                            <option value="">Please select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <!--<input type="text" class="form-control" id="gender" name = "gender" ng-model="_self.userModel.gender" placeholder="Gender" required/>-->
+                        <p ng-show="accountForm.gender.$invalid && !accountForm.gender.$pristine" class="help-block">Gender is
+                            required.</p>
+                    </div>
+                </div>
+                <div ng-if="_self.usertype=='JobSeeker'" class="form-group row" ng-class="{ 'has-error' : accountForm.jobtitle.$invalid && !accountForm.jobtitle.$pristine }">
+                    <label class="control-label col-sm-4" for="jobtitle"><span>Job Title : <small class="red">*</small></span></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="jobtitle" name="jobtitle" ng-model="_self.userModel.jobtitle" placeholder="Job Title" required />
+                        <p ng-show="accountForm.jobtitle.$invalid && !accountForm.jobtitle.$pristine" class="help-block">Job Title is required.</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="email"><span>E-mail :</span></label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static"><% _self.userModel.email %></p>    
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="youtube_video">
+                        <span>Youtube Video :</span>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="youtube_video" placeholder="youtube video" ng-model="_self.userModel.youtube_video" />
+                    </div>
+                </div>
+                <div ng-if="_self.usertype=='JobSeeker'" class="form-group row">
+                    <label for="inputPassword3" class="control-label col-sm-4"><span>Category: </span></label>
+                    <div class="col-sm-8">
+                        <div class="" ng-class="{ 'has-error' : _self.userModel.jobcategory.$invalid && !_self.userModel.jobcategory.$pristine }">
+                            <div class="typeahead">
+                                </ui-select>
+                                        <ui-select multiple='true'  ng-model="_self.userModel.cat" ng-model-options="_self.modelOptions" ng-disabled="disabled" reset-search-input="true"  title="Categories" append-to-body="true" style="width:100%">
+                                            <ui-select-match placeholder="Categories">
+                                                <%$item.name%>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="category in _self.categoriesList| filter: $select.search track by $index" refresh="_self.getCategories($select.search)" refresh-delay="0">
+                                                <span ng-bind-html="category.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <div ng-show="_self.showCatSpinner ==1" class="inner-pg-serach-loader"><i class="fas fa-spinner fa-spin"></i></div>    
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group row">
+                    <div class="col-md-10 col-md-offset-2">
+                        <label class="checkbox" for="iagree">
+                            <input type="checkbox" id="iagree" name="iagree" value="0" ng-model="_self.userModel.iagree"
+                                   ng-disabled="_self.userModel.iagree" ng-checked="_self.userModel.iagree"  class="busi_info_iagree_ckbx mt-5" required />
+                            <b class="busi_info_iagree_txt_b ml-20">I agree that all provided details are correct</b>
+                        </label>
+                        <div ng-show="_self.userModel.iagree.$invalid && !_self.userModel.iagree.$pristine">
+                            <p class="help-block">Please select terms</p>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8">
+                        <button type="submit" class="btn btn-primary" ng-click="_self.saveuser()" ng-disabled="accountForm.$invalid">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

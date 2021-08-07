@@ -1,0 +1,83 @@
+<!-- /app/modules/users/create/create.html -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">{{_self.user.firstName}} {{_self.user.lastName}}</h3>
+      </div>
+      <!-- /.box-header -->
+      <form role="form" name="userForm" class="form-horizontal">
+        <div class="box-body">
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="username" class="col-md-4 control-label" translate="createuser.form.fields.username.label"></label>
+              <div class="col-md-7">
+                {{_self.user.username}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="name" class="col-md-4 control-label" translate="createuser.form.fields.firstName.label"></label>
+              <div class="col-md-7">
+              {{_self.user.firstName}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="name" class="col-md-4 control-label" translate="createuser.form.fields.lastName.label"></label>
+              <div class="col-md-7">
+                 {{_self.user.lastName}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="phoneNumber" class="col-md-4 control-label" translate="createuser.form.fields.phoneNumber.label"></label>
+              <div class="col-md-7">
+                {{_self.user.phoneNumber}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="email" class="col-md-4 control-label" translate="createuser.form.fields.email.label"></label>
+              <div class="col-md-7">
+                {{_self.user.email}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group" >
+              <label for="roles" class="col-md-4 control-label" translate="createuser.form.fields.roles.label"></label>
+              <div class="col-md-7">
+                {{_self.user.roles}}
+              </div>
+            </div>
+          </div>
+          <!-- Assign project-->
+          <div class="col-sm-12 col-lg-12">
+            <div class="form-group">
+              <label for="projectCode" class="col-md-4 control-label" translate="createuser.form.fields.projectCode.label"></label>
+              <div class="col-md-7">
+                  <ul ng-if="_self.user.projects" class="image-list">
+                  <li ng-repeat="(key, project) in _self.user.projects" >
+                      <a ng-href="#" ui-sref="projects.detail.stories({ project_code: project.projectCode,project_id: project.projectid || project.projectid})" tooltip="{{project.name}}" tooltip-placement="top">
+                    <i class="fa fa-search fa-fw"></i> {{project.name}}</a>
+                  </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /Assign project -->
+        </div>
+        <!-- /.box-body -->
+      </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /app/modules/users/create/create.html -->

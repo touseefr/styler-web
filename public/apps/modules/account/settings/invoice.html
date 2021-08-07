@@ -1,0 +1,34 @@
+<div class="clear"></div>
+<div class="tableOverflow row">
+		<div class="show-spinner" ng-show="_self.loadingspinner ==1">   
+				<img src="images/spinner.gif" alt="Loading" class="" width="124" />
+		</div>
+  <div class="col-xs-12">
+  <table  ng-if="_self.loadingspinner ==0" class="table table-bordered bordered table-vertically-center table-striped table-condensed datatable" ui-jq="dataTable" datatables="ng"  dt-options="dtOptions" >
+    <thead>
+      <tr>
+        <th >Start Date</th>
+        <th>End Date</th>
+        <th>Plan</th>
+        <th>Invoice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="(key, value) in _self.usersubscription">
+        <td><% value.starting_date %></td>
+        <td><% value.ending_date %></td>
+        <td><% _self.membership(value.plan_id) %></td>
+        <td>
+			  <a href="<%value.url%>" target="_blank">View Invoice</a>
+			</td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
+</div>
+<!--<div class="reviews_pagination ng-binding ng-scope" style="text-align:right;">
+  <button ng-disabled="bookingCtrl.current_page==0" ng-click="bookingCtrl.previousPage()" class="btn bg-teal text-white no-radius">Previous</button>
+  <%bookingCtrl.current_page+1%>/
+  <%bookingCtrl.total_pages%>
+  <button ng-disabled="(bookingCtrl.current_page+1)==bookingCtrl.total_pages || bookingCtrl.total_pages===0 " ng-click="bookingCtrl.nextPage()" class="btn bg-teal text-white no-radius">Next</button>
+</div>-->

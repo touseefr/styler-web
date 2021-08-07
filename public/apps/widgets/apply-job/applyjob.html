@@ -1,0 +1,29 @@
+<form name="appltJobfrm">
+    <div class="form-group">
+        <label for="coverLetter">Cover Letter</label>
+        <textarea cols="34" rows="5" id="coverLetter" name="coverLetter" ng-model="self.coverLetter.cover" class="cover_letter" required></textarea>
+    </div>
+    <div class="form-group" flow-init="self.flowConfig()">
+        <div class="drop" flow-drop ng-class="dropClass">
+                <div ng-if="self.coverLetter.asset_id == '-'">
+                    <div flow-init="self.flowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{pdf:1,doc:1,docx:1}[$file.getExtension()]" flow-file-success="self.fileUploadSuccess($file,$message)" >
+                        <div ng-if="self.coverLetter.asset_id == '-'">
+                            <button class="btn btn-default btn-sm" flow-btn flow-attrs="{accept:'.doc,.docx,application/pdf'}">Upload Resume</button>
+                            <div class="col-md-12" style="padding-left:0;margin-top: 15px;" ng-repeat="file in $flow.files">
+                                <% self.fileName %> <a href="javascript:;" class="ml-15 d-inlineB" prevent-default ng-click="self.cancelFile(file)"><i class="fa fa-trash text-danger"></i></a>                                
+                            </div>
+                        </div>
+                        <input type="hidden" ng-modal="<%self.fileid%>" value="<%self.fileid%>"/>
+                    </div>
+                </div>
+                <div ng-if="self.coverLetter.asset_id !== '-'">
+                    <input type="hidden" ng-modal="<%self.coverLetter.asset_id%>" value="<%self.coverLetter.fileid%>"/>
+                    <input type="hidden" ng-modal="<%self.coverLetter.fileName%>" value="<%self.coverLetter.fileName%>"/>
+                    <a href="<%self.coverLetter.file_path%><%self.coverLetter.fileName%>" target="_blank"><img ng-src="<%self.coverLetter.file_url%>" class="mr-10" width="30px" /><%self.coverLetter.fileName%></a>
+                </div>
+            </div>
+    </div>
+    <div class="form-group clearfix">
+        <a class="btn btn-primary btn-sm pull-right" href="#" ng-click="self.applyJob()">APPLY</a>
+    </div>
+</form>

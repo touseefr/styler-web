@@ -1,0 +1,15 @@
+<div class="sub-horizontal-nav">
+	<ul class="horizontal-inner-tabs" ng-if = "$state.includes('user.job_preferences.shortlisted') || $state.includes('user.job_preferences.preferences')">
+		<!--<li><a ng-href="#" ui-sref="user.job_preferences.dashboard" ng-class="{'active_text' : $state.includes('user.job_preferences.dashboard')}">Dashboard</a></li> -->
+		<li><a ng-href="#" ui-sref="user.job_preferences.shortlisted" ng-class="{'active_text' : $state.includes('user.job_preferences.shortlisted')}">&verbar; Jobs Shortlisted</a></li>
+		<li><a ng-href="#" ui-sref="user.job_preferences.preferences" ng-class="{'active_text' : $state.includes('user.job_preferences.preferences')}">&verbar; Jobs Applied</a></li>
+	</ul>
+	
+	<!--<ul ng-if = "$state.includes('user.job_preferences.resumeupload')">
+		<li><a ng-href="#" ui-sref="user.job_preferences.resumeupload" ng-class="{'active_text' : $state.includes('user.job_preferences.resumeupload')}">Upload resume</a></li>
+	</ul>-->
+	
+	<ul ng-if = "$state.includes('settings.resumeupload')">
+		<li><a ng-href="#" ui-sref="settings.resumeupload" ng-class="{'active_text' : $state.includes('settings.resumeupload')}">Upload resume</a></li>
+	</ul>
+</div>

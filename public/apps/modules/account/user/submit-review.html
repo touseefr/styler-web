@@ -1,0 +1,59 @@
+<form class="form-horizontal form-beautyCollective submit-review" role="form">
+    <div class="panel panel-default panel-beautyCollective">
+        <div class="panel-heading">
+            <h2 class="panel-title"></h2>
+        </div>
+        <!-- /.panel-header -->
+        <div class="panel-body ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="control-label sr-only">Email</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" data-ng-model="createListCtrl.dataModel.listingTitle" placeholder="Title" Name="Title" required />
+                        </div>
+                    </div>
+                    <div class="form-group custom-select">
+                        <label for="inputPassword3" class="control-label sr-only">With in</label>
+                        <div class="col-sm-12">
+                            <ui-select on-select="createListCtrl.selectCategory($item, $model)" ng-model="createListingCtrl.dataModel.category" theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                                <ui-select-match placeholder="Select a category">(($select.selected.name))</ui-select-match>
+                                <ui-select-choices repeat="category in createListCtrl.categories | propsFilter: {name: $select.search, age: $select.search}">
+                                    <div ng-bind-html="category.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="control-label sr-only">Password</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" data-ng-model="createListCtrl.dataModel.contactNumber" placeholder="Contact Information" Name="Contact number" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="control-label sr-only">Password</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" data-ng-model="createListCtrl.dataModel.locationInfo" placeholder="Locational Information" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <span class="rating"> Rating: 9.8 </span>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-12 text-left text-muted">Your Review</label>
+                        <div class="col-md-12 col-sm-15">
+                            <textarea class="form-control" rows="7" data-ng-model="createListCtrl.dataModel.description" placeholder="Describe Your Experience"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="panel-footer text-right">
+            <button class="btn btn-primary" type="button" data-ng-click="createListCtrl.savelisting();">Submit</button>
+        </div>
+        <!-- /.box-footer -->
+    </div>
+</form>

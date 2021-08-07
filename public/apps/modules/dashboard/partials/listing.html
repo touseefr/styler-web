@@ -1,0 +1,84 @@
+<div class="row">
+    <!-- left navigation -->
+    <div class="col-md-2 col-xs-12">
+        <ul class="nav nav-tabs toggle_tab">
+            <li ng-class="{active: tabCtrl.type == '1'}" data-ng-click="tabCtrl.changeType('1');">
+                <a data-toggle="tab" href="#classified" class="news_icon"></a>
+            </li>
+            <li ng-class="{active: tabCtrl.type == '7'}" data-ng-click="tabCtrl.changeType('7');">
+                <a data-toggle="tab" href="#deals" class="delear_icon"></a>
+            </li>
+            <li ng-class="{active: tabCtrl.type == '4'}" data-ng-click="tabCtrl.changeType('4');">
+                <a data-toggle="tab" href="#jobs" class="group_icon"></a>
+            </li>
+            <li ng-class="{active: tabCtrl.type == '8'}" data-ng-click="tabCtrl.changeType('8');">
+                <a data-toggle="tab" href="#businessforsale" class="idea_icon"></a>
+            </li>
+        </ul>
+    </div>
+    <!-- /left navigation -->
+    <div class="col-md-10">
+        <div class="pt-15 mb-20">
+            <h4>Service Provider Listings</h4>
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-md-5" ng-repeat="item in tabCtrl.listing">
+                    <div class="pannel_ratting">
+                        <div class="img_part">
+                            <figure>
+                                <img src="images/user_pic.jpg" class="img-responsive img-circle center-block" />
+                            </figure>
+                        </div>
+                        <div class="pannel_part">
+                            <span>
+                                <h4>((item.title))</h4>
+                                <h2>((item.rating))</h2>
+                            </span>
+                        </div>
+                        <div class="detail_part">
+                            <p>((item.description))</p>
+                            <span>
+                                <a href="#">Details</a>
+                            </span>
+                        </div>
+                        <ul class="left_area">
+                            <li>
+                                <h5>+</h5>
+                            </li>
+                            <li>
+                                <a href="#">Provider Page</a>
+                            </li>
+                        </ul>
+                        <ul class="right_area">
+                            <li>
+                                <a href="#">
+                                    <img src="images/fb_ico.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="images/rss_ico.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="images/twiter_ico.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="images/in_ico.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="images/web_ico.png" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

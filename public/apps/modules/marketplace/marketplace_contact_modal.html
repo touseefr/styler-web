@@ -1,0 +1,17 @@
+<form ng-submit="_self.sendMessage();$close()">
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$close()">&times;</button>
+    <h4 class="modal-title">Contact owner</h4>
+</div>
+<div class="modal-body">    
+    <div>Your email: <input type="email" class="form-control"  name="from_email_business" ng-model="_self.from_email_business"  required="required"></div>
+    <div>Message: <textarea class="form-control width580" name="email_message_business" ng-model="_self.email_message_business"></textarea> </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success btn-primary" >Send</button>    
+</div> 
+</form>
+
+<style type="text/css">    
+    .modal-content{height:auto;}
+</style>

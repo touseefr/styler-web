@@ -1,0 +1,72 @@
+<div id="" class="tab-pane ng-scope">
+  <div class="table-responsive no-border">
+    <div class="faq_form">
+      <div class="panel-heading pl-0">
+        <h4>Notifications</h4>
+      </div>
+      <div class="tableOverflow">
+        <table class="table table-striped table-bordered table-hover mt-0">
+          <thead>
+            <tr>
+<!--              <th class="text-center w60">Sr No.</th>-->
+              <th>List Type</th>
+              <th>From Name</th>
+              <th>From Email</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="notification in _self.usernotifications.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index">
+<!--              <td>
+                <% $index +_self.currentPage*_self.pageSize +1 %>
+              </td>-->
+              <td>
+                <%notification.type%>
+              </td>
+              <td>
+                <%notification.from_name%>
+              </td>
+              <td>
+                <%notification.from_email%>
+              </td>
+              <td>
+                <%notification.message | limitTo: 15%>
+                <%notification.message.length > 15 ? '...' : ''%>
+              </td>
+              <td>
+                <% notification.status == 0 && "New" || "Old" %>
+              </td>
+              <td class="text-center">
+                <span class="">
+                  <a ng-href="#" ui-sref="settings.updatenotificationmember({notification_member_id:notification.id})"
+                    data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                  <a ng-href="#" prevent-default ng-click="_self.delete_options($event, notification.id)" data-toggle="tooltip"
+                    title="Delete"><i class="fa fa-trash"></i></a>
+                  <div class="delte_selection" id="delete_options_<%notification.id%>">
+                    <p>Sure to Delete?<p>
+                        <button class="ok btn-default btn-xs btn" ng-href="#" prevent-default ng-click="_self.DeletenotificationMember($event, notification.id)">Yes</button>
+                        <button class="cancel btn btn-default btn-xs" ng-href="#" prevent-default ng-click="_self.delete_options_cancel($event, notification.id)">No</button>
+                  </div>
+                </span>
+              </td>
+            </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification_pagination" ng-if=" _self.usernotifications.data.length">
+    <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn">
+      Previous
+    </button>
+    <%_self.currentPage+1%>/
+    <%_self.numberOfPages()%>
+    <button ng-disabled="_self.currentPage >= _self.usernotifications.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1"
+      class="btn">
+      Next
+    </button>
+  </div>

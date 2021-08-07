@@ -1,0 +1,123 @@
+<div id="" class="tab-pane  ng-scope">
+  <div class="mt-20">
+    <div class="faq_form">
+      <div class="panel panel-default">
+        <div class="bg-teal text-white p-15">
+          <h3 class="panel-title">Add New Team Member</h3>
+        </div>
+        <div class="panel-body">
+          <form method="post" class="form-horizontal1 form-beautyCollective" name="teams">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : _self.teams.name.$invalid && !_self.teams.name.$pristine }">
+                  <input id="name" name="name" ng-model="_self.teams.name" value="" type="text" placeholder="Enter member name *"
+                    class="form-control" required>
+                  <p ng-show="_self.teams.name.$invalid && !_self.teams.name.$pristine" class="help-block">Name is
+                    required.</p>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : _self.teams.about.$invalid && !_self.teams.about.$pristine }">
+                  <textarea id="about" name="about" rows="5" ng-model="_self.teams.about" class="form-control" placeholder="Enter About here *" required></textarea>
+                  <p ng-show="_self.teams.about.$invalid && !_self.teams.about.$pristine" class="help-block">About is required.</p>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : _self.teams.designation.$invalid && !_self.teams.designation.$pristine }">
+                  <input id="designation" name="designation" ng-model="_self.teams.designation" value="" type="text"
+                    placeholder="Enter member designation *" class="form-control" required>
+                  <p ng-show="_self.teams.designation.$invalid && !_self.teams.designation.$pristine" class="help-block">Designation is required.</p>
+                </div>
+                <div class="form-group upload_pics">
+                  <div flow-init="_self.teamflowConfig()" flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="_self.teamfileUploadSuccess($file,$message)" flow-file-error="_self.UserGalleryfileUploadError($file,$message,$flow)" flow-complete="_self.hideProgressbar()" >
+                    <div class="after_upload flex align-items-center">
+                      <div class="col-md-3" ng-repeat="file in $flow.files">
+                        <div class="thumbnail upldbrd" ng-show="$flow.files.length">
+                          <img flow-img="file" class="img-responsive img-rounded" />
+                          <div class="upload-image-overlay">Upload</div>
+                          <a class="upldbrdDelete" prevent-default ng-click="_self.teamcancelFile($event,$flow,_self.teams.imgid)">&times;</a>
+                        </div>
+                        <div ng-show="_self.loginAlertMessage!=1" class="progress progress-striped progressOverlay" ng-class="{active: file.isUploading()}" style="width: 85px;">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                            aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                            <span class="sr-only"><%file.progress()%>% Complete</span>
+                          </div>
+                        </div>
+                      </div>    
+                      <!--                                            ----------- for add new listing case --------------->
+                      <div class="row">
+                        <div class="col-md-6 ng-scope">
+                          <div class="inlineFlex align-items-center">
+                            <div class="form-control upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}" ng-if="$flow.files.length!==1">
+                              <div class="upload-image-overlay">Upload</div>
+                              <div class="upload-image">Upload</div>
+                            </div>                              
+                            <button class="btn bg-teal text-white no-radius" type="button" ng-click="_self.createteam()" ng-disabled="teams.$invalid">Create</button>
+                              
+                          </div>
+                        </div>
+                        <input type="hidden" ng-model="_self.teams.imgid" >
+                      </div>
+                      <!--                                            ------------------ END ---------------------->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-xs-12 col-md-12">
+    
+              </div>
+              <div class="col-sm-12">
+    
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>      
+    </div>
+    <div class="clearfix"></div>
+    <div class="panel panel-default">
+      <div class=" bg-teal text-white p-15">
+        <h3 class="panel-title">Manage Team</h3>
+      </div>
+      <div class="panel-body">
+        <table ng-if="_self.TeamInfo.data" class="table table-bordered bordered table-vertically-center table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+          <thead>
+            <tr>
+              <!--                    <th>Sr No.</th>-->
+              <th>Member Name</th>
+              <th>Photo</th>
+              <th>Designation</th>
+              <th>About</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="team in _self.TeamInfo.data">
+              <!--                    <td><% $index +_self.currentPage*_self.pageSize +1 %></td>-->
+              <td>
+                <%team.member_name%>
+              </td>
+              <td><img ng-src="<%team.image_url%>" width="40"></td>
+              <td>
+                <%team.designation%>
+              </td>
+              <td>
+                <%team.about | limitTo :45 %>...</td>
+              <td class="actionIcons" style="width: 100px;">
+                <!------------------------------------------------->
+                <span class="text-right1">
+                  <a  ui-sref="settings.updateteammember({team_member_id:base64_encode(team.team_id)})" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                  <a  prevent-default ng-click="_self.delete_options($event, team.team_id)" data-toggle="tooltip" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+                  <div class="delte_selection" id="delete_options_<% team.team_id %>">
+                    <p>Sure to Delete!<p>
+                    <button class="ok btn btn-xs btn-default" ng-href="#" prevent-default ng-click="_self.DeleteTeamMember($event, team.team_id)">Yes</button>
+                    <button class="cancel btn btn-xs btn-default" ng-href="#" prevent-default ng-click="_self.delete_options_cancel($event, team.team_id)">No</button>
+                  </div>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>    
+  </div>
+</div>

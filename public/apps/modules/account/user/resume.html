@@ -1,0 +1,82 @@
+<form method="post" class="form-beautyCollective" name="mycoverletter">
+    <div class="upload_pics">
+      <div flow-init="_self.MyResumeflowConfig()" flow-files-submitted="_self.submitCvFile($flow)" flow-file-added="!!{pdf:1,doc:1,docx:1}[$file.getExtension()]"
+        flow-file-success="_self.UserResumefileUploadSuccess($file,$message)">
+        <div class="upload-heading mb-15" style="font-size: 15px;font-weight: bold;">Upload cover letter and resume.</div>
+        <div class="row after_upload">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="" ng-class="{ 'has-error' : _self.mycoverletter.cover.$invalid && !_self.mycoverletter.cover.$pristine }">
+                <textarea ng-model="_self.mycoverletter.cover" class="form-control" type="text" value="" placeholder="Write about your" required /><%_self.mycoverletter.coverletter%></textarea>              
+                <p ng-show="_self.mycoverletter.cover.$invalid && !_self.mycoverletter.cover.$pristine" class="help-block">Image title is required.</p>
+              </div>
+            </div>
+          </div>           
+        </div>
+        <div class="" style="display: flex;align-items: flex-end;justify-content: space-between;">
+            <div class="">
+              
+            
+<!--            <div ng-if="_self.mycoverletter.asset_id">-->
+            <div class="text-center">
+              <a ng-if="_self.mycoverletter.file_url" href="<% _self.mycoverletter.file_path%><% _self.mycoverletter.file_name%>" target="_blank">                  
+                <img  ng-src="<% _self.mycoverletter.file_url%>" width="40px;" />
+                <!--<span ><i class="fa fa-file"></i></span>-->
+                
+              </a>    
+                <a ng-if="!_self.mycoverletter.file_url">
+                    <img  ng-src="images/upload_resuma.png" width="40px;" />
+                </a>
+              <br>
+              <br>
+              <span ng-if="_self.mycoverletter.file_url" ng-bind-html="_self.mycoverletter.filenameis"></span>
+              <span ng-if="!_self.mycoverletter.file_url" >Upload CV/Resuma</span>
+              <br>
+              <br>
+              <button ng-disabled="!_self.mycoverletter.file_url" class="btn btn-primary btn-danger" prevent-default="" type="button" ng-click="_self.DeleteMyResume($event,_self.mycoverletter.asset_id)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-primary" flow-btn="" flow-attrs="{accept:'.doc,.docx,application/pdf'}"><i class="fa fa-upload"></i></button>
+              <p style="font-size: 13px; line-height: 29px; letter-spacing: 1px;"><small>(Only Doc,Docx,Pdf file allowed.)</small></p>
+            </div>
+          </div>
+            <div class="">
+                <input type="hidden" ng-model="_self.usergallery.resume_id" value="<% _self.usergallery.resume_id %>">
+                <div class="">
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="button" ng-click="_self.CreatMyCoverletterAndResume();"
+                      ng-disabled="mycoverletter.$invalid">Submit</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="row">
+          <div class="col-md-5">
+              
+            
+            <div ng-if="_self.mycoverletter.asset_id">
+<div class="text-center">
+              <a href="<% _self.mycoverletter.file_path%><% _self.mycoverletter.file_name%>" target="_blank">
+                <img ng-src="<% _self.mycoverletter.file_url%>" width="40px;" />
+              </a>
+              <br>
+              <br>
+              <span ng-bind-html="_self.mycoverletter.filenameis"></span>
+              <br>
+              <br>
+              <button class="btn btn-primary btn-danger" prevent-default="" type="button" ng-click="_self.DeleteMyResume($event,_self.mycoverletter.asset_id)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-primary" flow-btn="" flow-attrs="{accept:'.doc,.docx,application/pdf'}"><i class="fa fa-upload"></i></button>
+              <p style="font-size: 13px; line-height: 29px; letter-spacing: 1px;"><small>(Only Doc,Docx,Pdf file allowed.)</small></p>
+            </div>
+          </div>
+          <input type="hidden" ng-model="_self.usergallery.resume_id" value="<% _self.usergallery.resume_id %>">
+          <div class="col-md-2">
+            <div class="form-group">
+              <button class="btn btn-primary" type="button" ng-click="_self.CreatMyCoverletterAndResume();"
+                ng-disabled="mycoverletter.$invalid">Submit</button>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </form>

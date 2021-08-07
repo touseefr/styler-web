@@ -1,0 +1,56 @@
+<div id="listing" class="tab-pane account_list pt-25">
+        <form method="post" name="payment">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--        <div ng-if="(_self.pmethod.paypal)==true">
+                              <input id="paypal" type="checkbox" ng-model="_self.payment.paypal" value="1" name="paypal" ng-checked="true"
+                                checked="checked" ng-click="_self.ppp();">
+                            </div>
+                            <div ng-if="_self.pmethod.paypal==false">
+                              <input type="checkbox" ng-model="_self.payment.paypal" name="paypal" value="1">
+                            </div>
+                            <div ng-if="_self.pmethod==''">-->
+                    <label class="inputLabel">
+                      <input type="checkbox" ng-model="_self.payment.paypal" name="paypal" value="1">
+                      <span class="checkmark"></span>
+                      <!-- <i class="fas fa-money-check"></i> -->
+                      <i class="far fa-money-bill-alt" style="margin-right:2px;"></i>Cash
+                    </label>
+                    <!--        </div>-->
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ng-if="(_self.pmethod.creditcard) == true">
+                      <label class="inputLabel">
+                        <input type="checkbox" ng-model="_self.payment.creditcard" name="creditcard" value="1" ng-checked="true" checked="checked" id="crdcrd">
+                        <span class="checkmark"></span>
+                        <i class="fa fa-credit-card"></i> Card
+                      </label>                    
+                    </div>
+                    <div ng-if="_self.pmethod.creditcard == false">
+                      <label class="inputLabel">
+                        <input type="checkbox" ng-model="_self.payment.creditcard" name="creditcard" value="1" />
+                        <span class="checkmark"></span>
+                        <i class="fa fa-credit-card"></i> Card
+                      </label>
+                    </div>
+                    <div ng-if="_self.pmethod == ''">
+                      <label class="inputLabel">
+                        <input type="checkbox" ng-model="_self.payment.creditcard" name="creditcard" value="1" />
+                        <span class="checkmark"></span>
+                        <i class="fa fa-credit-card"></i> Card
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn bg-teal text-white no-radius" type="button" style="font-size: 13px;" ng-click="_self.SavePaymentMethod()">Save payment methods</button>
+              </div>
+            </div>
+        </form>
+    </div>

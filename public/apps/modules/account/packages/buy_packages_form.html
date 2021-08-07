@@ -1,0 +1,205 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title" style="font-size:medium;">
+            Buy <% $stripe.plan_selected == 'sms' ? 'SMS' : 'Listing' %>
+        </h3>
+    </div>
+    <form name="myForm" class="validation" data-cc-on-file="false" id="payment-form"><br>
+        <span
+            style="text-align: center; font-size: large; margin-left: 182px;  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+            Let's finish powering you up!
+        </span>
+        <span style="text-align: center; font-size: small; margin-left: 214px; color: #4e4e4e;">
+            You Choosen Plan <span>
+                <%$stripe.promo_status.name%>
+            </span>
+        </span>
+
+        <div class="modal-body p30" style="padding-bottom: 0;" id="modal-body">
+            <div class="row form-group " style="padding-right: 17px;">
+                <!-- <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12 left-align">
+                            <span><%$stripe.promo_status.name%></span>
+                        </div>
+                    </div>
+                </div> -->
+                <div>
+                    <div class=" d-flex justify-content-between "
+                        style="margin-bottom:0px;margin-left: 7px; background-color:transparent">
+                        <div>
+                            <span style="font-weight: bold;font-size: medium;">
+                                <%$stripe.promo_status.name%>
+                            </span>
+                        </div>
+                        <div>
+                            <span style="font-weight: bolder; font-size: x-large;"><strong>$<%$stripe.promo_status.price%>
+                                </strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <style type="text/css">
+                .error {
+                    border: 1px solid red;
+                }
+
+            </style>
+
+
+
+            <div ng-show="$stripe.ToggleCards == 0">
+                <strong style="font-size: 12px;"> NAME ON CARD </strong>
+                <div class="row">
+                    <div class="form-group col-lg-12 " style="margin: 0;">
+                        <input type="text" class="form-control" placeholder="" />
+                    </div>
+                </div><br>
+
+                <strong style="font-size: 12px;">CARD NUMBER</strong>
+                <div class="cardNumberInput " style="border: 0px solid gray; position: relative; padding: 0;">
+                    <!-- <div class="cardinput " >
+                    <i class="fa fa-credit-card"></i>
+                  </div> -->
+                    <div class=" cardinput form-group" style="width: 100%;">
+                        <div class="cardNumberInput" ng-class="{error:$stripe.stripe_error.code == 'incorrect_number'}"
+                            style="padding: 0;">
+                            <input type="text" required class="form-control card-num" placeholder="0000 0000 0000 0000"
+                                ng-model="number" payments-validate="card" payments-format="card"
+                                payments-type-model="type">
+                        </div>
+
+                        <div class="cardinput" style="font-size: 24px; position: absolute ; top: 1px; right: -45px;">
+
+                            <!-- <img src="{{ asset('mastercard.png') }}" /> -->
+                            <image img src="vs.png" style="height: 29px; width: 40px; margin-bottom: 6px;" alt="Logo">
+                            </image <i class="fa fa-cc-visa" style="color:rgba(207, 207, 207, 0.952);"></i>
+                            <image img src="mastercard.png" style="height: 31px; width: 40px; margin-bottom: 6px;"
+                                alt="Logo">
+                            </image <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                            <i class="fa fa-cc-amex" style="color:blue;"></i>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div ng-if="$stripe.userSubscription">
+                        Your card is already attached if you want to use existing card please checked the checkbox.
+                </div> -->
+            <!-- <div class="split_line" ng-show="$stripe.userSubscription && $stripe.ToggleCards == 0"></div> -->
+            <div class="form-group row" style="    margin-top: 15px;" ng-show="$stripe.ToggleCards == 0">
+                <label style="padding-left: 18px;" for="">EXPIRY DATE (MM YYYY)</label>
+                <label style="padding-left: 187px;" for="">CSV / CVC</label>
+                <div class="col-sm-12">
+
+                    <div class="cardNumberInput" style="border: none; padding: 0;">
+                        <!-- <div class="cardinput">
+                                <i class="fa fa-credit-card"></i>
+                            </div>
+                            <div class="cardinput">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Card Number"
+                                    ng-model="number"
+                                    payments-validate="card"
+                                    payments-format="card"
+                                    payments-type-model="type"
+                                />
+                            </div> -->
+                        <div class="col-sm-6" style="padding-right: 16px; margin-left: -13px;">
+                            <div class="cardinput expiration  mr-2" style="border: 0px solid gray;">
+                                <div class="cardNumberInput"
+                                    ng-class="{error:$stripe.stripe_error.code == 'invalid_expiry_month'}"
+                                    style="padding: 0;">
+                                    <input type="number" class="form-control card-expiry-month"
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        placeholder="MM" size='2' maxlength="2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding-right: 43px;">
+                            <div class="cardinput expiration required" style="border: 0px solid gray">
+                                <div class="cardNumberInput"
+                                    ng-class="{error:$stripe.stripe_error.code == 'invalid_expiry_year'}"
+                                    style="padding: 0;">
+                                    <input type="text" class="form-control card-expiry-year" placeholder="YYYY"
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        maxlength="4" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cardinput cvc required" style="border: 0px solid gray">
+                            <div class="cardNumberInput" ng-class="{error:$stripe.stripe_error.code == 'incorrect_cvc'}"
+                                style="padding: 0;">
+                                <input type="text" class="form-control card-cvc" placeholder="3 or 4 digit number"
+                                    ng-model="cvc" payments-validate="cvc" payments-format="cvc"
+                                    payments-type-model="type" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="$stripe.stripe_error && $stripe.ToggleCards == 0" class="text-color-red">
+                <%$stripe.stripe_error.message%>
+            </div>
+
+            <div ng-show="$stripe.userSubscription">
+                <input type="checkbox" class="check_class" name="ToggleCards" style="color: black;font-size: small"
+                    id="ToggleCards" ng-model="ToggleCards" value="0" ng-change="$stripe.changeCardMethod()" />
+                <label for="ToggleCards" style="cursor: pinter;">Use Existing Card</labe>
+            </div>
+            <div>
+                <input type="checkbox" class="checkbox_class" checked name="ToggleCards" id="" value="" /> <label> <a
+                        style="color: black;font-size: small;" href="/termsandconditions" target="_blank">Accept Terms &
+                        Condition</a></label>
+            </div>
+        </div>
+
+
+        <div class="modal-footer" style="border: none;">
+            <div style="font-weight: 40px;" class="span4">
+                <button style="width: 92%;margin-right: 26px; font-weight: 50px;" type="submit" id="stripeBuybutton"
+                    class="btnc btn btn-primary btn-large" ng-click="$stripe.BuySubmit()">
+                    Confirm Payment
+                    <span style="padding-left: 11px;"> $<%$stripe.promo_status.price%> </span>
+                </button>
+                <!--    
+        <button class="cancel btn btn-defaul" type="button" ng-click="$stripe.cancel()">
+          Cancel
+        </button> -->
+            </div>
+        </div>
+        <div class="d-flex justify-content-between" style="margin-bottom: 0px; background-color:transparent;">
+            <div ng-if="$stripe.userSubscription && $stripe.ToggleCards == 0" style="font-size: 9px;"
+                class="text-darkGray text-info-message">
+                Note: Once you enter the new details, existing information will
+                be updated.
+            </div>
+            <div class="text-darkGray text-info-message" style="font-size: 9px;">
+                <i class="fab fa-stripe-s" style="color: rgb(112, 112, 206);"></i> Powered by Stripe
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('.checkbox_class').on('change', function () { // on change of state
+        if (this.checked) // if changed state is "CHECKED"
+        {
+            $('.btnc').css('cursor', 'pointer');
+            $('.btnc').removeAttr('disabled')
+        } else {
+            $('.btnc').css({
+                'cursor': 'not-allowed'
+            });
+            $('.btnc').attr('disabled', true);
+        }
+    })
+
+</script>

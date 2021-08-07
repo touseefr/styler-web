@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12" style="padding-top:25px;" ng-show="!_self.getWatchListjobseeker.data.length">
+    <p class="alert alert-info">No item in your watch list .</p>
+  </div>
+  <div ng-if="_self.getWatchListjobseeker.data.length" id="listing_id" class="watch_list_itemss col-md-6 fadeInUp animated"
+    ng-repeat="jobseeker in _self.getWatchListjobseeker.data | startFrom:_self.currentPage*_self.pageSize | limitTo:_self.pageSize track by $index">
+    <div class="listing_item">
+      <div class="item_image">
+        <figure>
+          <img ng-src="<%jobseeker.assets.path+jobseeker.assets.name || 'images/no-image.png'%>" fallback-src="images/no-image.png"
+            class="img-responsive img-circle center-block" title="<%jobseeker.name%>" />
+        </figure>
+      </div>
+      <div class="title_rating">
+        <span ng-if="jobseeker.name.length<=20" class="title" title="<%jobseeker.name%>">
+          <%jobseeker.name%>
+        </span>
+        <span ng-if="jobseeker.name.length>20" class="title" title="<%jobseeker.name%>">
+          <%jobseeker.name | limitTo : 20%>...
+        </span>
+
+      </div>
+      <div class="item_detail">
+        <p>
+          <%jobseeker.about | limitTo : 50%>
+        </p>
+        <span>
+          <a href="<% _self.host %>/profile?id=<%jobseeker.id%>">Details</a>
+        </span>
+      </div>
+      <ul class="left_area">
+
+        <li class="red">
+          <a watchtype="Job Seeker" item_id="<%jobseeker.id%>" href="javascript:void(0);" ng-click="_self.delete_options($event, jobseeker.watchlist_id)">Remove</a>
+
+          <div class="delte_selection" id="delete_options_<%jobseeker.watchlist_id%>">
+            <p>Are you sure you want to delete this watchlist item?<p>
+                <button class="ok" ng-href="#" prevent-default ng-click="_self.watchlistdelete($event, jobseeker.watchlist_id, 'Job Seeker')">Ok</button>
+                <button class="cancel" ng-href="#" prevent-default ng-click="_self.delete_options_cancel($event, jobseeker.watchlist_id)">Cancel</button>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="reviews_pagination" ng-if=" _self.getWatchListjobseeker.data.length">
+  <button ng-disabled="_self.currentPage == 0" ng-click="_self.currentPage=_self.currentPage-1" class="btn">
+    Previous
+  </button>
+  <%_self.currentPage+1%>/
+  <%_self.numberOfPages()%>
+  <button ng-disabled="_self.currentPage >= _self.getWatchListjobseeker.data.length/_self.pageSize - 1" ng-click="_self.currentPage=_self.currentPage+1"
+    class="btn">
+    Next
+  </button>
+</div>

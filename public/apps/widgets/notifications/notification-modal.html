@@ -1,0 +1,46 @@
+ <a  href="#" data-toggle="modal" data-target=".bs-example-modal-notification"><i class="fa fa-envelope fa-5x fa-yellow" aria-hidden="true"></i></a> 
+
+<div class="modal fade bs-example-modal-notification" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Notify</h4>
+      </div>
+      <form class="form-horizontal" role="form" name="notificationform" id="notificationformpopup" type="post" >
+		  <div class="modal-body">
+		  	 <div class="form-group">
+				<label class="control-label col-sm-3" for="name"> 
+					<span>Name</span>
+				</label>
+				<div class="col-sm-9">
+					<input  type="text" class="form-control" value="{{$scope.fromname}}"  ng-model="fromname" placeholder="Your Name"     ng-readonly="self.fromname !== '' " />
+				</div>
+			</div>
+			 <div class="form-group">
+				<label class="control-label col-sm-3" for="email" > 
+					<span>Email</span>
+				</label>
+				<div class="col-sm-9">
+					<input  type="email" class="form-control" value="{{$scope.fromemail}}"  ng-model="fromemail" placeholder="Your Email" ng-readonly="self.fromemail !== '' " />
+				</div>
+			</div>
+			   <div class="form-group">
+				<label class="control-label col-sm-3" for="message"> 
+					<span>Your Message :</span>
+				</label>
+				<div class="col-sm-9">
+					<textarea onkeyup="char_length_notify()" minlength="190" class="form-control"  ng-model="message" placeholder="Your Message" ></textarea>
+					<text class="red text-right note">Min Characters Allowed: <text class="allowed_char">190</text></text>
+					<br/><text class="red text-right note">Characters Remaining: <text class="remaining_char">190</text></text>
+				</div>
+				</div>
+		  </div> 
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" ng-click="self.saveNotification();" ng-disabled="notificationform.$invalid" data-dismiss="modal" >Submit</button>
+		  </div>
+	  </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

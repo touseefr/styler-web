@@ -1,0 +1,261 @@
+<form name="listingForm" class="form-beautyCollective tab-pane" role="form" novalidate>
+    <h4 class="mb-15 mt-0"><% (obj.listing.id ? 'Update' : 'Post') %> a Job</h4>
+    <div class="row panel-beautyCollective">
+        <div class="col-md-6">
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine }">
+                <label for="inputEmail3" class="control-label col-sm-4 text-right pt-5">Title <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" class="form-control" data-ng-model="obj.listing.title" placeholder="Title of Listing *" name="listingtitle" required />
+                    <p ng-show="listingForm.listingtitle.$invalid && !listingForm.listingtitle.$pristine" class="help-block">Title is required.</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Contact Number <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" class="form-control" data-ng-model="obj.listing.contact" placeholder="Contact Number *"
+                           Name="Contact number" maxlength="15" />
+                </div>
+            </div>
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine }">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Contact Email <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <input type="email" autocomplete="off" class="form-control" data-ng-model="obj.listing.email" placeholder="Contact Email *"
+                           name="contactemail" required />
+                    <p ng-show="listingForm.contactemail.$invalid && !listingForm.contactemail.$pristine" class="help-block">Enter
+                        valid email.</p>
+                </div>
+            </div>
+            <input type="hidden" id="latitude-n1" class="form-control" data-ng-model="obj.listing.latitude"
+                   placeholder="latitude" name="listinglatitude" />
+            <input type="hidden" id="longitude-n1" data-ng-model="obj.listing.longitude" value="">
+            <input type="hidden" id="suburb-n1" ng-model="obj.listing.suburb" value="">
+            <input type="hidden" id="state-n1" ng-model="obj.listing.state" value="">
+            <input type="hidden" id="postcode-n1" ng-model="obj.listing.postcode" value="">
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right">Address (suburb, postcode, or city) <span class="text-red">*</span></label>
+                <div class="col-sm-8 select-postcode">
+                    <ui-select on-select="obj.selectLocation($item, $model)" ng-model="obj.listing.locations"
+                               ng-disabled="disabled" reset-search-input="true" title="Address? (suburb, postcode, or city) *"
+                               append-to-body="true" style="width:100%">
+
+                        <ui-select-match placeholder="suburb, postcode *">
+                            <%$select.selected.location%> -
+                            <%$select.selected.state%>,
+                            <%$select.selected.postcode%>
+                        </ui-select-match>
+                        <ui-select-choices ui-disable-choice="locjob.no_found" repeat="locjob in obj.suburbList track by $index" refresh="obj.getLocation($select.search)"
+                                           refresh-delay="0">
+                            <span ng-if="!locjob.no_found" ng-bind-html="locjob.location | highlight: $select.search"></span> <span ng-if="!locjob.no_found">-</span> <span ng-if="!locjob.no_found" ng-bind-html="locjob.state | highlight: $select.search"></span><span ng-if="!locjob.no_found">,</span> <span ng-if="!locjob.no_found" ng-bind-html="locjob.postcode | highlight: $select.search"></span>
+                            <span ng-if="locjob.no_found">Records not found.</span>
+                        </ui-select-choices>
+                    </ui-select>            
+                    <div ng-show="obj.showspinner == 1" class="inner-pg-serach-loader"><i class="fas fa-spinner fa-spin"></i></div>    
+                </div>
+            </div>
+
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.job_summary.$invalid && !listingForm.job_summary.$pristine }">
+                <label for="inputPassword3" class="col-sm-12">Job Summary <span class="text-red">*</span></label>
+                <div class="col-sm-12">
+                             <textarea class="form-control width580" rows="7" data-ng-model="obj.listing.job_summary"
+                                placeholder="Description" name="job_summary" maxlength="150" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row" ng-class="{ 'has-error' : listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine }">
+                <label for="inputPassword3" class="col-sm-12">Job Description <span class="text-red">*</span></label>
+                <div class="col-sm-12">
+                    <trix-editor angular-trix ng-model='obj.listing.description'  class="trix-content" required=""></trix-editor>
+                    <!--          <textarea class="form-control width580" rows="7" data-ng-model="obj.listing.description"
+                                placeholder="Description" name="listingdesc" required></textarea>-->
+                    <p ng-show="listingForm.listingdesc.$invalid && !listingForm.listingdesc.$pristine" class="help-block">Enter
+                        listing description.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="post_title" class="control-label col-sm-4 text-right pt-5">Job Type</label>
+                <div class="col-sm-8">                    
+                    <ui-select ng-required="true"  ng-model="obj.listing.post_title" theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Job Type">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in obj.posttitle | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>                    
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Role <span class="text-red">*</span></label>
+                <div class="col-sm-8">
+                    <!--on-select="obj.selectCategory($item, $model)"-->
+                    <ui-select ng-required="true"  ng-model="obj.listing.parentCategory"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Role">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in obj.categories | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                    <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Industry <span class="text-red">*</span></label>
+                    <div class="col-sm-8">
+                        <!--on-select="obj.selectCategory($item, $model)"-->
+                        <ui-select ng-required="true"  ng-model="obj.listing.industry"
+                                   theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                            <ui-select-match placeholder="Select Industry">
+                                <% $select.selected.name %>
+                            </ui-select-match>
+                            <ui-select-choices repeat="category in obj.Industry | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="category.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Job Visa</label>
+                <div class="col-sm-8">
+                    <ui-select ng-model="obj.listing.visa_id"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Job Visa">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in obj.jobVisatype | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                        
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                    <label for="expected_salary" class="control-label text-right col-sm-4 pt-5">Expected Salary</label>
+                    <div class="col-sm-8">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="text" autocomplete="off" class="form-control width200" data-ng-model="obj.listing.expected_salary"
+                          placeholder="Expected Salary" Name="expected_salary" maxlength="11" />
+                      </div>
+                    </div>
+                  </div>
+
+            <div class="form-group row">
+                <label for="expected_salary" class="control-label col-sm-4 text-right pt-5">Gender</label>
+                <div class="col-sm-8">
+                    <ui-select ng-model="obj.listing.gender_require"
+                               theme="bootstrap" ng-disabled="disabled" style="min-width: 200px;">
+                        <ui-select-match placeholder="Select Gender">
+                            <% $select.selected.name %>
+                        </ui-select-match>
+                        <ui-select-choices repeat="category in obj.Gendertype | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="category.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                        
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="expiry" class="control-label col-sm-4 text-right pt-5">Expiry</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" class="form-control" uib-datepicker-popup="<%self.format%>" ng-model="obj.listing.expire"
+                           is-open="obj.popup1.opened" min-date="obj.minDate" max-date="obj.maxDate"
+                           datepicker-options="obj.dateOptions" ng-required="true" close-text="Close"
+                           alt-input-formats="altInputFormats"  disabled="disabled" />         
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Video</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" class="form-control width200" data-ng-model="obj.listing.listing_video"
+                           name="listing_video" placeholder="Embed youtube video url">
+                </div>
+            </div>      
+            <div class="form-group row">
+                <label for="inputPassword3" class="control-label col-sm-4 text-right pt-5">Gallery</label>
+                <div class="col-sm-8">
+                    <div class="upload_pics">
+                        <div flow-init="obj.flowConfig()" flow-files-submitted="obj.uploadfiles($flow)"
+                             flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="obj.fileUploadSuccess($file,$message,$flow)"
+                             flow-file-error="obj.UserGalleryfileUploadError($file,$message)">                           
+                            <!--              <div class="drop pull-right" flow-drop ng-class="dropClass"><span class="btn btn-default" flow-btn flow-attrs="{accept:'image/*'}">Upload Image</span><small>Upload upto 6 images</small></div>
+                                          <div class="upload-heading mb-10">Upload upto 10 images <span class="req-msg-listing">(Atleast one image required.)</span></div>-->
+                            <div class="row after_upload">
+                                <div class="uploadImageSize col-md-12" ng-if="obj.listing.assets && obj.showgallery == 1">
+                                    <div ng-if="$flow.files.length == 0" ng-repeat="image in  obj.listing.assets">
+                                        <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img ng-src="<%image.path%><%image.name%>" src="" class="img-responsive img-rounded">
+                                        </div>
+                                    </div>
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+                                        <div ng-if="$flow.files.length > 0" class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}" >
+                                            <!--                      <span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+                                        <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                                                 aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                                <span class="sr-only"><%file.progress()%>% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-ng-repeat=" j in [1]">
+                                        <div class="uploadImageSize" ng-if="j > obj.listing.assets.length + $flow.files.length">
+                                            <div class="ng-scope" flow-btn flow-attrs="{accept:'image/*'}">
+                                                <div class="fileupload upldbrd">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                 
+                                <div class="col-md-12" ng-if="obj.showgallery == 0" >
+                                    <div class="uploadImageSize" ng-repeat="file in $flow.files" style="flex-direction: column;">
+                                        <div class="fileupload upldbrd" ng-show="$flow.files.length" flow-btn="" flow-attrs="{accept:'image/*'}"> 
+                                            <!--<span class="x_one"><a class="" prevent-default="" ng-click="obj.deleteImage(image.id,$flow)">&times;</a></span>-->
+                                            <img flow-img="file" class="img-responsive img-rounded" />
+                                        </div>
+
+                                        <div ng-if="file.isUploading()" class="progress progress-striped" ng-class="{active: file.isUploading()}" style="width: 80px;">
+                                            <div ng-if="file.isUploading()" ng-show="obj.showprogressbar == 1" class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="<%file.progress() * 100%>"
+                                                     aria-valuemin="0" aria-valuemax="100" ng-style="{width: my = (file.progress() * 100) + '%'}">
+                                                    <span class="sr-only">
+                                                        <%file.progress()%>% Complete</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div> 
+                                    <div class="uploadImageSize" data-ng-repeat="i in [1]" >
+                                        <div ng-if="i > $flow.files.length">
+                                            <div class="ng-scope">
+                                                <div class="fileupload upldbrd" flow-btn="" flow-attrs="{accept:'image/*'}">
+                                                    <div class="upload-image">upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <input type="hidden" data-ng-model="obj.listing.flowFiles"/>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="button" data-ng-click="obj.savelisting();" ng-disabled="listingForm.$invalid">Save</button>
+        </div>
+    </div>  
+</form>

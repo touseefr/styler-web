@@ -1,0 +1,12 @@
+<div class="sub-horizontal-nav">
+  <ul class="horizontal-inner-tabs">
+    <li><a ng-href="#" ui-sref="business_info.basic_info" ng-class="{'active_text' : $state.includes('business_info.basic_info')}">&verbar; Basic information</a></li>
+    <li ng-if="_acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='SchoolCollege' || _acountCtrl.userRole=='Distributor'"><a ng-href="#" ui-sref="business_info.operation_time" ng-class="{'active_text' : $state.includes('business_info.operation_time')}">&verbar; Business Hours</a></li>
+    <li><a ng-href="#" ui-sref="business_info.social_media" ng-class="{'active_text' : $state.includes('business_info.social_media')}">&verbar; Social Media</a></li>
+    <!-- <li ng-if="_acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='SchoolCollege'"><a ng-href="#" ui-sref="business_info.faqs" ng-class="{'active_text' : $state.includes('business_info.faqs')}">&verbar; FAQ</a></li> -->
+<!--	<li ng-if="_acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='SchoolCollege' || _acountCtrl.userRole=='Distributor'"><a ng-href="#" ui-sref="business_info.services" ng-class="{'active_text' : $state.includes('business_info.services')}">Business Services</a></li>-->
+    <li ng-if="_acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='Distributor'"><a ng-href="#" ui-sref="business_info.brand" ng-class="{'active_text' : $state.includes('business_info.brand')}">&verbar; Business Brand</a></li>       
+    <li ng-if="_acountCtrl.userRole=='SchoolCollege'"><a ng-href="#" ui-sref="business_info.courses" ng-class="{'active_text' : $state.includes('business_info.courses')|| $state.includes('business_info.courses.update')  }">&verbar; Courses</a></li>       
+    <li ng-if="_acountCtrl.userRole=='ServiceProvider' || _acountCtrl.userRole=='SchoolCollege' || _acountCtrl.userRole=='Distributor'"><a ng-href="#" ui-sref="business_info.paymethod" ng-class="{'active_text' : $state.includes('business_info.paymethod')}">&verbar; Payment Methods Accepted </a></li>
+  </ul>
+</div>

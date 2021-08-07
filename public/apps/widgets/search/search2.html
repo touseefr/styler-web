@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="col-xs-12 col-md-10 col-lg-8 col-lg-offset-2 col-md-offset-1 col-xs-offset-0">
+        <form class="search_box header-serach-box formbackground" id="search-frm-main" action="/search" autocomplete="off">
+            <!-- <ul> -->
+            <div class="row flex">
+<div class="col-sm-12 col-md-12" ng-class="{search_home: <% self.ishome %>,search_collection:!<% self.ishome %>}">
+                    <div class="row flex align-items-center">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="input_search">
+<input type="text" name="q" id='textfield' placeholder="Search by services & business names…" class="input_search_center input-search-pgs form-control no-outline"  ng-model="self.searchStr" ng-keyup="self.keyPressed($event)"  autocomplete='off'/>
+                            </div>
+                            <div id="<%id%>_dropdown" class="items search_dropdown" ng-if="self.showDropdown">
+                                <div ng-show="self.searching" class="searcinf-forNow">Searching...</div>
+                                <div class="angucomplete-searching" ng-show="!self.searching && (!self.results || self.results.length == 0)">No results found</div>
+                                <div class="group-item" ng-repeat="(key, value) in self.results" ng-if="value.length > 0" >
+            <div ng-show="self.showAjaxCall((value | filter:self.searchStr).length)" style="text-align: center;padding: 15px;">No record found</div>
+            <div ng-show="(value | filter:self.searchStr).length>0">
+            <h5 class="">{{key}}</h5>
+                                        <div ng-if="key == 'Category'"  class="item" ng-repeat="result in value | filter:self.searchStr" ng-click="self.selectResult(result)" ng-mouseover="self.hoverRow()" >
+                                            <p class="title" ><% result.name %></p>                                            
+                                        </div>
+                                        <div ng-if="key == 'Service Provider'" class="item" ng-repeat="result in value | filter:self.searchStr" ng-click="self.spOpen(result.id)" ng-mouseover="self.hoverRow()" >
+                                            <p class="title" ><% result.name %></p>                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <input type="hidden" id="searchFor" name="label" value="Service Provider">
+                            <input type="hidden" id="searchFor_hidden" name="searchFor" value="serviceprovider">
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <!-- <li class="second"> -->
+                            <div class="input-search-postcode">
+                            <input maxlength="4" id="suburb_input" name="location_address" type='text' class="input_postcode1 serach-location-input form-control no-outline" ng-keyup='fetchSuberbs()' ng-model='searchText' placeholder="Post/Suburb" ng-model="self.post" required="" ng-keypress="alphaValidate($event)" />
+                                <div ng-show="self.searchButtonText == 'Searching'" class="search_loader"><i class="fas fa-spinner fa-spin"></i></div>
+                                <ul id='searchResult' style="display: none;">
+                                    <li ng-if="self.suburbList[0].no_found" ng-bind-html="self.suburbList[0].no_found"></li>
+                            <li ng-if="!self.suburbList[0].no_found" ng-click='setValue($index)' ng-repeat="address in self.suburbList" >{{ address.location}},{{ address.state}},{{ address.postcode}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12 px-5 align-self-center">
+                            <button  type="submit" class="btn btn-primary btn-block btn-sm"><i class="fa fa-search"></i> SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- form end here -->
+    </div>
+</div>
